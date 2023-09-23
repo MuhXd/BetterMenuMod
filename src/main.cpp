@@ -45,7 +45,7 @@ if (FirstBoot) {
     "Warning!",    
     "<cr>This mod is Still in beta, Please report bugs if you find some.</c>", 
     "Sure!"    
-);
+); // TestComent
  alert->m_scene = this;
 alert->show();
 };
