@@ -49,6 +49,6 @@ if (FirstBoot) {
  alert->m_scene = this;
 alert->show();
 };
-        return true;
+        return true; 
     }
 };
