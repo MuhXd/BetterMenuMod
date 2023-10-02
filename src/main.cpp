@@ -2,9 +2,6 @@
 #include <Geode/modify/MenuLayer.hpp>
 #include <Geode/binding/EndLevelLayer.hpp>
 #include <Geode/cocos/base_nodes/Layout.hpp> 
-
-
-using namespace mouse;
 // TOP RIGHT CLOSE
 // to LEFT PROFILE FUNNI
 using namespace geode::prelude;
