@@ -2,7 +2,7 @@
 #include <Geode/modify/MenuLayer.hpp>
 #include <Geode/binding/EndLevelLayer.hpp>
 #include <Geode/cocos/base_nodes/Layout.hpp> 
-#include <geode.mouse-api/include/API.hpp>
+
 
 using namespace mouse;
 // TOP RIGHT CLOSE
