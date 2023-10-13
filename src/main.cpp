@@ -13,6 +13,10 @@ auto LoadGreatMethod = false;
 struct $modify(newer,MenuLayer) {
 	
   	void onMyLevelsClick(CCObject* target) {
+			#ifdef GEODE_IS_MACOS {
+reinterpret_cast<CreatorLayer*>(this)->onMyLevels(target);
+			return true
+		}
 		if (LoadGreatMethod) {
 			reinterpret_cast<CreatorLayer*>(this)->onMyLevels(target);
 			}
@@ -25,6 +29,10 @@ auto CreatorLayer = CreatorLayer::create();
 
   }
   	void SearchButtonClicked(CCObject* target) {
+		#ifdef GEODE_IS_MACOS {
+reinterpret_cast<CreatorLayer*>(this)->onOnlineLevels(target);
+			return true
+		}
 		if (LoadGreatMethod) {
 reinterpret_cast<CreatorLayer*>(this)->onOnlineLevels(target);
 		}
@@ -34,6 +42,10 @@ auto CreatorLayer = CreatorLayer::create();
 		};
   }
     	void onSavedLevelsClick(CCObject* target) {
+				#ifdef GEODE_IS_MACOS {
+reinterpret_cast<CreatorLayer*>(this)->onSavedLevels(target);
+			return true
+		}
 			if (LoadGreatMethod) {
 reinterpret_cast<CreatorLayer*>(this)->onSavedLevels(target);
 		}
@@ -50,7 +62,7 @@ auto CreatorLayer = CreatorLayer::create();
 			return true;
 		};
 		// To fix mac stuff waaa
-		if ( !CreatorLayer::create() ) {
+		#ifdef GEODE_IS_MACOS {
 		LoadGreatMethod = false;
 	} else {
 		if (Mod::get()->getSettingValue<bool>("macmethod")) {
