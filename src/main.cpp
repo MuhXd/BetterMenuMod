@@ -9,12 +9,8 @@
 using namespace geode::prelude;
 auto Mainbooter = true;
 auto FirstBoot = false;
-auto macosdisableThingsthatnoworkyonemacy=false
+
 struct $modify(newer,MenuLayer) {
-	#ifdef GEODE_IS_MACOS {
-	//macosdisableThingsthatnoworkyonemacy = true
-}
-if (!macosdisableThingsthatnoworkyonemacy) {
   	void onMyLevelsClick(CCObject* target) {
 auto CreatorLayer = CreatorLayer::create();
 	CreatorLayer->onMyLevels(target);
@@ -27,7 +23,6 @@ auto CreatorLayer = CreatorLayer::create();
 auto CreatorLayer = CreatorLayer::create();
 	CreatorLayer->onSavedLevels(target);
   }
-}
     bool init() {
         if (!MenuLayer::init() ) {
             return false;
@@ -100,7 +95,7 @@ if (Mod::get()->getSettingValue<bool>("HideName")) {
 };
 		 auto ByeBye = this->getChildByID("social-media-menu");
 		 ByeBye->setPosition(-121212,121212);
-		   if (!macosdisableThingsthatnoworkyonemacy) {
+		 
       auto menu = CCMenu::create();
 	  int Offset = 0;
 	  // Shortcut Search thingy
@@ -117,7 +112,6 @@ if (Mod::get()->getSettingValue<bool>("HideName")) {
 	  // accountBtn_myLevels_001.png
 	  // GJ_editBtn_001.png
 	  // 1
-	
 	  if (Mod::get()->getSettingValue<bool>("ShortcutMyLevel")) {
 		this->addChild(menu); 
         auto Profiler = CCSprite::createWithSpriteFrameName("GJ_editBtn_001.png");
@@ -144,7 +138,7 @@ Offset=Offset+5+onMyLevels->getContentSize().width;
 		Offset=Offset+5+onSavedLevels->getContentSize().width;
  }
 //
-	  }
+	
 
  				// profile->setAttribute("geode.mouse-api/tooltip", profileUser->getString() );
 	if (Mainbooter) {
