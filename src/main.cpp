@@ -15,7 +15,7 @@ struct $modify(newer,MenuLayer) {
   	void onMyLevelsClick(CCObject* target) {
 			#ifdef GEODE_IS_MACOS {
 reinterpret_cast<CreatorLayer*>(this)->onMyLevels(target);
-			return true
+			return true;
 		};
 		if (LoadGreatMethod) {
 			reinterpret_cast<CreatorLayer*>(this)->onMyLevels(target);
@@ -31,7 +31,7 @@ auto CreatorLayer = CreatorLayer::create();
   	void SearchButtonClicked(CCObject* target) {
 		#ifdef GEODE_IS_MACOS {
 reinterpret_cast<CreatorLayer*>(this)->onOnlineLevels(target);
-			return true
+			return true;
 		};
 		if (LoadGreatMethod) {
 reinterpret_cast<CreatorLayer*>(this)->onOnlineLevels(target);
@@ -44,7 +44,7 @@ auto CreatorLayer = CreatorLayer::create();
     	void onSavedLevelsClick(CCObject* target) {
 				#ifdef GEODE_IS_MACOS {
 reinterpret_cast<CreatorLayer*>(this)->onSavedLevels(target);
-			return true
+			return true;
 		};
 			if (LoadGreatMethod) {
 reinterpret_cast<CreatorLayer*>(this)->onSavedLevels(target);
