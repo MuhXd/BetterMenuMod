@@ -20,7 +20,7 @@ struct $modify(newer,MenuLayer) {
 auto CreatorLayer = CreatorLayer::create();
  
 	CreatorLayer->onMyLevels(target);
-		}
+		};
 	
 
   }
@@ -31,7 +31,7 @@ reinterpret_cast<CreatorLayer*>(this)->onOnlineLevels(target);
 		else {
 auto CreatorLayer = CreatorLayer::create();
 	CreatorLayer->onOnlineLevels(target);
-		}
+		};
   }
     	void onSavedLevelsClick(CCObject* target) {
 			if (LoadGreatMethod) {
@@ -40,7 +40,7 @@ reinterpret_cast<CreatorLayer*>(this)->onSavedLevels(target);
 		else {
 auto CreatorLayer = CreatorLayer::create();
 	CreatorLayer->onSavedLevels(target);
-		}
+		};
   }
     bool init() {
         if (!MenuLayer::init() ) {
