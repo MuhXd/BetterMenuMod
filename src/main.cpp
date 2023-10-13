@@ -100,7 +100,7 @@ if (Mod::get()->getSettingValue<bool>("HideName")) {
 };
 		 auto ByeBye = this->getChildByID("social-media-menu");
 		 ByeBye->setPosition(-121212,121212);
-		   if (macosdisableThingsthatnoworkyonemacy) {
+		   if (!macosdisableThingsthatnoworkyonemacy) {
       auto menu = CCMenu::create();
 	  int Offset = 0;
 	  // Shortcut Search thingy
