@@ -9,7 +9,7 @@
 using namespace geode::prelude;
 auto Mainbooter = true;
 auto FirstBoot = false;
-auto LoadGreatMethod = false
+
 struct $modify(newer,MenuLayer) {
 	
   	void onMyLevelsClick(CCObject* target) {
@@ -177,7 +177,7 @@ alert->show();
 
 /*
 	  auto alert = FLAlertLayer::create(
-    "You what what that means",    
+    "You what that means",    
     "<cb>FISH</c>", 
     ""    
 ); 
