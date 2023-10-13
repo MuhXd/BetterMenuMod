@@ -16,7 +16,7 @@ struct $modify(newer,MenuLayer) {
 			#ifdef GEODE_IS_MACOS {
 reinterpret_cast<CreatorLayer*>(this)->onMyLevels(target);
 			return true
-		}
+		};
 		if (LoadGreatMethod) {
 			reinterpret_cast<CreatorLayer*>(this)->onMyLevels(target);
 			}
@@ -32,7 +32,7 @@ auto CreatorLayer = CreatorLayer::create();
 		#ifdef GEODE_IS_MACOS {
 reinterpret_cast<CreatorLayer*>(this)->onOnlineLevels(target);
 			return true
-		}
+		};
 		if (LoadGreatMethod) {
 reinterpret_cast<CreatorLayer*>(this)->onOnlineLevels(target);
 		}
@@ -45,7 +45,7 @@ auto CreatorLayer = CreatorLayer::create();
 				#ifdef GEODE_IS_MACOS {
 reinterpret_cast<CreatorLayer*>(this)->onSavedLevels(target);
 			return true
-		}
+		};
 			if (LoadGreatMethod) {
 reinterpret_cast<CreatorLayer*>(this)->onSavedLevels(target);
 		}
@@ -67,7 +67,7 @@ auto CreatorLayer = CreatorLayer::create();
 	} else {
 		if (Mod::get()->getSettingValue<bool>("macmethod")) {
 LoadGreatMethod = false;
-		}
+		};
 		else {
 		LoadGreatMethod = true;
 		};
