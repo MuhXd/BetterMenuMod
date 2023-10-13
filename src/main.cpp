@@ -12,7 +12,7 @@ auto FirstBoot = false;
 auto macosdisableThingsthatnoworkyonemacy=false
 struct $modify(newer,MenuLayer) {
 	#ifdef GEODE_IS_MACOS {
-	macosdisableThingsthatnoworkyonemacy = true
+	//macosdisableThingsthatnoworkyonemacy = true
 }
 if (!macosdisableThingsthatnoworkyonemacy) {
   	void onMyLevelsClick(CCObject* target) {
