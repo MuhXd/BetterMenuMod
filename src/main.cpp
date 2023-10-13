@@ -12,16 +12,34 @@ auto FirstBoot = false;
 
 struct $modify(newer,MenuLayer) {
   	void onMyLevelsClick(CCObject* target) {
+		#ifdef GEODE_IS_MACOS {
+reinterpret_cast<CreatorLayer*>(this)->onMyLevels(target);
+		}
+		else {
 auto CreatorLayer = CreatorLayer::create();
+ 
 	CreatorLayer->onMyLevels(target);
+		}
+	
+
   }
   	void SearchButtonClicked(CCObject* target) {
+		#ifdef GEODE_IS_MACOS {
+reinterpret_cast<CreatorLayer*>(this)->onOnlineLevels(target);
+		}
+		else {
 auto CreatorLayer = CreatorLayer::create();
 	CreatorLayer->onOnlineLevels(target);
+		}
   }
     	void onSavedLevelsClick(CCObject* target) {
+			#ifdef GEODE_IS_MACOS {
+reinterpret_cast<CreatorLayer*>(this)->onSavedLevels(target);
+		}
+		else {
 auto CreatorLayer = CreatorLayer::create();
 	CreatorLayer->onSavedLevels(target);
+		}
   }
     bool init() {
         if (!MenuLayer::init() ) {
