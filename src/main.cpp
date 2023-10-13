@@ -11,9 +11,7 @@ auto Mainbooter = true;
 auto FirstBoot = false;
 auto LoadGreatMethod = false
 struct $modify(newer,MenuLayer) {
-	if (!CreatorLayer::create()) {
-		LoadGreatMethod = false
-	}
+	
   	void onMyLevelsClick(CCObject* target) {
 #ifdef GEODE_IS_MACOS {
 reinterpret_cast<CreatorLayer*>(this)->onMyLevels(target);
