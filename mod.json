@@ -13,11 +13,18 @@
 		"type": "bool",
 		"default": true
 	},
+	
 	"RunMainMenu": {
 		"name": "Main Menu Modifications",
 		"description": "This settings Enables the main menu (Note: This will be for other menus when i am finished)",
 		"type": "bool",
 		"default": true
+	},
+	"macmethod": {
+		"name": "FORCE BAD MAC METHOD",
+		"description": "forces the mac method in Shortcuts (Not recomened)",
+		"type": "bool",
+		"default": false
 	},
 	"ShortcutMyLevel": {
 		"name": "My Levels Shortcut",

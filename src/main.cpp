@@ -9,12 +9,13 @@
 using namespace geode::prelude;
 auto Mainbooter = true;
 auto FirstBoot = false;
-
+auto LoadGreatMethod = false;
 struct $modify(newer,MenuLayer) {
+	
   	void onMyLevelsClick(CCObject* target) {
-		#ifdef GEODE_IS_MACOS {
-reinterpret_cast<CreatorLayer*>(this)->onMyLevels(target);
-		}
+		if (LoadGreatMethod) {
+			reinterpret_cast<CreatorLayer*>(this)->onMyLevels(target);
+			}
 		else {
 auto CreatorLayer = CreatorLayer::create();
  
@@ -24,7 +25,7 @@ auto CreatorLayer = CreatorLayer::create();
 
   }
   	void SearchButtonClicked(CCObject* target) {
-		#ifdef GEODE_IS_MACOS {
+		if (LoadGreatMethod) {
 reinterpret_cast<CreatorLayer*>(this)->onOnlineLevels(target);
 		}
 		else {
@@ -33,7 +34,7 @@ auto CreatorLayer = CreatorLayer::create();
 		}
   }
     	void onSavedLevelsClick(CCObject* target) {
-			#ifdef GEODE_IS_MACOS {
+			if (LoadGreatMethod) {
 reinterpret_cast<CreatorLayer*>(this)->onSavedLevels(target);
 		}
 		else {
@@ -48,6 +49,18 @@ auto CreatorLayer = CreatorLayer::create();
 		if (!Mod::get()->getSettingValue<bool>("RunMainMenu")) {
 			return true;
 		};
+		// To fix mac stuff waaa
+		if ( !CreatorLayer::create() ) {
+		LoadGreatMethod = false;
+	} else {
+		if (Mod::get()->getSettingValue<bool>("macmethod")) {
+LoadGreatMethod = false;
+		}
+		else {
+		LoadGreatMethod = true;
+		};
+	};
+	// end of looking
 if (Mod::get()->getSettingValue<bool>("MoveMenuPos")) {
 		auto close = this->getChildByID("close-menu");
 close->setLayout(
@@ -186,4 +199,5 @@ alert->show();
 };
         return true; 
     }
+	
 };
