@@ -4,32 +4,27 @@
 #include <Geode/binding/EndLevelLayer.hpp>
 #include <Geode/cocos/base_nodes/Layout.hpp> 
 
-// TOP RIGHT CLOSE
-// to LEFT PROFILE FUNNI
 using namespace geode::prelude;
 auto Mainbooter = true;
 auto FirstBoot = false;
-auto MacOs = false;
-
-
+bool MacOs = false;
 struct $modify(newer,MenuLayer) {
-	
 #ifdef GEODE_IS_MACOS 
-	MacOs = true; 
+	bool MacOs = true; 
 #endif
-
+// Creates the level click buttons function
 void onMyLevelsClick(CCObject* target) {
-	if (MacOs) {
+if (MacOs) {
 reinterpret_cast<CreatorLayer*>(this)->onOnlineLevels(target);
-		} else {
+} 
+else {
 	auto CreatorLayer = CreatorLayer::create();
 	CreatorLayer->onMyLevels(target);
-		};
+};
   }
   	void SearchButtonClicked(CCObject* target) {
 	if (MacOs) {
 reinterpret_cast<CreatorLayer*>(this)->onOnlineLevels(target);
-		
 	} else {
 	auto CreatorLayer = CreatorLayer::create();
 	CreatorLayer->onOnlineLevels(target);
@@ -37,13 +32,13 @@ reinterpret_cast<CreatorLayer*>(this)->onOnlineLevels(target);
   }
     void onSavedLevelsClick(CCObject* target) {
 		if (MacOs) {
-reinterpret_cast<CreatorLayer*>(this)->onSavedLevels(target);
-			
+reinterpret_cast<CreatorLayer*>(this)->onSavedLevels(target);	
 		} else {
 	auto CreatorLayer = CreatorLayer::create();
 	CreatorLayer->onSavedLevels(target);
 		};
   }
+  // ints the main menu code
     bool init() {
         if (!MenuLayer::init() ) {
             return false;
