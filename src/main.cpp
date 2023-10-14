@@ -9,36 +9,38 @@
 using namespace geode::prelude;
 auto Mainbooter = true;
 auto FirstBoot = false;
+auto MacOs = false;
+
 
 struct $modify(newer,MenuLayer) {
 	
-  	void onMyLevelsClick(CCObject* target) {
-#ifdef GEODE_IS_MACOS {
-reinterpret_cast<CreatorLayer*>(this)->onMyLevels(target);
-		}
-		else {
-auto CreatorLayer = CreatorLayer::create();
- 
+#ifdef GEODE_IS_MACOS 
+	MacOs = true; 
+#endif
+
+void onMyLevelsClick(CCObject* target) {
+	if (MacOs) {
+reinterpret_cast<CreatorLayer*>(this)->onOnlineLevels(target);
+		} else {
+	auto CreatorLayer = CreatorLayer::create();
 	CreatorLayer->onMyLevels(target);
 		};
-	
-
   }
   	void SearchButtonClicked(CCObject* target) {
-		#ifdef GEODE_IS_MACOS {
+	if (MacOs) {
 reinterpret_cast<CreatorLayer*>(this)->onOnlineLevels(target);
-		}
-		else {
-auto CreatorLayer = CreatorLayer::create();
+		
+	} else {
+	auto CreatorLayer = CreatorLayer::create();
 	CreatorLayer->onOnlineLevels(target);
-		};
+	};
   }
-    	void onSavedLevelsClick(CCObject* target) {
-			#ifdef GEODE_IS_MACOS {
+    void onSavedLevelsClick(CCObject* target) {
+		if (MacOs) {
 reinterpret_cast<CreatorLayer*>(this)->onSavedLevels(target);
-		}
-		else {
-auto CreatorLayer = CreatorLayer::create();
+			
+		} else {
+	auto CreatorLayer = CreatorLayer::create();
 	CreatorLayer->onSavedLevels(target);
 		};
   }
