@@ -126,16 +126,18 @@ if (Mod::get()->getSettingValue<bool>("HideName")) {
 	  // accountBtn_myLevels_001.png
 	  // GJ_editBtn_001.png
 	  // 1
+	  this->addChild(menu);
+	   menu->setPosition((17+4),22);
+	   menu->setContentSize({ 0, 0 });
+	   menu->setAnchorPoint({0,0});
+
 	  if (Mod::get()->getSettingValue<bool>("ShortcutMyLevel")) {
-		this->addChild(menu); 
         auto Profiler = CCSprite::createWithSpriteFrameName("GJ_editBtn_001.png");
         Profiler->setScale(0.4f);
         auto onMyLevels = CCMenuItemSpriteExtra::create(Profiler, this, menu_selector(newer::onMyLevelsClick));
       	menu->addChild(onMyLevels);
   
-       menu->setPosition((17+4+Offset),22);
-	   menu->setContentSize({ 0, 0 });
-	   menu->setAnchorPoint({0,0});
+      
         onMyLevels->setPosition(0,0);
         onMyLevels->setID("bettermenu/shortcut/onMyLevels");
 Offset=Offset+5+onMyLevels->getContentSize().width;
