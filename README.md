@@ -1,7 +1,4 @@
 # BetterMenu
-
-This is where Among us
-
-
+Wow very cool
 ## Link to Indexer
 https://github.com/MuhXd/GeodeModIndexer
