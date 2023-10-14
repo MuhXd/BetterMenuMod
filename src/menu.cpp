@@ -1,7 +1,7 @@
 
 auto Mainbooter = true;
 auto FirstBoot = false;
-
+using namespace geode::prelude;
 struct $modify(newer,MenuLayer) {
 
 
