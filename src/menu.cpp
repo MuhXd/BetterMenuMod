@@ -1,7 +1,12 @@
+#include <Geode/Geode.hpp>
+#include <Geode/modify/MenuLayer.hpp>
+#include <Geode/modify/CreatorLayer.hpp>
+#include <Geode/binding/EndLevelLayer.hpp>
+#include <Geode/cocos/base_nodes/Layout.hpp> 
 
 auto Mainbooter = true;
 auto FirstBoot = false;
-using namespace geode::prelude;
+
 struct $modify(newer,MenuLayer) {
 
 
