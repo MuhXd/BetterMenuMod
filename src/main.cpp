@@ -45,6 +45,7 @@ reinterpret_cast<CreatorLayer*>(this)->onSavedLevels(target);
 		if (!Mod::get()->getSettingValue<bool>("RunMainMenu")) {
 			return true;
 		};
+		   auto winSize = CCDirector::get()->getWinSize();
 if (Mod::get()->getSettingValue<bool>("MoveMenuPos")) {
 		auto close = this->getChildByID("close-menu");
 close->setLayout(
@@ -56,7 +57,8 @@ close->setLayout(
 		->setCrossAxisAlignment(AxisAlignment::Center)
 		->setCrossAxisLineAlignment(AxisAlignment::Center)
 );
-close->setPosition(466.9,302);
+auto profilePos = (winSize.height-20);
+close->setPosition(winSize.width-100,profilePos);
 auto RightSideMenu = this->getChildByID("right-side-menu");
 RightSideMenu->setLayout(
     RowLayout::create()
@@ -67,10 +69,10 @@ RightSideMenu->setLayout(
 		->setCrossAxisAlignment(AxisAlignment::Center)
 		->setCrossAxisLineAlignment(AxisAlignment::Center)
 );
- RightSideMenu->setPosition(282,70);
+ RightSideMenu->setPosition(0.5*winSize.width,winSize.height/4.2);
  RightSideMenu->setScale(1.225);
  RightSideMenu->setContentSize({ 223.749, 69.000 });
-         auto winSize = CCDirector::get()->getWinSize();
+        
 		/*
         auto title = this->getChildByID("main-title");
 		title->setPosition(0, 0);
@@ -92,14 +94,17 @@ RightSideMenu->setLayout(
 );
 
 bottommenu->setContentSize({ 35.f, 198.f });
- bottommenu->setPosition((17+4),186.000);
-bottommenu->updateLayout();
+
 		auto profile = this->getChildByID("profile-menu");
-		 profile->setPosition((44+4),300.000);
+		
+		 profile->setPosition((44+4),winSize.height-20);
 		 	  profile->setScale(0.575);
 			    auto profileUser = this->getChildByID("player-username");
 		 profileUser->setPosition(76,391);
 		   profileUser->setScale(1);
+		   // FIXES STUFF
+		    bottommenu->setPosition((17+4),(profilePos - 114));
+bottommenu->updateLayout();
 };
 
 if (Mod::get()->getSettingValue<bool>("HideName")) {
@@ -111,6 +116,7 @@ if (Mod::get()->getSettingValue<bool>("HideName")) {
 		 ByeBye->setPosition(-121212,121212);
 		 
       auto menu = CCMenu::create();
+	  menu->setID("bettermenu/Shortcuts");
 	  int Offset = 0;
 	  // Shortcut Search thingy
 	   if (Mod::get()->getSettingValue<bool>("ShortcutSearch")) {
@@ -120,7 +126,7 @@ if (Mod::get()->getSettingValue<bool>("HideName")) {
       	auto more=this->getChildByID("more-games-menu");
 		menu->addChild(Search);
 		more-> setPosition(-122222,-120);
-        Search->setPosition(505.875,19.500);
+        Search->setPosition(winSize.width-63.125,19.500);
         Search->setID("bettermenu/Search/MoreGamesReplacement");
 	   }
 	  // accountBtn_myLevels_001.png
