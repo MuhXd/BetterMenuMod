@@ -65,14 +65,14 @@ RightSideMenu->setLayout(
         ->setGap(5.f)
         ->setAutoScale(true)
         ->setAxis(Axis::Row)
-		->setAxisAlignment(AxisAlignment::Center)
+		->setAxisAlignment(AxisAlignment::Even)
 		->setCrossAxisAlignment(AxisAlignment::Center)
 		->setCrossAxisLineAlignment(AxisAlignment::Center)
 );
  RightSideMenu->setPosition(0.5*winSize.width,winSize.height/4.2);
  RightSideMenu->setScale(1.225);
  RightSideMenu->setContentSize({ 223.749, 69.000 });
-        
+ RightSideMenu->updateLayout();
 		/*
         auto title = this->getChildByID("main-title");
 		title->setPosition(0, 0);
@@ -80,9 +80,8 @@ RightSideMenu->setLayout(
 		  Title Remover LOL
 		*/
 
-	 auto bottommenu = this->getChildByID("bottom-menu");
-		 bottommenu->setScale(0.95);
-
+	auto bottommenu = this->getChildByID("bottom-menu");
+	bottommenu->setScale(0.95);
 	bottommenu->setLayout(
     RowLayout::create()
         ->setGap(5.f)
@@ -104,7 +103,7 @@ bottommenu->setContentSize({ 35.f, 198.f });
 		   profileUser->setScale(1);
 		   // FIXES STUFF
 		    bottommenu->setPosition((17+4),(profilePos - 114));
-bottommenu->updateLayout();
+			bottommenu->updateLayout();
 };
 
 if (Mod::get()->getSettingValue<bool>("HideName")) {
