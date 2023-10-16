@@ -62,7 +62,7 @@ close->setPosition(winSize.width-100,profilePos);
 auto RightSideMenu = this->getChildByID("right-side-menu");
 RightSideMenu->setLayout(
     RowLayout::create()
-        ->setGap(5.f)
+        ->setGap(2.f)
         ->setAutoScale(true)
         ->setAxis(Axis::Row)
 		->setAxisAlignment(AxisAlignment::Even)
@@ -84,7 +84,7 @@ RightSideMenu->setLayout(
 	bottommenu->setScale(0.95);
 	bottommenu->setLayout(
     RowLayout::create()
-        ->setGap(5.f)
+        ->setGap(3.5)
         ->setAutoScale(true)
         ->setAxis(Axis::Column)
 		->setAxisAlignment(AxisAlignment::Center)
