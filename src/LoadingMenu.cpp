@@ -14,7 +14,7 @@ struct $modify(newer,MenuLayer) {
 // Creates the level click buttons function
 void onMyLevelsClick(CCObject* target) {
 #ifdef GEODE_IS_MACOS 
-reinterpret_cast<CreatorLayer*>(this)->onOnlineLevels(target);
+reinterpret_cast<CreatorLayer*>(this)->onMyLevels(target);
 #else
 	auto CreatorLayer = CreatorLayer::create();
 	CreatorLayer->onMyLevels(target);
