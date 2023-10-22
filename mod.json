@@ -10,13 +10,6 @@
         "Customization"
     ],
 	"settings": {
-	"BootMessage": {
-		"name": "Boot message",
-		"description": "Show the boot message when booting the game for the first time",
-		"type": "bool",
-		"default": true
-	},
-	
 	"RunMainMenu": {
 		"name": "Main Menu Modifications",
 		"description": "This settings Enables the main menu (Note: This will be for other menus when i am finished)",
