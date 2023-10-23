@@ -1,192 +1,103 @@
 #include <Geode/Geode.hpp>
 #include <Geode/modify/MenuLayer.hpp>
-#include <Geode/modify/CreatorLayer.hpp>
-#include <Geode/binding/EndLevelLayer.hpp>
-#include <Geode/cocos/base_nodes/Layout.hpp> 
+#include <UIBuilder.hpp>
 
 using namespace geode::prelude;
-auto Mainbooter = true;
-auto FirstBoot = false;
 
-struct $modify(newer,MenuLayer) {
-
-
-// Creates the level click buttons function
-void onMyLevelsClick(CCObject* target) {
-#ifdef GEODE_IS_MACOS 
-reinterpret_cast<CreatorLayer*>(this)->onMyLevels(target);
-#else
-	auto CreatorLayer = CreatorLayer::create();
-	CreatorLayer->onMyLevels(target);
-  #endif  
-
-  }
-  	void SearchButtonClicked(CCObject* target) {
-	#ifdef GEODE_IS_MACOS 
-reinterpret_cast<CreatorLayer*>(this)->onOnlineLevels(target);
-#else
-	auto CreatorLayer = CreatorLayer::create();
-	CreatorLayer->onOnlineLevels(target);
-  #endif  
-  }
-    void onSavedLevelsClick(CCObject* target) {
-	#ifdef GEODE_IS_MACOS 
-reinterpret_cast<CreatorLayer*>(this)->onSavedLevels(target);	
-	#else
-	auto CreatorLayer = CreatorLayer::create();
-	CreatorLayer->onSavedLevels(target);
-	  #endif  
-  }
-  // ints the main menu code
+class $(MenuLayer) {
     bool init() {
-        if (!MenuLayer::init() ) {
+        if (!MenuLayer::init())
             return false;
-		};
-		if (!Mod::get()->getSettingValue<bool>("RunMainMenu")) {
-			return true;
-		};
-		   auto winSize = CCDirector::get()->getWinSize();
-if (Mod::get()->getSettingValue<bool>("MoveMenuPos")) {
-		auto close = this->getChildByID("close-menu");
-close->setLayout(
-    RowLayout::create()
-        ->setGap(5.f)
-        ->setAutoScale(true)
-        ->setAxis(Axis::Row)
-		->setAxisAlignment(AxisAlignment::End)
-		->setCrossAxisAlignment(AxisAlignment::Center)
-		->setCrossAxisLineAlignment(AxisAlignment::Center)
-);
-auto profilePos = (winSize.height-20);
-close->setPosition(winSize.width-100,profilePos);
-auto RightSideMenu = this->getChildByID("right-side-menu");
-RightSideMenu->setLayout(
-    RowLayout::create()
-        ->setGap(2.f)
-        ->setAutoScale(true)
-        ->setAxis(Axis::Row)
-		->setAxisAlignment(AxisAlignment::Even)
-		->setCrossAxisAlignment(AxisAlignment::Center)
-		->setCrossAxisLineAlignment(AxisAlignment::Center)
-);
- RightSideMenu->setPosition(0.5*winSize.width,winSize.height/4.2);
- RightSideMenu->setScale(1.225);
- RightSideMenu->setContentSize({ 223.749, 69.000 });
- RightSideMenu->updateLayout();
-		/*
-        auto title = this->getChildByID("main-title");
-		title->setPosition(0, 0);
-		  title->setScale(0);
-		  Title Remover LOL
-		*/
 
-	auto bottommenu = this->getChildByID("bottom-menu");
-	bottommenu->setScale(0.95);
-	bottommenu->setLayout(
-    RowLayout::create()
-        ->setGap(3.5)
-        ->setAutoScale(true)
-        ->setAxis(Axis::Column)
-		->setAxisAlignment(AxisAlignment::Center)
-		->setCrossAxisAlignment(AxisAlignment::Center)
-		->setCrossAxisLineAlignment(AxisAlignment::Center)
-);
+        if (Mod::get()->getSettingValue<bool>("RunMainMenu")) {
+            auto winSize = CCDirector::get()->getWinSize();
 
-bottommenu->setContentSize({ 35.f, 198.f });
+            this->getChildByID("social-media-menu")->setVisible(false);
+            if (Mod::get()->getSettingValue<bool>("HideName"))
+                this->getChildByID("player-username")->setVisible(false);
 
-		auto profile = this->getChildByID("profile-menu");
-		
-		 profile->setPosition((44+4),winSize.height-20);
-		 	  profile->setScale(0.575);
-			    auto profileUser = this->getChildByID("player-username");
-		 profileUser->setPosition(76,391);
-		   profileUser->setScale(1);
-		   // FIXES STUFF
-		    bottommenu->setPosition((17+4),(profilePos - 114));
-			bottommenu->updateLayout();
-};
+            // Move the menus around
+            if (Mod::get()->getSettingValue<bool>("MoveMenuPos")) {
+                Build(this->getChildByID("close-menu"))
+                    .pos(winSize.width - 105, winSize.height - 20)
+                    .layout(RowLayout::create()->setAxisAlignment(AxisAlignment::End))
+                    .updateLayout();
 
-if (Mod::get()->getSettingValue<bool>("HideName")) {
-		  auto profileUser = this->getChildByID("player-username");
-		 profileUser->setPosition(-121212,121212);
-		  profileUser->setScale(0);
-};
-		 auto ByeBye = this->getChildByID("social-media-menu");
-		 ByeBye->setPosition(-121212,121212);
-		 
-      auto menu = CCMenu::create();
-	  menu->setID("bettermenu/Shortcuts");
-	  int Offset = 0;
-	  // Shortcut Search thingy
-	   if (Mod::get()->getSettingValue<bool>("ShortcutSearch")) {
-	  auto SearchIcon = CCSprite::createWithSpriteFrameName("GJ_searchBtn_001.png");
-        SearchIcon->setScale(0.7f);
-        auto Search = CCMenuItemSpriteExtra::create(SearchIcon, this, menu_selector(newer::SearchButtonClicked));
-      	auto more=this->getChildByID("more-games-menu");
-		menu->addChild(Search);
-		more-> setPosition(-122222,-120);
-        Search->setPosition(winSize.width-63.125,19.500);
-        Search->setID("bettermenu/Search/MoreGamesReplacement");
-	   }
-	  // accountBtn_myLevels_001.png
-	  // GJ_editBtn_001.png
-	  // 1
-	  this->addChild(menu);
-	   menu->setPosition((17+4),22);
-	   menu->setContentSize({ 0, 0 });
-	   menu->setAnchorPoint({0,0});
+                Build(this->getChildByID("right-side-menu"))
+                    .pos(winSize.width / 2, winSize.height / 4.2)
+                    .scale(1.225)
+                    .contentSize({223.749, 69.000})
+                    .layout(RowLayout::create()
+                        ->setGap(2.f)
+                        ->setAxisAlignment(AxisAlignment::Even)
+                    ).updateLayout();
 
-	  if (Mod::get()->getSettingValue<bool>("ShortcutMyLevel")) {
-        auto Profiler = CCSprite::createWithSpriteFrameName("GJ_editBtn_001.png");
-        Profiler->setScale(0.4f);
-        auto onMyLevels = CCMenuItemSpriteExtra::create(Profiler, this, menu_selector(newer::onMyLevelsClick));
-      	menu->addChild(onMyLevels);
-  
-      
-        onMyLevels->setPosition(0,0);
-        onMyLevels->setID("bettermenu/shortcut/onMyLevels");
-Offset=Offset+5+onMyLevels->getContentSize().width;
-	  }
-// 2
- if (Mod::get()->getSettingValue<bool>("ShortcutSavedLevels")) {
-	this->addChild(menu); 
-        auto onSavedLevelsIcon = CCSprite::createWithSpriteFrameName("accountBtn_myLevels_001.png");
-        onSavedLevelsIcon->setScale(0.7f);
-        auto onSavedLevels = CCMenuItemSpriteExtra::create(onSavedLevelsIcon, this, menu_selector(newer::onSavedLevelsClick));
-      	menu->addChild(onSavedLevels);
-        onSavedLevels->setPosition(0+Offset,0);
-        onSavedLevels->setID("bettermenu/shortcut/onSavedLevels");
-		Offset=Offset+5+onSavedLevels->getContentSize().width;
- }
-//
-	
+                Build(this->getChildByID("bottom-menu"))
+                    .scale(0.95)
+                    .contentSize({35.f, 198.f})
+                    .pos(21, winSize.height - 134)
+                    .layout(ColumnLayout::create()->setGap(3.5))
+                    .updateLayout();
 
- 				// profile->setAttribute("geode.mouse-api/tooltip", profileUser->getString() );
-	if (Mainbooter) {
-		FirstBoot = Mod::get()->getSettingValue<bool>("BootMessage");
-		Mainbooter=false;
-		};
-if (FirstBoot) {
-	FirstBoot=false;
-	
-	  auto alert = FLAlertLayer::create(
-    "Warning! (From Better Menu)",    
-    "<cr>This mod is Still in beta, Please report bugs if you find some.</c>", 
-    "Sure!"    
-); 
- alert->m_scene = this;
-alert->show();
+                Build(this->getChildByID("profile-menu"))
+                    .pos(48, winSize.height - 20)
+                    .scale(0.575);
 
-/*
-	  auto alert = FLAlertLayer::create(
-    "You what that means",    
-    "<cb>FISH</c>", 
-    ""    
-); 
- alert->m_scene = this;
-alert->show();
-*/
-};
-        return true; 
+                Build(this->getChildByID("player-username"))
+                    .pos(76, 391)
+                    .scale(1);
+            }
+
+            // Search
+            if (Mod::get()->getSettingValue<bool>("ShortcutSearch")) {
+                this->getChildByID("more-games-menu")->setVisible(false);
+
+                Build<CCSprite>::createSpriteName("GJ_searchBtn_001.png")
+                    .scale(0.7)
+                    .intoMenuItem([](auto target) {
+                        CreatorLayer::create()->onOnlineLevels(target);
+                    })
+                    .pos(winSize.width - 42.125, 41.500)
+                    .id("search-btn"_spr)
+                    .intoNewParent(CCMenu::create())
+                    .pos(0, 0)
+                    .parent(this)
+                    .id("search-menu"_spr);
+            }
+
+            auto shortcutMenu = Build<CCMenu>::create()
+                .pos(7, 6)
+                .anchorPoint({0, 0})
+                .parent(this)
+                .layout(RowLayout::create()->setAxisAlignment(AxisAlignment::Start))
+                .id("shortcuts-menu"_spr)
+                .collect();
+
+            // My Levels
+            if (Mod::get()->getSettingValue<bool>("ShortcutMyLevel")) {
+                Build<CCSprite>::createSpriteName("GJ_editBtn_001.png")
+                    .scale(0.4)
+                    .intoMenuItem([](auto target) {
+                        CreatorLayer::create()->onMyLevels(target);
+                    })
+                    .parent(shortcutMenu)
+                    .id("my-levels-btn"_spr);
+            }
+
+            // Saved Levels
+            if (Mod::get()->getSettingValue<bool>("ShortcutSavedLevels")) {
+                Build<CCSprite>::createSpriteName("accountBtn_myLevels_001.png")
+                    .scale(0.7)
+                    .intoMenuItem([](auto target) {
+                        CreatorLayer::create()->onSavedLevels(target);
+                    })
+                    .parent(shortcutMenu)
+                    .id("saved-levels-btn"_spr);
+            }
+
+            shortcutMenu->updateLayout();
+        }
+
+        return true;
     }
 };
