@@ -44,7 +44,8 @@ class $(MenuLayer) {
                     .scale(0.575);
 
                 Build(this->getChildByID("player-username"))
-                    .pos(92,  winSize.height - 20);
+                    .pos(39,  winSize.height - 20)
+                    .anchorPoint({0.f,0.5});
             }
 
             // Search
