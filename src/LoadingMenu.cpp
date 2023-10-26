@@ -44,7 +44,7 @@ class $(MenuLayer) {
                     .scale(0.575);
 
                 Build(this->getChildByID("player-username"))
-                    .pos(76, 391)
+                    .pos(92,  winSize.height - 20)
                     .scale(1);
             }
 
