@@ -18,8 +18,8 @@ class $(MenuLayer) {
             if (Mod::get()->getSettingValue<bool>("MoveMenuPos")) {
                 Build(this->getChildByID("right-side-menu"))
                     .pos(winSize.width / 2, winSize.height / 4.2)
-                    .scale(1.225)
-                    .contentSize({223.749, 69.000})
+                    .scale(1.225f)
+                    .contentSize({223.749f, 69.000})
                     .layout(RowLayout::create()
                         ->setGap(2.f)
                         ->setAxisAlignment(AxisAlignment::Even)
@@ -29,13 +29,13 @@ if (Mod::get()->getSettingValue<bool>("MoveMenuPosFlip")) {
                 Build(this->getChildByID("bottom-menu"))
                     .contentSize({35.750, 221.f})
                     .pos(winSize.width - 22, winSize.height - 139)
-                    .scale(0.9)
+                    .scale(0.9f)
                     .layout(ColumnLayout::create()->setGap(36))
                     .updateLayout();
                 Build(this->getChildByID("profile-menu"))
                     .pos(winSize.width - 49, winSize.height - 20)
                     .layout(RowLayout::create()->setAxisAlignment(AxisAlignment::End))
-                    .scale(0.575);
+                    .scale(0.575f);
                 Build(this->getChildByID("player-username"))
                     .pos(winSize.width - 40,  winSize.height - 20)
                     .anchorPoint({1.f,0.5});
@@ -52,7 +52,7 @@ else {
                     .updateLayout();
                     Build(this->getChildByID("profile-menu"))
                     .pos(48, winSize.height - 20)
-                    .scale(0.575);
+                    .scale(0.575f);
 
                 Build(this->getChildByID("player-username"))
                     .pos(39,  winSize.height - 20)
@@ -65,15 +65,15 @@ else {
               Build(this->getChildByID("bottom-menu")).posY(winSize.height-35.5);
                Build(this->getChildByID("main-title"))
                .posY(80)
-               .scale(0.775);
+               .scale(0.775f);
             }
             // Moves right side menu down bescause Croozy wanted it to.
              if (Mod::get()->getSettingValue<bool>("RightSide")) { 
                
                 Build(this->getChildByID("right-side-menu"))
-                    .pos(169,  28.190)
+                    .pos(169,  28.190f)
                     .scale(1)
-                    .contentSize({144.749, 63.825})
+                    .contentSize({144.749f, 63.825f})
                     .layout(
                         RowLayout::create()
                         ->setGap(3.f)
@@ -89,7 +89,7 @@ else {
                 this->getChildByID("more-games-menu")->setVisible(false);
 
                 Build<CCSprite>::createSpriteName("GJ_searchBtn_001.png")
-                    .scale(0.7)
+                    .scale(0.7f)
                     .intoMenuItem([](auto target) {
                         CreatorLayer::create()->onOnlineLevels(target);
                     })
@@ -116,7 +116,7 @@ else {
             // My Levels
             if (Mod::get()->getSettingValue<bool>("ShortcutMyLevel")) {
                 Build<CCSprite>::createSpriteName("GJ_editBtn_001.png")
-                    .scale(0.4)
+                    .scale(0.4f)
                     .intoMenuItem([](auto target) {
                         CreatorLayer::create()->onMyLevels(target);
                     })
@@ -127,7 +127,7 @@ else {
             // Saved Levels
             if (Mod::get()->getSettingValue<bool>("ShortcutSavedLevels")) {
                 Build<CCSprite>::createSpriteName("accountBtn_myLevels_001.png")
-                    .scale(0.7)
+                    .scale(0.7f)
                     .intoMenuItem([](auto target) {
                         CreatorLayer::create()->onSavedLevels(target);
                     })
