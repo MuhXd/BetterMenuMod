@@ -1,6 +1,5 @@
 # ChangeLog
 ## BetterMenu-beta.9
-* Added new Shortcuts
 * fixed the name bug
 * added a flip menu option
 * option to move bottom ui
