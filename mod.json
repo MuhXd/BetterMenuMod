@@ -34,6 +34,18 @@
 		"type": "bool",
 		"default": true
 	},
+	"ShortcutDaily": {
+		"name": "Daily Shortcut",
+		"description": "Adds Daily button to Shortcuts",
+		"type": "bool",
+		"default": true
+	},
+	"ShortcutWeekly": {
+		"name": "Weekly Shortcut",
+		"description": "Adds Weekly button to Shortcuts",
+		"type": "bool",
+		"default": true
+	},
 	"HideName": {
 		"name": "Hide Username",
 		"description": "This setting Hides the players name from the main menu",

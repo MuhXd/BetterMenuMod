@@ -1,15 +1,20 @@
 #include <Geode/Geode.hpp>
 #include <Geode/modify/MenuLayer.hpp>
 #include <UIBuilder.hpp>
-
+#include <Geode/loader/Mod.hpp>
+#include <Geode/loader/Loader.hpp>
+static geode::Loader* get();
 using namespace geode::prelude;
-
 class $(MenuLayer) {
+     static void onModify(auto& self) {
+        self.setHookPriority("MenuLayer::init", -1); // For the icon profile bug fix
+    }
     bool init() {
         if (!MenuLayer::init())
             return false;
 
         if (Mod::get()->getSettingValue<bool>("RunMainMenu")) {
+            bool anti = false;
             auto winSize = CCDirector::get()->getWinSize();
             this->getChildByID("social-media-menu")->setVisible(false);
             if (Mod::get()->getSettingValue<bool>("HideName"))
@@ -22,7 +27,7 @@ class $(MenuLayer) {
                     .contentSize({223.749f, 69.000})
                     .layout(RowLayout::create()
                         ->setGap(2.f)
-                        ->setAxisAlignment(AxisAlignment::Even)
+                        ->setAxisAlignment(AxisAlignment::Center)
                     ).updateLayout();
             // i don't wanna get into custom settings please, Don't make me. 
 if (Mod::get()->getSettingValue<bool>("MoveMenuPosFlip")) {
@@ -32,10 +37,18 @@ if (Mod::get()->getSettingValue<bool>("MoveMenuPosFlip")) {
                     .scale(0.9f)
                     .layout(ColumnLayout::create()->setGap(36))
                     .updateLayout();
+                auto RowLayoutFix_IconProfile = RowLayout::create();
                 Build(this->getChildByID("profile-menu"))
-                    .pos(winSize.width - 49, winSize.height - 20)
-                    .layout(RowLayout::create()->setAxisAlignment(AxisAlignment::End))
-                    .scale(0.575f);
+                    .pos(winSize.width - 39, winSize.height - 20)
+                    .layout(RowLayoutFix_IconProfile->setAxisAlignment(AxisAlignment::End))
+                    .contentSize({111.000f, 58.000f})
+                    .scale(0.575f);   
+                if (Loader::get()->isModLoaded("capeling.icon_profile")) {
+                    this->getChildByID("profile-menu")->setRotationY(180);
+                    this->getChildByID("profile-menu")->setRotationX(0);
+                    RowLayoutFix_IconProfile->setAxisAlignment(AxisAlignment::Start);
+                }
+                    this->getChildByID("profile-menu")->updateLayout();
                 Build(this->getChildByID("player-username"))
                     .pos(winSize.width - 40,  winSize.height - 20)
                     .anchorPoint({1.f,0.5});
@@ -46,11 +59,13 @@ else {
                     .pos(21, winSize.height - 149)
                     .layout(ColumnLayout::create()->setGap(36))
                     .updateLayout();
+                anti=true;
                 Build(this->getChildByID("close-menu"))
                     .pos(winSize.width - 105, winSize.height - 20)
                     .layout(RowLayout::create()->setAxisAlignment(AxisAlignment::End))
                     .updateLayout();
                     Build(this->getChildByID("profile-menu"))
+                    .layout(RowLayout::create()->setAxisAlignment(AxisAlignment::Start))
                     .pos(48, winSize.height - 20)
                     .scale(0.575f);
 
@@ -64,7 +79,7 @@ else {
             {
               Build(this->getChildByID("bottom-menu")).posY(winSize.height-35.5);
                Build(this->getChildByID("main-title"))
-               .posY(80)
+               .posY(45)
                .scale(0.775f);
             }
             // Moves right side menu down bescause Croozy wanted it to.
@@ -77,42 +92,67 @@ else {
                     .layout(
                         RowLayout::create()
                         ->setGap(3.f)
-                        ->setAxisAlignment(AxisAlignment::Even)
+                        ->setAxisAlignment(AxisAlignment::Center)
                         ->setAutoScale(false)
                         ->setGrowCrossAxis(false)
                         ->setCrossAxisOverflow(true)
                         ).updateLayout();
             }
-            // Search
-            if (Mod::get()->getSettingValue<bool>("ShortcutSearch")) {
-                
-                this->getChildByID("more-games-menu")->setVisible(false);
-
-                Build<CCSprite>::createSpriteName("GJ_searchBtn_001.png")
-                    .scale(0.7f)
-                    .intoMenuItem([](auto target) {
-                        CreatorLayer::create()->onOnlineLevels(target);
-                    })
-                    .pos(winSize.width - 42.125, 41.500)
-                    .id("search-btn"_spr)
-                    .intoNewParent(CCMenu::create())
-                    .pos(0, 0)
-                    .parent(this)
-                    .id("search-menu"_spr);
-            }
-
-            auto shortcutMenu = Build<CCMenu>::create()
-                .pos(7, 6)
+            // Creates the Menu
+            auto SearchMenu = Build<CCMenu>::create()
+                .pos(0, 1.500f)
+                .scale(0.75f)
+                .contentSize({755.000f, 104.500f})
                 .anchorPoint({0, 0})
                 .parent(this)
                 .layout(
                     RowLayout::create()
+                    ->setAxisAlignment(AxisAlignment::End)
+                    ->setGrowCrossAxis(true)
+                    ->setAxisReverse(true)
+                    )
+                .id("shortcuts-menu-search"_spr)
+                .collect();
+                bool Size = false;
+            if (Mod::get()->getSettingValue<bool>("ShortcutSearch")) {
+                this->getChildByID("more-games-menu")->setVisible(false);
+               auto Button =  Build<CCSprite>::createSpriteName("GJ_searchBtn_001.png")
+                    .intoMenuItem([](auto target) {
+                        CreatorLayer::create()->onOnlineLevels(target);
+                    })
+                    .scale(0.75f)
+                    .pos(0, 0)
+                    .parent(SearchMenu)
+                    .id("search-menu"_spr);
+            }
+            auto shortcutMenu = Build<CCMenu>::create()
+                .pos(7, 6)
+                .anchorPoint({0, 0})
+                .parent(this)
+                .contentSize({71.000f, 78.600f})
+                .layout(
+                    RowLayout::create()
                     ->setAxisAlignment(AxisAlignment::Start)
                     ->setGrowCrossAxis(true)
+                    ->setCrossAxisReverse(true)
                     )
                 .id("shortcuts-menu"_spr)
                 .collect();
 
+        auto shortcutMenu_2 = Build<CCMenu>::create()
+                .pos(winSize.width - 77, 78)
+                .anchorPoint({0, 0})
+                .parent(this)
+                .contentSize({71.000f, 78.600f})
+                .layout(
+                    RowLayout::create()
+                    ->setAxisAlignment(AxisAlignment::Start)
+                    ->setGrowCrossAxis(true)
+                    ->setCrossAxisReverse(true)
+                    )
+                .id("shortcuts-menu-Fix"_spr)
+                .collect();
+    
             // My Levels
             if (Mod::get()->getSettingValue<bool>("ShortcutMyLevel")) {
                 Build<CCSprite>::createSpriteName("GJ_editBtn_001.png")
@@ -123,7 +163,7 @@ else {
                     .parent(shortcutMenu)
                     .id("my-levels-btn"_spr);
             }
-
+    
             // Saved Levels
             if (Mod::get()->getSettingValue<bool>("ShortcutSavedLevels")) {
                 Build<CCSprite>::createSpriteName("accountBtn_myLevels_001.png")
@@ -134,9 +174,33 @@ else {
                     .parent(shortcutMenu)
                     .id("saved-levels-btn"_spr);
             }
+            
+            auto Menu2_2=shortcutMenu_2;
+            if (Mod::get()->getSettingValue<bool>("MoveMenuPosFlip")) {
+              Menu2_2=shortcutMenu;
+            }
 
+            if (Mod::get()->getSettingValue<bool>("ShortcutDaily")) {
+                auto Button = Build<CCSprite>::createSpriteName("GJ_sStarsIcon_001.png")
+                    .intoMenuItem([](auto target) {
+                        CreatorLayer::create()->onDailyLevel(target);
+                    })
+                    .pos(0, 0)
+                    .parent(Menu2_2);
+            }
+             if (Mod::get()->getSettingValue<bool>("ShortcutWeekly")) {
+                auto Button = Build<CCSprite>::createSpriteName("difficulty_06_btn_001.png")
+                    .intoMenuItem([](auto target) {
+                        CreatorLayer::create()->onWeeklyLevel(target);
+                    })
+                    .pos(0, 0)
+                    .parent(Menu2_2);
+            }
+            Menu2_2->updateLayout();
             shortcutMenu->updateLayout();
+            SearchMenu->updateLayout();
         }
+        
 
         return true;
     }
