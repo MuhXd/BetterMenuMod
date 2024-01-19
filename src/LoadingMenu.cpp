@@ -5,7 +5,7 @@
 #include <Geode/loader/Loader.hpp>
 static geode::Loader* get();
 using namespace geode::prelude;
-class $(MenuLayer) {
+class $modify(MenuLayer) {
      static void onModify(auto& self) {
         self.setHookPriority("MenuLayer::init", -1); // For the icon profile bug fix
     }
