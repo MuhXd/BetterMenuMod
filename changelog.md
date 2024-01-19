@@ -1,4 +1,6 @@
 # ChangeLog
+### BetterMenu-beta.10
+* 2.2 REAL
 ## BetterMenu-beta.9
 * fixed the name bug
 * added a flip menu option
