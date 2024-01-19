@@ -18,8 +18,11 @@ else()
 endif()
 
 add_subdirectory($ENV{GEODE_SDK} ${CMAKE_CURRENT_BINARY_DIR}/geode)
-
+if(ANDROID)
+CPMAddPackage("https://github.com/MuhXd/uibuilder_Docs#main")
+else()
 CPMAddPackage("gh:camila314/UIBuilder#main")
+endif()
 target_link_libraries(${PROJECT_NAME} UIBuilder)
 
 setup_geode_mod(${PROJECT_NAME})
