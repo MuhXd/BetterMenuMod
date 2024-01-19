@@ -5,7 +5,12 @@
 #include <Geode/loader/Loader.hpp>
 static geode::Loader* get();
 using namespace geode::prelude;
-class $modify(MenuLayer) {
+class $modify(MenuLayer) { 
+/*
+'ewww
+switch that out for $modify'
+mat (@mat.4) - 2024
+*/
      static void onModify(auto& self) {
         self.setHookPriority("MenuLayer::init", -1); // For the icon profile bug fix
     }
