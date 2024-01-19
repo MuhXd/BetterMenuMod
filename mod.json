@@ -1,13 +1,10 @@
 {
-<<<<<<< HEAD
+
 	"geode": "2.0.0",
 	"gd": {
 		"win": "2.204",
 		"android": "2.200"
 	},
-=======
-	"geode": "v2.0.0-beta.1",
->>>>>>> 68b7d8c258700911b0bb1b22e2c2e43762992996
 	"version": "v1.0.4-beta.9",
 	"id": "muhammadgames.bettermenu",
 	"name": "Better Menu",
