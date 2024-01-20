@@ -73,12 +73,6 @@
 		"description": "Moves the right menu near the Shortcuts",
 		"type": "bool",
 		"default": false
-	},
-	"FireInTheHole": {
-		"name": "DO NOT ENABLE",
-		"description": "Trust Me",
-		"type": "bool",
-		"default": false
 	}
 }
 }

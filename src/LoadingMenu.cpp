@@ -206,23 +206,6 @@ else {
             shortcutMenu->updateLayout();
             SearchMenu->updateLayout();
         }
-        if (Mod::get()->getSettingValue<bool>("FireInTheHole")) {
-            auto normal = CCSprite::createWithSpriteFrameName("difficulty_02_btn_001.png");
-            normal->setPosition({0,0});
-            normal->setScale(2.0F);
-            this->getChildByID("profile-menu")->addChild(normal);
-            log::info("I TOLD YOU NOT TO ENABLE IT!");
-            log::info("THERE IS FIRE");
-            log::info("IN THE HOLE");
-            log::info(" ");
-            log::info(" ");
-            FLAlertLayer::create(
-            "UH OH",
-            "FIRE IN THE HOLE! FIRE IN THE HOLE!",
-            "🔥🔥🕳🕳"
-        )->show(); 
-          
-        }
 
         return true;
     }
