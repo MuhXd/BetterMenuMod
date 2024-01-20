@@ -211,12 +211,17 @@ else {
             normal->setPosition({0,0});
             normal->setScale(2.0F);
             this->getChildByID("profile-menu")->addChild(normal);
-            this->getChildByID("player-username")->setString("FIRE IN THE HOLE");
             log::info("I TOLD YOU NOT TO ENABLE IT!");
             log::info("THERE IS FIRE");
             log::info("IN THE HOLE");
             log::info(" ");
             log::info(" ");
+            FLAlertLayer::create(
+            "UH OH",
+            "FIRE IN THE HOLE! FIRE IN THE HOLE!",
+            "🔥🔥🕳🕳"
+        )->show(); 
+          
         }
 
         return true;
