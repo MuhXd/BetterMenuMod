@@ -48,7 +48,7 @@ if (Mod::get()->getSettingValue<bool>("MoveMenuPosFlip")) {
                     .layout(RowLayoutFix_IconProfile->setAxisAlignment(AxisAlignment::End))
                     .contentSize({111.000f, 58.000f})
                     .scale(0.575f);   
-                if (Loader::get()->isModLoaded("capeling.icon_profile")) {
+                if (Loader::get()->isModLoaded("capeling.icon_profile_2.2")) {
                     this->getChildByID("profile-menu")->setRotationY(180);
                     this->getChildByID("profile-menu")->setRotationX(0);
                     RowLayoutFix_IconProfile->setAxisAlignment(AxisAlignment::Start);

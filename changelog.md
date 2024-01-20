@@ -1,6 +1,7 @@
 # ChangeLog
 ### BetterMenu-beta.11
 * small screen bug fix for certain android screen sizes
+* icon profile works
 ### BetterMenu-beta.10
 * android!
 * 2.2 is real
