@@ -1,6 +1,10 @@
 # ChangeLog
+### BetterMenu-beta.11
+* small screen bug fix for certain android screen sizes
 ### BetterMenu-beta.10
-* 2.2 REAL
+* android!
+* 2.2 is real
+* mac is fake
 ## BetterMenu-beta.9
 * fixed the name bug
 * added a flip menu option

@@ -107,7 +107,7 @@ else {
             auto SearchMenu = Build<CCMenu>::create()
                 .pos(0, 1.500f)
                 .scale(0.75f)
-                .contentSize({755.000f, 104.500f})
+                .contentSize({winSize.width, 104.500f})
                 .anchorPoint({0, 0})
                 .parent(this)
                 .layout(
