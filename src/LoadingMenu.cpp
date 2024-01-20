@@ -3,6 +3,7 @@
 #include <Geode/loader/Mod.hpp>
 #include <Geode/loader/Loader.hpp>
 #include <UIBuilder.hpp>
+#include <Geode/cocos/label_nodes/CCLabelBMFont.h>
 static geode::Loader* get();
 using namespace geode::prelude;
 class $modify(MenuLayer) { 
