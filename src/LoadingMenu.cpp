@@ -41,7 +41,7 @@ if (Mod::get()->getSettingValue<bool>("MoveMenuPosFlip")) {
                     .contentSize({35.750, 221.f})
                     .pos(winSize.width - 22, winSize.height - 139)
                     .scale(0.9f)
-                    .layout(ColumnLayout::create()->setGap(36))
+                    .layout(ColumnLayout::create()->setGap(0))
                     .updateLayout();
                 auto RowLayoutFix_IconProfile = RowLayout::create();
                 Build(this->getChildByID("profile-menu"))
@@ -63,7 +63,7 @@ else {
                 Build(this->getChildByID("bottom-menu"))
                     .contentSize({35.750, 218.f})
                     .pos(21, winSize.height - 149)
-                    .layout(ColumnLayout::create()->setGap(36))
+                    .layout(ColumnLayout::create()->setGap(0))
                     .updateLayout();
                 anti=true;
                 Build(this->getChildByID("close-menu"))
