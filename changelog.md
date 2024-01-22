@@ -2,6 +2,7 @@
 ### BetterMenu-beta.12
 * Fix Ui for prism menu and other buttons
 * Fixed ui not being centered
+* Name replacement setting added, Hides your name and replaces it with Streamer
 ### BetterMenu-beta.11
 * small screen bug fix for certain android screen sizes
 * icon profile works

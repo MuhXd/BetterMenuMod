@@ -206,27 +206,9 @@ else {
             shortcutMenu->updateLayout();
             SearchMenu->updateLayout();
         }
-getBMFontLabelChildByID(const std::string& id) {
-    auto node = this->getChildByID(id);
-    auto bmFontLabel = dynamic_cast<cocos2d::CCLabelBMFont*>(node);
-    if (bmFontLabel) {
-        return bmFontLabel;
-    } else {
-
-        return false;
-    }
-}
-
-
-
-auto value = "TEST"
-auto bmFontLabel = getBMFontLabelChildByID("player-username");
-
-if (bmFontLabel) {
-    bmFontLabel->setString(value.c_str());
-} else {
-
-}
+        if (Mod::get()->getSettingValue<bool>("replacename")) {
+         static_cast<cocos2d::CCLabelBMFont*>(this->getChildByID("player-username"))->setString("Streamer");
+        }
 
         return true;
     }

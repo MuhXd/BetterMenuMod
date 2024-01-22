@@ -50,6 +50,12 @@
 		"type": "bool",
 		"default": true
 	},
+	"replacename": {
+		"name": "Hide Real Username",
+		"description": "This replaces your Username with 'Streamer'",
+		"type": "bool",
+		"default": true
+	},
 	"HideName": {
 		"name": "Hide Username",
 		"description": "This setting Hides the players name from the main menu",
