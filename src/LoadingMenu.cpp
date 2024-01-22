@@ -138,7 +138,7 @@ else {
                 .contentSize({71.000f, 78.600f})
                 .layout(
                     RowLayout::create()
-                    ->setAxisAlignment(AxisAlignment::Start)
+                    ->setAxisAlignment(AxisAlignment::Center)
                     ->setGrowCrossAxis(true)
                     ->setCrossAxisReverse(true)
                     )
