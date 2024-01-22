@@ -206,21 +206,18 @@ else {
             shortcutMenu->updateLayout();
             SearchMenu->updateLayout();
         }
-cocos2d::CCLabelBMFont* getBMFontLabelChildByID(const std::string& id) {
+getBMFontLabelChildByID(const std::string& id) {
     auto node = this->getChildByID(id);
-
-    // Ensure that the node is a CCLabelBMFont or a subclass of CCLabelBMFont
     auto bmFontLabel = dynamic_cast<cocos2d::CCLabelBMFont*>(node);
     if (bmFontLabel) {
         return bmFontLabel;
     } else {
-        // Handle the case where getChildByID did not return a CCLabelBMFont
-        CCLOG("Error: '%s' is not a CCLabelBMFont or not found", id.c_str());
-        return nullptr;
+
+        return false;
     }
 }
 
-// ...
+
 
 auto value = "TEST"
 auto bmFontLabel = getBMFontLabelChildByID("player-username");
@@ -228,8 +225,7 @@ auto bmFontLabel = getBMFontLabelChildByID("player-username");
 if (bmFontLabel) {
     bmFontLabel->setString(value.c_str());
 } else {
-    // Handle the case where getChildByID did not return a CCLabelBMFont or not found
-    // The error is already logged inside getBMFontLabelChildByID
+
 }
 
         return true;
