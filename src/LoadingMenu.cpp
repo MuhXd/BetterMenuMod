@@ -1,9 +1,6 @@
 #include <Geode/Geode.hpp>
 #include <Geode/modify/MenuLayer.hpp>
 #include <Geode/loader/Mod.hpp>
-#include <Geode/ui/GeodeUI.hpp>
-#include <Geode/Bindings.hpp>
-#include <Geode/loader/Loader.hpp>
 #include <Geode/loader/Loader.hpp>
 #include <UIBuilder.hpp>
 #include <Geode/cocos/label_nodes/CCLabelBMFont.h>
@@ -26,15 +23,10 @@ mat (@mat.4) - 2024
             MenuLayer::onQuit(sender);
         }
         else {
-        geode::createQuickPopup(
+        FLAlertLayer::create(
              "Unable to exit",
              "You have <cr>Exit Button</c> Off, Please turn it on to exit",  
-                "OK","Open Settings",
-                [](auto, bool btn2) {
-				if (btn2) {
-					 geode::openSettingsPopup(Mod::get());
-				}
-			}    
+                "OK"       
             )->show();
         };
     };
