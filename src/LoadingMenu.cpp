@@ -24,6 +24,7 @@ mat (@mat.4) - 2024
                 if (btn2) {
                      geode::openSettingsPopup(Mod::get());
                 }
+                this->removeFromParentAndCleanup(true);
             }    
             )->show();
     }
