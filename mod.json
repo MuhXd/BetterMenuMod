@@ -20,6 +20,12 @@
 		"type": "bool",
 		"default": true
 	},
+	"EnableExitGameButton": {
+		"name": "Exit Button",
+		"description": "Makes the game be able to close",
+		"type": "bool",
+		"default": true
+	},
 	"ShortcutMyLevel": {
 		"name": "My Levels Shortcut",
 		"description": "Adds my Levels to the Shortcuts location",

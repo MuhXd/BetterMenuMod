@@ -15,9 +15,33 @@ mat (@mat.4) - 2024
      static void onModify(auto& self) {
         self.setHookPriority("MenuLayer::init", -1); // For the icon profile bug fix
     }
+    void onQuit(CCObject* sender) {
+        if (Mod::get()->getSettingValue<bool>("EnableExitGameButton")) {
+            MenuLayer->onQuit()
+        }
+        else {
+        FLAlertLayer::create(
+             "Unable to exit",
+             "You have <cr>Exit Button</c> Off Please turn it on to exit",  
+                "OK"       
+                )->show();
+        };
+    }
     bool init() {
         if (!MenuLayer::init())
             return false;
+
+    #ifdef !GEODE_IS_ANDROID
+        if (!Mod::get()->getSettingValue<bool>("EnableExitGameButton")) {
+            this->getChildByID("close-menu")->setVisible(false);
+        }
+    #else
+    if (Loader::get()->isModLoaded("weebify.restartbtn.geode")) {
+            if (!Mod::get()->getSettingValue<bool>("EnableExitGameButton")) {
+                 this->getChildByID("close-menu")->setVisible(false);
+            }
+    }
+    #endif
 
         if (Mod::get()->getSettingValue<bool>("RunMainMenu")) {
             bool anti = false;
