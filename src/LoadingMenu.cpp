@@ -29,13 +29,14 @@ mat (@mat.4) - 2024
         geode::createQuickPopup(
              "Unable to <cr>exit</c>",
              "You have <cr>Exit Button</c> Off, Please turn it on to exit",  
-                "OK","<cy>Open Settings</c>",
+                "OK","Open Settings",
                 [](auto, bool btn2) {
 				if (btn2) {
 					 geode::openSettingsPopup(Mod::get());
 				}
 			}    
             )->show();
+            return true
         };
     };
     bool init() {
