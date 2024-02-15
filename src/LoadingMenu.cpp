@@ -36,7 +36,7 @@ mat (@mat.4) - 2024
             this->getChildByID("close-menu")->setVisible(false);
         }
     #else
-    if (Loader::get()->isModLoaded("weebify.restartbtn.geode")) {
+    if (Loader::get()->isModLoaded("weebify.restartbtn")) {
             if (!Mod::get()->getSettingValue<bool>("EnableExitGameButton")) {
                  this->getChildByID("close-menu")->setVisible(false);
             }
