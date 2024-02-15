@@ -18,9 +18,6 @@ mat (@mat.4) - 2024
     }
     
  void onQuit(CCObject* sender) {
-        if (!Mod::get()->getSettingValue<bool>("RunMainMenu")) {
-            MenuLayer::onQuit(sender);
-         }
         if (Mod::get()->getSettingValue<bool>("EnableExitGameButton")) {
             MenuLayer::onQuit(sender);
         }
@@ -44,6 +41,7 @@ mat (@mat.4) - 2024
         if (!MenuLayer::init())
             return false;
         if (Mod::get()->getSettingValue<bool>("RunMainMenu")) {
+           
             #ifdef GEODE_IS_ANDROID
                 if (Loader::get()->isModLoaded("weebify.restartbtn")) {
                     if (!Mod::get()->getSettingValue<bool>("EnableExitGameButton")) {
