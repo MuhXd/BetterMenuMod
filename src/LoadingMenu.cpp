@@ -7,7 +7,7 @@
 #include <Geode/cocos/label_nodes/CCLabelBMFont.h>
 static geode::Loader* get();
 using namespace geode::prelude;
-class $modify(newlayer,MenuLayer) { 
+class $modify(MenuLayer) { 
 /*
 'ewww
 switch that out for $modify'
@@ -16,8 +16,16 @@ mat (@mat.4) - 2024
      static void onModify(auto& self) {
         self.setHookPriority("MenuLayer::init", -1); // For the icon profile bug fix
     }
-    void Blocked(CCObject* sender) {
-         geode::createQuickPopup(
+    
+ void onQuit(CCObject* sender) {
+         if (!Mod::get()->getSettingValue<bool>("RunMainMenu")) {
+            MenuLayer::onQuit(sender);
+         }
+        if (Mod::get()->getSettingValue<bool>("EnableExitGameButton")) {
+            MenuLayer::onQuit(sender);
+        }
+        else {
+        geode::createQuickPopup(
              "Unable to exit",
              "You have <cr>Exit Button</c> Off, Please turn it on to exit",  
                 "OK","Open Settings",
@@ -28,19 +36,7 @@ mat (@mat.4) - 2024
                 this->removeFromParentAndCleanup(true);
             }    
             )->show();
-    }
- void onQuit(CCObject* sender) { // idk why it hates me
-        if (Mod::get()->getSettingValue<bool>("EnableExitGameButton")) {
-            MenuLayer::onQuit(sender);
-        }
-        else {
-            if (Mod::get()->getSettingValue<bool>("RunMainMenu")) {
-                newlayer::Blocked(sender);
-            }
-            else {
-                MenuLayer::onQuit(sender);
-            }
-        }
+        };
     };
 
     bool init() {
