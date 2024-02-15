@@ -27,7 +27,7 @@ mat (@mat.4) - 2024
         }
         else {
         geode::createQuickPopup(
-             "Unable to <cr>exit</c>",
+             "Unable to exit",
              "You have <cr>Exit Button</c> Off, Please turn it on to exit",  
                 "OK","Open Settings",
                 [](auto, bool btn2) {
@@ -36,7 +36,7 @@ mat (@mat.4) - 2024
 				}
 			}    
             )->show();
-            return true
+            return true;
         };
     };
     bool init() {
