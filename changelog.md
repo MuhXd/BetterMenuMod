@@ -1,4 +1,7 @@
 # ChangeLog
+### BetterMenu-beta.13
+* Add disable close button
+* Mac Support is Back!
 ### BetterMenu-beta.12
 * Fix Ui for prism menu and other buttons
 * Fixed ui not being centered

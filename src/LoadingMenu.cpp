@@ -24,9 +24,9 @@ mat (@mat.4) - 2024
         }
         else {
         FLAlertLayer::create(
-             "Unable to exit",
-             "You have <cr>Exit Button</c> Off Please turn it on to exit",  
-                "OK","Open Settings"   
+             "Unable to <cr>exit</c>",
+             "You have <cr>Exit Button</c> Off, Please turn it on to exit",  
+                "OK","<cy>Open Settings</c>",
                 [](auto, bool btn2) {
 				if (btn2) {
 					 geode::openSettingsPopup(Mod::get());
