@@ -26,7 +26,7 @@ mat (@mat.4) - 2024
         }
         else {
       
-        Alert = geode::createQuickPopup(
+        auto Alert = geode::createQuickPopup(
              "Unable to exit",
              "You have <cr>Exit Button</c> Off, Please turn it on to exit",  
                 "OK","Open Settings",
