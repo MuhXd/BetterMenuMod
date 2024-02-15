@@ -29,11 +29,11 @@ mat (@mat.4) - 2024
              "You have <cr>Exit Button</c> Off, Please turn it on to exit",  
             "OK"
             )->show();
-        };
         }
         else {
              MenuLayer::onQuit(sender);
         }
+        };
     };
 
     bool init() {
