@@ -31,16 +31,16 @@ mat (@mat.4) - 2024
         if (!MenuLayer::init())
             return false;
 
-    #ifdef !GEODE_IS_ANDROID
-        if (!Mod::get()->getSettingValue<bool>("EnableExitGameButton")) {
-            this->getChildByID("close-menu")->setVisible(false);
-        }
-    #else
-    if (Loader::get()->isModLoaded("weebify.restartbtn")) {
+    #ifdef GEODE_IS_ANDROID
+        if (Loader::get()->isModLoaded("weebify.restartbtn")) {
             if (!Mod::get()->getSettingValue<bool>("EnableExitGameButton")) {
                  this->getChildByID("close-menu")->setVisible(false);
-            }
-    }
+            };
+        };
+    #else
+        if (!Mod::get()->getSettingValue<bool>("EnableExitGameButton")) {
+            this->getChildByID("close-menu")->setVisible(false);
+         };
     #endif
 
         if (Mod::get()->getSettingValue<bool>("RunMainMenu")) {
