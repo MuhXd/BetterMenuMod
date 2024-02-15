@@ -24,15 +24,10 @@ mat (@mat.4) - 2024
         else 
         {
              
-        geode::createQuickPopup(
+        FLAlertLayer::create(
              "Unable to exit",
              "You have <cr>Exit Button</c> Off, Please turn it on to exit",  
-                "OK","Open Settings",
-                [](auto, bool btn2) {
-                if (btn2) {
-                     geode::openSettingsPopup(Mod::get());
-                }
-            }    
+            "OK"
             )->show();
         };
     };
@@ -40,9 +35,8 @@ mat (@mat.4) - 2024
     bool init() {
         if (!MenuLayer::init())
             return false;
-        if (Mod::get()->getSettingValue<bool>("RunMainMenu")) {
-           
-            #ifdef GEODE_IS_ANDROID
+        if (Mod::get()->getSettingValue<bool>("RunMainMenu")) {   
+        #ifdef GEODE_IS_ANDROID
                 if (Loader::get()->isModLoaded("weebify.restartbtn")) {
                     if (!Mod::get()->getSettingValue<bool>("EnableExitGameButton")) {
                       this->getChildByID("close-menu")->setVisible(false);
@@ -52,7 +46,7 @@ mat (@mat.4) - 2024
               if (!Mod::get()->getSettingValue<bool>("EnableExitGameButton")) {
                  this->getChildByID("close-menu")->setVisible(false);
                };
-             #endif
+        #endif
             bool anti = false;
             auto winSize = CCDirector::get()->getWinSize();
             this->getChildByID("social-media-menu")->setVisible(false);
