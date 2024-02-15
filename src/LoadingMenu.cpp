@@ -12,12 +12,12 @@ class $modify(MenuLayer) {
 switch that out for $modify'
 mat (@mat.4) - 2024
 */
-#ifdef GEODE_IS_WINDOWS && GEODE_IS_ANDROID
+
      static void onModify(auto& self) {
         self.setHookPriority("MenuLayer::init", -1); // For the icon profile bug fix
     }
     log::info("USER IS GOD")
-#endif
+
     bool init() {
         if (!MenuLayer::init())
             return false;
