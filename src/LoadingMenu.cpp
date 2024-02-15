@@ -17,7 +17,7 @@ mat (@mat.4) - 2024
     }
     void onQuit(CCObject* sender) {
         if (Mod::get()->getSettingValue<bool>("EnableExitGameButton")) {
-            MenuLayer->onQuit()
+            MenuLayer::onQuit()
         }
         else {
         FLAlertLayer::create(
