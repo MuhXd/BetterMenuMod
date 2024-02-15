@@ -16,7 +16,7 @@ mat (@mat.4) - 2024
      static void onModify(auto& self) {
         self.setHookPriority("MenuLayer::init", -1); // For the icon profile bug fix
     }
-    log::info("USER IS GOD")
+    log::info("USER IS GOD");
 
     bool init() {
         if (!MenuLayer::init())
