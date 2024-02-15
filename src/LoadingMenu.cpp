@@ -18,15 +18,16 @@ mat (@mat.4) - 2024
     }
     
  void onQuit(CCObject* sender) {
-         if (!Mod::get()->getSettingValue<bool>("RunMainMenu")) {
+        if (!Mod::get()->getSettingValue<bool>("RunMainMenu")) {
             MenuLayer::onQuit(sender);
          }
         if (Mod::get()->getSettingValue<bool>("EnableExitGameButton")) {
             MenuLayer::onQuit(sender);
         }
-        else {
-      
-        auto Alert = geode::createQuickPopup(
+        else 
+        {
+             
+        geode::createQuickPopup(
              "Unable to exit",
              "You have <cr>Exit Button</c> Off, Please turn it on to exit",  
                 "OK","Open Settings",
@@ -36,7 +37,6 @@ mat (@mat.4) - 2024
                 }
             }    
             )->show();
-            Alert->removeFromParentAndCleanup(true);
         };
     };
 
