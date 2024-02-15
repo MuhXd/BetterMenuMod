@@ -26,7 +26,7 @@ mat (@mat.4) - 2024
             MenuLayer::onQuit(sender);
         }
         else {
-        FLAlertLayer::create(
+        geode::createQuickPopup(
              "Unable to <cr>exit</c>",
              "You have <cr>Exit Button</c> Off, Please turn it on to exit",  
                 "OK","<cy>Open Settings</c>",
