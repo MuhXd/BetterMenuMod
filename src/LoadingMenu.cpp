@@ -16,6 +16,9 @@ mat (@mat.4) - 2024
         self.setHookPriority("MenuLayer::init", -1); // For the icon profile bug fix
     }
     void onQuit(CCObject* sender) {
+         if (!Mod::get()->getSettingValue<bool>("RunMainMenu")) {
+            MenuLayer::onQuit(sender);
+         }
         if (Mod::get()->getSettingValue<bool>("EnableExitGameButton")) {
             MenuLayer::onQuit(sender);
         }
@@ -23,8 +26,13 @@ mat (@mat.4) - 2024
         FLAlertLayer::create(
              "Unable to exit",
              "You have <cr>Exit Button</c> Off Please turn it on to exit",  
-                "OK"       
-                )->show();
+                "OK","Open Settings"   
+                [](auto, bool btn2) {
+				if (btn2) {
+					 geode::openSettingsPopup(Mod::get());
+				}
+			}    
+            )->show();
         };
     };
     bool init() {
