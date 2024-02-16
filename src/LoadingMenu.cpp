@@ -121,9 +121,16 @@ else {
             else if (Mod::get()->getSettingValue<bool>("MoveMenuPosFlip"))
             {
               Build(this->getChildByID("bottom-menu")).posY(winSize.height-35.5);
+              if (Mod::get()->getSettingValue<bool>("RightSide")) {
+             Build(this->getChildByID("main-title"))
+               .posY(88)
+               .scale(0.775f);
+              }
+              else {
                Build(this->getChildByID("main-title"))
                .posY(45)
                .scale(0.775f);
+              }
             }
             // Moves right side menu down bescause Croozy wanted it to.
              if (Mod::get()->getSettingValue<bool>("RightSide")) { 
@@ -140,6 +147,7 @@ else {
                         ->setGrowCrossAxis(false)
                         ->setCrossAxisOverflow(true)
                         ).updateLayout();
+
             }
             // Creates the Menu
             auto SearchMenu = Build<CCMenu>::create()
@@ -221,6 +229,9 @@ else {
             auto Menu2_2=shortcutMenu_2;
             if (Mod::get()->getSettingValue<bool>("MoveMenuPosFlip")) {
               Menu2_2=shortcutMenu;
+               if (!Mod::get()->getSettingValue<bool>("MoveMenuPos")) {
+                    Menu2_2=shortcutMenu_2;
+               }
             }
 
             if (Mod::get()->getSettingValue<bool>("ShortcutDaily")) {
