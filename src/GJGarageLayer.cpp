@@ -10,7 +10,7 @@ class $modify(GJBallsLayer, GJGarageLayer) {
 
     void Switch(CCObject*) {
          auto gm = GameManager::sharedState();
-         IconType* PlayerIcon = gm->m_playerIconType 
+         IconType* PlayerIcon = gm->m_playerIconType;
         if (PlayerIcon== IconType::Cube) {
             gm->m_playerIconType = IconType::Ship;
             return;
