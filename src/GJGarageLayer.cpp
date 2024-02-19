@@ -31,7 +31,7 @@ int geticontonumber() {
      auto GAYMANAGER = GameManager::sharedState();
      auto id = GAYMANAGER->m_playerIconType;
     switch(id) {
-        default: return 1
+        default: return 1;
         case IconType::Ship: return 2;
         case IconType::Ball: return 3;
         case IconType::Ufo: return 4;
