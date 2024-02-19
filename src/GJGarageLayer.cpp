@@ -7,43 +7,12 @@
 using namespace geode::prelude;
 
 class $modify(GJBallsLayer,GJGarageLayer) { 
-void icon(int id) {
-     auto gm = GameManager::sharedState();
-   switch(id) {
-        default: gm->m_playerIconType = IconType::Cube; break;
-        case 1: gm->m_playerIconType = IconType::Cube; break;
-        case 2: gm->m_playerIconType = IconType::Ship; break;
-        case 3: gm->m_playerIconType = IconType::Ball; break;
-        case 4: gm->m_playerIconType = IconType::Ufo; break;
-        case 5: gm->m_playerIconType = IconType::Wave; break;
-        case 6: gm->m_playerIconType = IconType::Robot; break;
-        case 7: gm->m_playerIconType = IconType::Spider; break;
-	    case 9: gm->m_playerIconType = IconType::Swing; break;
-        case 0: gm->m_playerIconType = IconType::Swing; break; // back or something
-	    case 8: gm->m_playerIconType = IconType::Jetpack; break;
-    }
-}
 
 void Switch(CCObject*) {
-    GJBallsLayer::icon(GJBallsLayer::geticontonumber() + 1);
+    int a = gm->m_playerIconType
+    gm->m_playerIconType = ( a + 1);
 }
-int geticontonumber() {
-     auto GAYMANAGER = GameManager::sharedState();
-     auto id = static_cast<IconType>(GAYMANAGER->m_playerIconType);
-     int iconnum = 1;
-    switch(id) {
-        default: iconnum= 1; break;
-        case IconType::Ship: iconnum= 2; break;
-        case IconType::Ball: iconnum= 3; break;
-        case IconType::Ufo: iconnum= 4; break;
-        case IconType::Wave: iconnum= 5; break;
-        case IconType::Robot: iconnum= 6; break;
-        case IconType::Spider: iconnum= 7; break;
-	    case IconType::Swing: iconnum= 9; break;
-	    case IconType::Jetpack: iconnum= 8; break;
-    }
-    return iconnum;
-};
+
 bool init() {
         if (!GJGarageLayer::init())
             return false;
