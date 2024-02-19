@@ -3,9 +3,9 @@
 #include <Geode/binding/GameManager.hpp>
 #include <Geode/binding/SimplePlayer.hpp>
 #include <UIBuilder.hpp>
-
+#include <Geode/modify/ClassName.hpp>
 using namespace geode::prelude;
-auto 
+
 class $modify(GJBallsLayer,GJGarageLayer) { 
 void icon(int id) {
      auto gm = GameManager::sharedState();
@@ -68,5 +68,6 @@ bool init() {
         btn->setScale(.7);
         btn->setPosition(winSize.width / 2, (winSize.height / 2) - 25);
          test->addChild(btn);
+         return true;
 };
 };
