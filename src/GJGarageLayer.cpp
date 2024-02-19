@@ -5,30 +5,30 @@
 #include <UIBuilder.hpp>
 
 using namespace geode::prelude;
-
-class $modify(GJGarageLayer) { 
+auto 
+class $modify(GJBallsLayer,GJGarageLayer) { 
 void icon(int id) {
    switch(id) {
-        default: return IconType::Cube:
-        case 1 return IconType::Cube:
-        case 2 return IconType::Ship:
-        case 3 return IconType::Ball:
-        case 4 return IconType::Ufo: 
-        case 5 return IconType::Wave:
-        case 6 return IconType::Robot: 
-        case 7 return IconType::Spider:
-	    case 9 return IconType::Swing: 
-        case 0 return IconType::Swing: // back or something
-	    case 8 return IconType::Jetpack:
+        default: gm->m_playerIconType = IconType::Cube; break;
+        case 1: gm->m_playerIconType = IconType::Cube; break;
+        case 2: gm->m_playerIconType = IconType::Ship; break;
+        case 3: gm->m_playerIconType = IconType::Ball; break;
+        case 4: gm->m_playerIconType = IconType::Ufo; break;
+        case 5: gm->m_playerIconType = IconType::Wave; break;
+        case 6: gm->m_playerIconType = IconType::Robot; break;
+        case 7: gm->m_playerIconType = IconType::Spider; break;
+	    case 9: gm->m_playerIconType = IconType::Swing; break;
+        case 0: gm->m_playerIconType = IconType::Swing; break; // back or something
+	    case 8: gm->m_playerIconType = IconType::Jetpack; break;
     }
 }
-void Switch() {
-        auto id = GAYMANAGER->m_playerIconType
-    id = GJGarageLayer::icon(GJGarageLayer::geticontonumber() + 1)
+
+void Switch(CCObject*) {
+    GJBallsLayer::icon(GJBallsLayer::geticontonumber() + 1);
 }
 int geticontonumber() {
      auto GAYMANAGER = GameManager::sharedState();
-     auto id = GAYMANAGER->m_playerIconType
+     auto id = GAYMANAGER->m_playerIconType;
     switch(id) {
         default: return 1
         case IconType::Ship: return 2
@@ -46,11 +46,6 @@ bool init() {
             return false;
 
         auto winSize = CCDirector::sharedDirector()->getWinSize();
-        // auto spr = ButtonSprite::create("/nodeIdsLogo.png"_spr);
-       
-        btn->setScale(.7);
-        btn->setPosition(winSize.width / 2, (winSize.height / 2) - 25);
-       
         auto GAYMANAGER = GameManager::sharedState();
        auto test = Build<CCMenu>::create()
                 .pos(winSize.width - 77, 78)
@@ -69,6 +64,8 @@ bool init() {
         auto btn = CCMenuItemSpriteExtra::create(
             spr, this, menu_selector(GJGarageLayer::Switch)
         );
+        btn->setScale(.7);
+        btn->setPosition(winSize.width / 2, (winSize.height / 2) - 25);
          test->addChild(btn);
 };
 };
