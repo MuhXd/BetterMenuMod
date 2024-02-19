@@ -3,6 +3,8 @@
 #include <Geode/binding/GameManager.hpp>
 #include <Geode/binding/SimplePlayer.hpp>
 #include <UIBuilder.hpp>
+#include <algorithm> // Include the algorithm header for std::find
+#include <vector>    // Include the vector header for std::vector
 //#include <Geode/modify/ClassName.hpp>
 using namespace geode::prelude;
 
