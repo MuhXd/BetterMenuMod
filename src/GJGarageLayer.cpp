@@ -7,28 +7,29 @@
 using namespace geode::prelude;
 
 class $modify(GJGarageLayer) { 
-void icon(int id) {
+IconType* icon(int id) {
    switch(id) {
-        default: return IconType::Cube:
-        case 1 return IconType::Cube:
-        case 2 return IconType::Ship:
-        case 3 return IconType::Ball:
-        case 4 return IconType::Ufo: 
-        case 5 return IconType::Wave:
-        case 6 return IconType::Robot: 
-        case 7 return IconType::Spider:
-	    case 9 return IconType::Swing: 
-        case 0 return IconType::Swing: // back or something
-	    case 8 return IconType::Jetpack:
+        default: return IconType::Cube;
+        case 1: return IconType::Cube;
+        case 2: return IconType::Ship;
+        case 3: return IconType::Ball;
+        case 4: return IconType::Ufo;
+        case 5: return IconType::Wave;
+        case 6: return IconType::Robot; 
+        case 7: return IconType::Spider;
+	    case 9: return IconType::Swing; 
+        case 0: return IconType::Swing; // back or something
+	    case 8: return IconType::Jetpack;
     }
 }
-void Switch() {
-        auto id = GAYMANAGER->m_playerIconType
-    id = GJGarageLayer::icon(GJGarageLayer::geticontonumber() + 1)
+
+void Switch(CCObject*) {
+    auto id = GAYMANAGER->m_playerIconType;
+    id = GJGarageLayer::icon(GJGarageLayer::geticontonumber() + 1);
 }
 int geticontonumber() {
      auto GAYMANAGER = GameManager::sharedState();
-     auto id = GAYMANAGER->m_playerIconType
+     auto id = GAYMANAGER->m_playerIconType;
     switch(id) {
         default: return 1
         case IconType::Ship: return 2
@@ -46,11 +47,6 @@ bool init() {
             return false;
 
         auto winSize = CCDirector::sharedDirector()->getWinSize();
-        // auto spr = ButtonSprite::create("/nodeIdsLogo.png"_spr);
-       
-        btn->setScale(.7);
-        btn->setPosition(winSize.width / 2, (winSize.height / 2) - 25);
-       
         auto GAYMANAGER = GameManager::sharedState();
        auto test = Build<CCMenu>::create()
                 .pos(winSize.width - 77, 78)
@@ -69,6 +65,8 @@ bool init() {
         auto btn = CCMenuItemSpriteExtra::create(
             spr, this, menu_selector(GJGarageLayer::Switch)
         );
+        btn->setScale(.7);
+        btn->setPosition(winSize.width / 2, (winSize.height / 2) - 25);
          test->addChild(btn);
 };
 };
