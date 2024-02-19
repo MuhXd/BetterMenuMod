@@ -21,8 +21,10 @@ void icon(int id) {
         case 0 return IconType::Swing: // back or something
 	    case 8 return IconType::Jetpack:
     }
-    GAYMANAGER->m_playerIconType = id
-    
+}
+void Switch() {
+        auto id = GAYMANAGER->m_playerIconType
+    id = GJGarageLayer::icon(GJGarageLayer::geticontonumber() + 1)
 }
 int geticontonumber() {
      auto GAYMANAGER = GameManager::sharedState();
@@ -43,6 +45,12 @@ bool init() {
         if (!GJGarageLayer::init())
             return false;
 
+        auto winSize = CCDirector::sharedDirector()->getWinSize();
+        // auto spr = ButtonSprite::create("/nodeIdsLogo.png"_spr);
+       
+        btn->setScale(.7);
+        btn->setPosition(winSize.width / 2, (winSize.height / 2) - 25);
+       
         auto GAYMANAGER = GameManager::sharedState();
        auto test = Build<CCMenu>::create()
                 .pos(winSize.width - 77, 78)
@@ -57,11 +65,10 @@ bool init() {
                     )
                 .id("shortcuts-menu-Icon-Button"_spr)
                 .collect();
-                auto Button = Build<CCSprite>::createSpriteName("GJ_sStarsIcon_001.png")
-                    .intoMenuItem([]() {
-                        GJGarageLayer::icon(GJGarageLayer::geticontonumber() + 1 )
-                    })
-                    .pos(0, 0)
-                    .parent(test);
+              auto spr = ButtonSprite::create("Icon Switch");
+        auto btn = CCMenuItemSpriteExtra::create(
+            spr, this, menu_selector(GJGarageLayer::Switch)
+        );
+         test->addChild(btn);
 };
 };
