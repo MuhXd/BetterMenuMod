@@ -9,8 +9,9 @@ using namespace geode::prelude;
 class $modify(GJBallsLayer,GJGarageLayer) { 
 
 void Switch(CCObject*) {
-    int a = gm->m_playerIconType
-    gm->m_playerIconType = ( a + 1);
+    auto GAYMANAGER = GameManager::sharedState();
+    int a = GAYMANAGER->m_playerIconType;
+    GAYMANAGER->m_playerIconType = ( a + 1);
 }
 
 bool init() {
