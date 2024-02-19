@@ -3,72 +3,73 @@
 #include <Geode/binding/GameManager.hpp>
 #include <Geode/binding/SimplePlayer.hpp>
 #include <UIBuilder.hpp>
-#include <algorithm> // Include the algorithm header for std::find
-#include <vector>    // Include the vector header for std::vector
-//#include <Geode/modify/ClassName.hpp>
+
 using namespace geode::prelude;
 
-class $modify(GJBallsLayer,GJGarageLayer) { 
-
-void Switch(CCObject*) {
-    auto GAYMANAGER = GameManager::sharedState();
-    
-    // Ensure that m_playerIconType is of type IconType
-    static_assert(std::is_same<decltype(GAYMANAGER->m_playerIconType), IconType>::value,
-                  "m_playerIconType is not of type IconType");
-    
-    // Array of IconType values in the desired order
-    std::vector<IconType> iconOrder = {
-        IconType::Cube,
-        IconType::Ship,
-        IconType::Ball,
-        IconType::Ufo,
-        IconType::Wave,
-        IconType::Robot,
-        IconType::Spider,
-        IconType::Swing,
-        IconType::Jetpack
-    };
-    
-    // Get the current index of m_playerIconType in iconOrder
-    auto it = std::find(iconOrder.begin(), iconOrder.end(), GAYMANAGER->m_playerIconType);
-    if (it != iconOrder.end()) {
-        // Increment to the next icon type, looping back to the beginning if necessary
-        ++it;
-        if (it == iconOrder.end()) {
-            it = iconOrder.begin();
+class $modify(GJBallsLayer, GJGarageLayer) {
+    void icon(int id) {
+        auto gm = GameManager::sharedState();
+        switch (id) {
+        default: gm->m_playerIconType = IconType::Cube; break;
+        case 1: gm->m_playerIconType = IconType::Cube; break;
+        case 2: gm->m_playerIconType = IconType::Ship; break;
+        case 3: gm->m_playerIconType = IconType::Ball; break;
+        case 4: gm->m_playerIconType = IconType::Ufo; break;
+        case 5: gm->m_playerIconType = IconType::Wave; break;
+        case 6: gm->m_playerIconType = IconType::Robot; break;
+        case 7: gm->m_playerIconType = IconType::Spider; break;
+        case 9: gm->m_playerIconType = IconType::Swing; break;
+        case 0: gm->m_playerIconType = IconType::Swing; break; // back or something
+        case 8: gm->m_playerIconType = IconType::Jetpack; break;
         }
-        // Assign the next icon type to m_playerIconType
-        GAYMANAGER->m_playerIconType = *it;
     }
-}
 
-bool init() {
+    void Switch(CCObject*) {
+        icon(geticontonumber() + 1);
+    }
+
+    int geticontonumber() {
+        auto gm = GameManager::sharedState();
+        auto id = gm->m_playerIconType;
+        int iconnum = 0;
+        switch (id) {
+        default: iconnum = 1; break;
+        case IconType::Ship: iconnum = 2; break;
+        case IconType::Ball: iconnum = 3; break;
+        case IconType::Ufo: iconnum = 4; break;
+        case IconType::Wave: iconnum = 5; break;
+        case IconType::Robot: iconnum = 6; break;
+        case IconType::Spider: iconnum = 7; break;
+        case IconType::Swing: iconnum = 9; break;
+        case IconType::Jetpack: iconnum = 1; break;
+        }
+        return iconnum;
+    }
+
+    bool init() {
         if (!GJGarageLayer::init())
             return false;
 
         auto winSize = CCDirector::sharedDirector()->getWinSize();
-        auto GAYMANAGER = GameManager::sharedState();
-       auto test = Build<CCMenu>::create()
-                .pos(winSize.width - 77, 78)
-                .anchorPoint({0, 0})
-                .parent(this)
-                .contentSize({71.000f, 78.600f})
-                .layout(
-                    RowLayout::create()
-                    ->setAxisAlignment(AxisAlignment::Start)
-                    ->setGrowCrossAxis(true)
-                    ->setCrossAxisReverse(true)
-                    )
-                .id("shortcuts-menu-Icon-Button"_spr)
-                .collect();
-              auto spr = ButtonSprite::create("Icon Switch");
-        auto btn = CCMenuItemSpriteExtra::create(
-            spr, this, menu_selector($modify(GJBallsLayer,GJGarageLayer)::Switch)
-        );
-        btn->setScale(.7);
+        auto gm = GameManager::sharedState();
+        auto test = Build<CCMenu>::create()
+                        .pos(winSize.width - 77, 78)
+                        .anchorPoint({0, 0})
+                        .parent(this)
+                        .contentSize({71.000f, 78.600f})
+                        .layout(RowLayout::create()
+                                    ->setAxisAlignment(AxisAlignment::Start)
+                                    ->setGrowCrossAxis(true)
+                                    ->setCrossAxisReverse(true))
+                        .id("shortcuts-menu-Icon-Button"_spr)
+                        .collect();
+
+        auto spr = ButtonSprite::create("Icon Switch");
+        auto btn = CCMenuItemSpriteExtra::create(spr, this, menu_selector(GJBallsLayer::Switch));
+        btn->setScale(0.7);
         btn->setPosition(winSize.width / 2, (winSize.height / 2) - 25);
-         test->addChild(btn);
-         return true;
-};
+        test->addChild(btn);
+
+        return true;
+    }
 };
