@@ -48,24 +48,6 @@ class $modify(GJBallsLayer, GJGarageLayer) {
         }
     }
 
-    int geticontonumber() {
-        auto gm = GameManager::sharedState();
-        auto id = gm->m_playerIconType;
-        int iconnum = 0;
-        switch (id) {
-        default: iconnum = 1; break;
-        case IconType::Ship: iconnum = 2; break;
-        case IconType::Ball: iconnum = 3; break;
-        case IconType::Ufo: iconnum = 4; break;
-        case IconType::Wave: iconnum = 5; break;
-        case IconType::Robot: iconnum = 6; break;
-        case IconType::Spider: iconnum = 7; break;
-        case IconType::Swing: iconnum = 9; break;
-        case IconType::Jetpack: iconnum = 1; break;
-        }
-        return iconnum;
-    }
-
     bool init() {
         if (!GJGarageLayer::init())
             return false;
