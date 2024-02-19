@@ -42,6 +42,7 @@ int geticontonumber() {
 bool init() {
         if (!GJGarageLayer::init())
             return false;
+
         auto GAYMANAGER = GameManager::sharedState();
        auto test = Build<CCMenu>::create()
                 .pos(winSize.width - 77, 78)
@@ -57,10 +58,10 @@ bool init() {
                 .id("shortcuts-menu-Icon-Button"_spr)
                 .collect();
                 auto Button = Build<CCSprite>::createSpriteName("GJ_sStarsIcon_001.png")
-                    .intoMenuItem([](auto target) {
-                        icon(geticontonumber() + 1 )
+                    .intoMenuItem([]() {
+                        GJGarageLayer::icon(GJGarageLayer::geticontonumber() + 1 )
                     })
                     .pos(0, 0)
                     .parent(test);
 };
-}
+};
