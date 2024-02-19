@@ -3,7 +3,7 @@
 #include <Geode/binding/GameManager.hpp>
 #include <Geode/binding/SimplePlayer.hpp>
 #include <UIBuilder.hpp>
-#include <Geode/modify/ClassName.hpp>
+//#include <Geode/modify/ClassName.hpp>
 using namespace geode::prelude;
 
 class $modify(GJBallsLayer,GJGarageLayer) { 
