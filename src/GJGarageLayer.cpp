@@ -7,25 +7,45 @@
 using namespace geode::prelude;
 
 class $modify(GJBallsLayer, GJGarageLayer) {
-    void icon(int id) {
-        auto gm = GameManager::sharedState();
-        switch (id) {
-        default: gm->m_playerIconType = IconType::Cube; break;
-        case 1: gm->m_playerIconType = IconType::Cube; break;
-        case 2: gm->m_playerIconType = IconType::Ship; break;
-        case 3: gm->m_playerIconType = IconType::Ball; break;
-        case 4: gm->m_playerIconType = IconType::Ufo; break;
-        case 5: gm->m_playerIconType = IconType::Wave; break;
-        case 6: gm->m_playerIconType = IconType::Robot; break;
-        case 7: gm->m_playerIconType = IconType::Spider; break;
-        case 9: gm->m_playerIconType = IconType::Swing; break;
-        case 0: gm->m_playerIconType = IconType::Swing; break; // back or something
-        case 8: gm->m_playerIconType = IconType::Jetpack; break;
-        }
-    }
 
     void Switch(CCObject*) {
-        icon(geticontonumber() + 1);
+         auto gm = GameManager::sharedState();
+        if gm->m_playerIconType == IconType::Cube {
+            gm->m_playerIconType = IconType::Ship;
+            return;
+        }
+         if gm->m_playerIconType == IconType::Ship {
+            gm->m_playerIconType = IconType::Ball;
+            return;
+        }
+         if gm->m_playerIconType == IconType::Ball {
+            gm->m_playerIconType = IconType::Ufo;
+            return;
+        }
+         if gm->m_playerIconType == IconType::Ufo {
+            gm->m_playerIconType = IconType::Wave;
+            return;
+        }
+         if gm->m_playerIconType == IconType::Wave {
+            gm->m_playerIconType = IconType::Robot;
+            return;
+        }
+         if gm->m_playerIconType == IconType::Robot {
+            gm->m_playerIconType = IconType::Spider;
+            return;
+        }
+         if gm->m_playerIconType == IconType::Spider {
+            gm->m_playerIconType = IconType::Swing;
+            return;
+        }
+         if gm->m_playerIconType == IconType::Swing {
+            gm->m_playerIconType = IconType::Jetpack;
+            return;
+        }
+         if gm->m_playerIconType == IconType::Jetpack {
+            gm->m_playerIconType = IconType::Cube;
+            return;
+        }
     }
 
     int geticontonumber() {
