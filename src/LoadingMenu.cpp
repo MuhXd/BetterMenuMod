@@ -40,23 +40,13 @@ mat (@mat.4) - 2024
         if (!MenuLayer::init())
             return false;
 
-        #ifdef GEODE_IS_ANDROID
-          if (Mod::get()->getSettingValue<bool>("RunMainMenu")) {   
-                if (Loader::get()->isModLoaded("weebify.restartbtn")) {
-                    if (!Mod::get()->getSettingValue<bool>("EnableExitGameButton")) {
-                      this->getChildByID("close-menu")->setVisible(false);
-                   };
-             };
-          };
-        #else
-          if (Mod::get()->getSettingValue<bool>("RunMainMenu")) {   
-              if (!Mod::get()->getSettingValue<bool>("EnableExitGameButton")) {
-                 this->getChildByID("close-menu")->setVisible(false);
-               };
-          };
-        #endif
-
         if (Mod::get()->getSettingValue<bool>("RunMainMenu")) {   
+
+            if (!Mod::get()->getSettingValue<bool>("EnableExitGameButton")) {
+                if(this->getChildByID("close-menu")) {
+                    this->getChildByID("close-menu")->setVisible(false);
+                }
+            }
             bool anti = false;
             auto winSize = CCDirector::get()->getWinSize();
             this->getChildByID("social-media-menu")->setVisible(false);
