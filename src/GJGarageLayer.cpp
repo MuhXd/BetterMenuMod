@@ -29,8 +29,8 @@ void Switch(CCObject*) {
 }
 int geticontonumber() {
      auto GAYMANAGER = GameManager::sharedState();
-     auto id = GAYMANAGER->m_playerIconType;
-     int iconnum = 0;
+     auto id = static_cast<IconType>(GAYMANAGER->m_playerIconType);
+     int iconnum = 1;
     switch(id) {
         default: iconnum= 1; break;
         case IconType::Ship: iconnum= 2; break;
