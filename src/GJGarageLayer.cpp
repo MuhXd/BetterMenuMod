@@ -10,8 +10,30 @@ class $modify(GJBallsLayer,GJGarageLayer) {
 
 void Switch(CCObject*) {
     auto GAYMANAGER = GameManager::sharedState();
-    int a = GAYMANAGER->m_playerIconType;
-    GAYMANAGER->m_playerIconType = ( a + 1);
+    
+    // Array of IconType values in the desired order
+    std::vector<IconType> iconOrder = {
+        IconType::Cube,
+        IconType::Ship,
+        IconType::Ball,
+        IconType::Ufo,
+        IconType::Wave,
+        IconType::Robot,
+        IconType::Spider,
+        IconType::Swing,
+        IconType::Jetpack
+    };
+    
+    // Get the current index of m_playerIconType in iconOrder
+    auto it = std::find(iconOrder.begin(), iconOrder.end(), GAYMANAGER->m_playerIconType);
+    if (it != iconOrder.end()) {
+        // Increment to the next icon type, looping back to the beginning if necessary
+        ++it;
+        if (it == iconOrder.end()) {
+            it = iconOrder.begin();
+        }
+        GAYMANAGER->m_playerIconType = *it;
+    }
 }
 
 bool init() {
