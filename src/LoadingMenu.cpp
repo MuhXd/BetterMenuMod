@@ -245,7 +245,9 @@ else {
             SearchMenu->updateLayout();
         }
         if (Mod::get()->getSettingValue<bool>("replacename")) {
-         static_cast<cocos2d::CCLabelBMFont*>(this->getChildByID("player-username"))->setString("Streamer");
+               if (!Loader::get()->isModLoaded("coopeeo.customname")) {
+                    static_cast<cocos2d::CCLabelBMFont*>(this->getChildByID("player-username"))->setString("Streamer");
+               }
         }
 
         return true;
