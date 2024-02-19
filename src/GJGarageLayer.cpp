@@ -30,17 +30,19 @@ void Switch(CCObject*) {
 int geticontonumber() {
      auto GAYMANAGER = GameManager::sharedState();
      auto id = GAYMANAGER->m_playerIconType;
+     int iconnum = 0;
     switch(id) {
-        default: return 1;
-        case IconType::Ship: return 2;
-        case IconType::Ball: return 3;
-        case IconType::Ufo: return 4;
-        case IconType::Wave: return 5;
-        case IconType::Robot: return 6;
-        case IconType::Spider: return 7;
-	    case IconType::Swing: return 9;
-	    case IconType::Jetpack: return 8;
+        default: iconnum= 1; break;
+        case IconType::Ship: iconnum= 2; break;
+        case IconType::Ball: iconnum= 3; break;
+        case IconType::Ufo: iconnum= 4; break;
+        case IconType::Wave: iconnum= 5; break;
+        case IconType::Robot: iconnum= 6; break;
+        case IconType::Spider: iconnum= 7; break;
+	    case IconType::Swing: iconnum= 9; break;
+	    case IconType::Jetpack: iconnum= 8; break;
     }
+    return iconnum;
 };
 bool init() {
         if (!GJGarageLayer::init())
