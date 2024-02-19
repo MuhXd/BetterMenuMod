@@ -13,6 +13,10 @@ class $modify(GJBallsLayer,GJGarageLayer) {
 void Switch(CCObject*) {
     auto GAYMANAGER = GameManager::sharedState();
     
+    // Ensure that m_playerIconType is of type IconType
+    static_assert(std::is_same<decltype(GAYMANAGER->m_playerIconType), IconType>::value,
+                  "m_playerIconType is not of type IconType");
+    
     // Array of IconType values in the desired order
     std::vector<IconType> iconOrder = {
         IconType::Cube,
@@ -34,6 +38,7 @@ void Switch(CCObject*) {
         if (it == iconOrder.end()) {
             it = iconOrder.begin();
         }
+        // Assign the next icon type to m_playerIconType
         GAYMANAGER->m_playerIconType = *it;
     }
 }
@@ -59,7 +64,7 @@ bool init() {
                 .collect();
               auto spr = ButtonSprite::create("Icon Switch");
         auto btn = CCMenuItemSpriteExtra::create(
-            spr, this, menu_selector(GJBallsLayer::Switch)
+            spr, this, menu_selector($modify(GJBallsLayer,GJGarageLayer)::Switch)
         );
         btn->setScale(.7);
         btn->setPosition(winSize.width / 2, (winSize.height / 2) - 25);
