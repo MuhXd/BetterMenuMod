@@ -8,6 +8,7 @@ using namespace geode::prelude;
 auto 
 class $modify(GJBallsLayer,GJGarageLayer) { 
 void icon(int id) {
+     auto gm = GameManager::sharedState();
    switch(id) {
         default: gm->m_playerIconType = IconType::Cube; break;
         case 1: gm->m_playerIconType = IconType::Cube; break;
@@ -31,14 +32,14 @@ int geticontonumber() {
      auto id = GAYMANAGER->m_playerIconType;
     switch(id) {
         default: return 1
-        case IconType::Ship: return 2
-        case IconType::Ball: return 3
-        case IconType::Ufo: return 4
-        case IconType::Wave: return 5
-        case IconType::Robot: return 6
-        case IconType::Spider: return 7
-	    case IconType::Swing: return 9
-	    case IconType::Jetpack: return 8
+        case IconType::Ship: return 2;
+        case IconType::Ball: return 3;
+        case IconType::Ufo: return 4;
+        case IconType::Wave: return 5;
+        case IconType::Robot: return 6;
+        case IconType::Spider: return 7;
+	    case IconType::Swing: return 9;
+	    case IconType::Jetpack: return 8;
     }
 };
 bool init() {
@@ -62,7 +63,7 @@ bool init() {
                 .collect();
               auto spr = ButtonSprite::create("Icon Switch");
         auto btn = CCMenuItemSpriteExtra::create(
-            spr, this, menu_selector(GJGarageLayer::Switch)
+            spr, this, menu_selector(GJBallsLayer::Switch)
         );
         btn->setScale(.7);
         btn->setPosition(winSize.width / 2, (winSize.height / 2) - 25);
