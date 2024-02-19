@@ -10,39 +10,39 @@ class $modify(GJBallsLayer, GJGarageLayer) {
 
     void Switch(CCObject*) {
          auto gm = GameManager::sharedState();
-        if gm->m_playerIconType == IconType::Cube {
+        if (gm->m_playerIconType == IconType::Cube) {
             gm->m_playerIconType = IconType::Ship;
             return;
         }
-         if gm->m_playerIconType == IconType::Ship {
+         if (gm->m_playerIconType == IconType::Ship) {
             gm->m_playerIconType = IconType::Ball;
             return;
         }
-         if gm->m_playerIconType == IconType::Ball {
+         if (gm->m_playerIconType == IconType::Ball) {
             gm->m_playerIconType = IconType::Ufo;
             return;
         }
-         if gm->m_playerIconType == IconType::Ufo {
+         if (gm->m_playerIconType == IconType::Ufo) {
             gm->m_playerIconType = IconType::Wave;
             return;
         }
-         if gm->m_playerIconType == IconType::Wave {
+         if (gm->m_playerIconType == IconType::Wave) {
             gm->m_playerIconType = IconType::Robot;
             return;
         }
-         if gm->m_playerIconType == IconType::Robot {
+         if (gm->m_playerIconType == IconType::Robot) {
             gm->m_playerIconType = IconType::Spider;
             return;
         }
-         if gm->m_playerIconType == IconType::Spider {
+         if (gm->m_playerIconType == IconType::Spider) {
             gm->m_playerIconType = IconType::Swing;
             return;
         }
-         if gm->m_playerIconType == IconType::Swing {
+         if (gm->m_playerIconType == IconType::Swing) {
             gm->m_playerIconType = IconType::Jetpack;
             return;
         }
-         if gm->m_playerIconType == IconType::Jetpack {
+         if (gm->m_playerIconType == IconType::Jetpack) {
             gm->m_playerIconType = IconType::Cube;
             return;
         }
