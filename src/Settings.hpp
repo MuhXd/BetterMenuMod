@@ -23,12 +23,12 @@ public:
 
 class SettingsNode : public SettingNode {
 protected:
- bool init(Settings* value, auto mode,auto txt, float width) {
+ bool init(Settings* value, float width) {
         if (!SettingNode::init(value))
             return false;
         this->setContentSize({ width, 35.f });
         auto menu = CCMenu::create();
-        auto label = CCLabelBMFont::create(txt, "bigFont.fnt");
+        auto label = CCLabelBMFont::create(value, "bigFont.fnt");
         label->setScale(.33F);
         label->setPositionX(-93);
         menu->setPosition(width / 2, 18.f);
