@@ -60,7 +60,7 @@ public:
 
     }
     static SettingsNode* create(Settings* value, float width) {
-        auto ret = new SettingClickNode;
+        auto ret = new SettingsNode;
         if (ret && ret->init(value, width)) {
             ret->autorelease();
             return ret;
