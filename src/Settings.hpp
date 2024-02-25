@@ -43,7 +43,7 @@ protected:
             return false;
         this->setContentSize({ width, 35.f });
         HeadingUno(this,width);
-         log::info(value);
+         log::info(SettingNode::init(value));
         return true;
     }
 
