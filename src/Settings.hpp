@@ -59,9 +59,9 @@ public:
     void resetToDefault() override {
 
     }
-    static SettingsNode* create(Settings* value,auto mode,auto txt, float width) {
+    static SettingsNode* create(Settings* value, float width) {
         auto ret = new SettingClickNode;
-        if (ret && ret->init(value,mode,txt, width)) {
+        if (ret && ret->init(value, width)) {
             ret->autorelease();
             return ret;
         }
