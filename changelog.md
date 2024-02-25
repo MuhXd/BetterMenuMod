@@ -1,7 +1,7 @@
 # ChangeLog
 ### BetterMenu-beta.14
-* Support for Coop Display name
-* Headers in settings
+* Support for Coop's Display name mod
+* Headers in settings for easier reading and sorting
 ### BetterMenu-beta.13
 * Add disable close button
 * Mac Support is Back!
