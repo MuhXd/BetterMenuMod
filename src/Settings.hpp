@@ -1,5 +1,11 @@
 #pragma once
 #include <Geode/loader/SettingNode.hpp>
+#include <chrono>
+#include <thread>
+#include <queue>
+#include <string>
+#include <sstream>
+#include <iostream>
 using namespace geode::prelude;
 
 class Settings;
@@ -28,7 +34,7 @@ protected:
             return false;
         this->setContentSize({ width, 35.f });
         auto menu = CCMenu::create();
-        auto label = CCLabelBMFont::create(value, "bigFont.fnt");
+        auto label = CCLabelBMFont::create("t", "bigFont.fnt");
         label->setScale(.33F);
         label->setPositionX(-93);
         menu->setPosition(width / 2, 18.f);
