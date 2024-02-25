@@ -21,6 +21,11 @@
 		"type": "bool",
 		"default": true
 	},
+	"exit-heading": {
+		"type": "custom",
+		"mode": "test",
+		"txt": "t"
+	 },
 	"EnableExitGameButton": {
 		"name": "Exit Button",
 		"description": "Makes the game be able to close",
