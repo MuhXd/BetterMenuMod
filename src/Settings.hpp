@@ -43,12 +43,11 @@ protected:
         this->setContentSize({ width, 35.f });
         Heading=Heading+1;
         auto menu = CCMenu::create();
-        auto label = CCLabelBMFont::create("Gay sex", "bigFont.fnt");
+        auto label = CCLabelBMFont::create(Headings[Heading], "bigFont.fnt");
         label->setScale(0.750);
         label->setPositionX(0);
         menu->setPosition(width / 2, 18.f);
         this->addChild(menu);
-        label->setString(Headings[Heading]); // Remove / Disable
         menu->addChild(label);
         if (Heading > ( Headings.size() - 1) ) {
             Heading = 0;
