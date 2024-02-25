@@ -10,6 +10,7 @@ using namespace geode::prelude;
 
 class Settings;
 void HeadingUno(auto thisui) {
+         auto menu = CCMenu::create();
         auto label = CCLabelBMFont::create("Remove / Disable", "bigFont.fnt");
         label->setScale(0.750);
         label->setPositionX(0);
