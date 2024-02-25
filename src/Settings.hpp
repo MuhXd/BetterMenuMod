@@ -56,7 +56,7 @@ protected:
         menu->setPosition(width / 2, 18.f);
         this->addChild(menu);
         menu->addChild(label);
-        if (Heading > (3) ) {
+        if (Heading > (2) ) {
             Heading = 0;
         };
         return true;
