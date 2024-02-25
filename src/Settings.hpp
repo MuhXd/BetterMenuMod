@@ -48,7 +48,7 @@ protected:
         label->setPositionX(0);
         menu->setPosition(width / 2, 18.f);
         this->addChild(menu);
-        label->setString(Headings[Heading]) // Remove / Disable
+        label->setString(Headings[Heading]); // Remove / Disable
         menu->addChild(label);
         if (Heading > ( Headings.size() - 1) ) {
             Heading = 0;
