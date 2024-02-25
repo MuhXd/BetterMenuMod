@@ -3,10 +3,10 @@
 
 using namespace geode::prelude;
 
-SettingNode* Settings::createNode(float width) {
-    return SettingsNode::create(this, width);
+SettingNode* Settings::createNode(float width, auto mo) {
+    return SettingsNode::create(this, width,mo);
 }
 
 $on_mod(Loaded) {
-    Mod::get()->addCustomSetting<Settings>("exit-heading", "none");
+    Mod::get()->addCustomSetting<exitheading>("exit-heading", "none","Mode");
 }

@@ -8,6 +8,16 @@
 #include <iostream>
 using namespace geode::prelude;
 
+
+void HeadingUno(auto thisui) {
+        auto menu = CCMenu::create();
+        auto label = CCLabelBMFont::create("Remove / Disable", "bigFont.fnt");
+        label->setScale(0.750);
+        label->setPositionX(0);
+        menu->setPosition(width / 2, 18.f);
+        menu->addChild(label);
+        thisui->addChild(menu);
+}
 class Settings;
 
 class Settings : public SettingValue {
@@ -23,23 +33,20 @@ public:
     bool save(matjson::Value& json) const override {
         return true;
     }
-    SettingNode* createNode(float width) override;
+    SettingNode* createNode(float width, auto mo) override;
 };
 
 
 class SettingsNode : public SettingNode {
 protected:
- bool init(Settings* value, float width) {
+ bool init(Settings* value, float width, auto mo) {
         if (!SettingNode::init(value))
             return false;
         this->setContentSize({ width, 35.f });
-        auto menu = CCMenu::create();
-        auto label = CCLabelBMFont::create("t", "bigFont.fnt");
-        label->setScale(.33F);
-        label->setPositionX(-93);
-        menu->setPosition(width / 2, 18.f);
-        menu->addChild(label);
-        this->addChild(menu);
+        if (mo == "1") {
+        HeadingUno(this);
+        };
+     
         return true;
     }
 
@@ -65,9 +72,9 @@ public:
     void resetToDefault() override {
 
     }
-    static SettingsNode* create(Settings* value, float width) {
+    static SettingsNode* create(Settings* value, float width, auto mo) {
         auto ret = new SettingsNode;
-        if (ret && ret->init(value, width)) {
+        if (ret && ret->init(value, width,mo)) {
             ret->autorelease();
             return ret;
         }
