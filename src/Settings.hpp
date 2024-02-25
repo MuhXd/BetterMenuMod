@@ -55,6 +55,10 @@ protected:
         menu->addChild(label);
         this->addChild(menu);
         }
+
+        if (Heading == 3) {
+            Heading = 0
+        }
         return true;
     }
 
