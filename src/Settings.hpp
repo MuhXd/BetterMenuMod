@@ -42,7 +42,7 @@ protected:
         if (!SettingNode::init(value))
             return false;
         this->setContentSize({ width, 35.f });
-        Heading=Heading+1
+        Heading=Heading+1;
         if (Heading == 1) {
         HeadingUno(this,width);
         }
