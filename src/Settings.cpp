@@ -8,5 +8,5 @@ SettingNode* Settings::createNode(float width) {
 }
 
 $on_mod(Loaded) {
-    Mod::get()->addCustomSetting<exitheading>("exit-heading", "none");
+    Mod::get()->addCustomSetting<Settings>("exit-heading", "none");
 }
