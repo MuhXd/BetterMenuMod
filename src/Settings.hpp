@@ -1,5 +1,6 @@
 #pragma once
 #include <Geode/loader/SettingNode.hpp>
+#include <Geode/Geode.hpp>
 #include <chrono>
 #include <thread>
 #include <queue>
@@ -9,7 +10,7 @@
 using namespace geode::prelude;
 
 class Settings;
-void HeadingUno(auto thisui) {
+void HeadingUno(auto thisui, float width) {
          auto menu = CCMenu::create();
         auto label = CCLabelBMFont::create("Remove / Disable", "bigFont.fnt");
         label->setScale(0.750);
@@ -41,7 +42,7 @@ protected:
         if (!SettingNode::init(value))
             return false;
         this->setContentSize({ width, 35.f });
-        HeadingUno(this);
+        HeadingUno(this,width);
          log::info(value);
         return true;
     }
