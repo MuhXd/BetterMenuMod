@@ -38,7 +38,7 @@ protected:
         this->setContentSize({ width, 35.f });
         Heading=Heading+1;
         auto menu = CCMenu::create();
-        
+
         auto head = "Gay Sex";
         if (Heading == 1) {
         head="Remove / Disable";
@@ -56,7 +56,7 @@ protected:
         menu->setPosition(width / 2, 18.f);
         this->addChild(menu);
         menu->addChild(label);
-        if (Heading > ( Headings.size() - 1) ) {
+        if (Heading > (3) ) {
             Heading = 0;
         };
         return true;
