@@ -8,9 +8,8 @@
 #include <iostream>
 using namespace geode::prelude;
 
-
+class Settings;
 void HeadingUno(auto thisui) {
-        auto menu = CCMenu::create();
         auto label = CCLabelBMFont::create("Remove / Disable", "bigFont.fnt");
         label->setScale(0.750);
         label->setPositionX(0);
@@ -18,8 +17,6 @@ void HeadingUno(auto thisui) {
         menu->addChild(label);
         thisui->addChild(menu);
 }
-class Settings;
-
 class Settings : public SettingValue {
 protected:
     std::string m_placeholder;
@@ -33,20 +30,18 @@ public:
     bool save(matjson::Value& json) const override {
         return true;
     }
-    SettingNode* createNode(float width, auto mo) override;
+    SettingNode* createNode(float width) override;
 };
 
 
 class SettingsNode : public SettingNode {
 protected:
- bool init(Settings* value, float width, auto mo) {
+ bool init(Settings* value, float width) {
         if (!SettingNode::init(value))
             return false;
         this->setContentSize({ width, 35.f });
-        if (mo == "1") {
         HeadingUno(this);
-        };
-     
+         log::info(value);
         return true;
     }
 
@@ -72,9 +67,9 @@ public:
     void resetToDefault() override {
 
     }
-    static SettingsNode* create(Settings* value, float width, auto mo) {
+    static SettingsNode* create(Settings* value, float width) {
         auto ret = new SettingsNode;
-        if (ret && ret->init(value, width,mo)) {
+        if (ret && ret->init(value, width)) {
             ret->autorelease();
             return ret;
         }
