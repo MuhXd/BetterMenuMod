@@ -13,11 +13,6 @@ using namespace geode::prelude;
 int Heading = 0;
 class Settings;
 
-std::vector<std::string> Headings = {
-    "Remove / Disable",
-    "Shortcuts",
-    "Menu Manipulation"
-};
 class Settings : public SettingValue {
 protected:
     std::string m_placeholder;
@@ -43,7 +38,18 @@ protected:
         this->setContentSize({ width, 35.f });
         Heading=Heading+1;
         auto menu = CCMenu::create();
-        std::string head = Headings[Heading];
+        
+        auto head = "Gay Sex";
+        if (Heading == 1) {
+        head="Remove / Disable";
+        };
+         if (Heading == 2) {
+        head="Shortcuts";
+        };
+         if (Heading == 3) {
+        head="Menu Manipulation";
+        };
+        
         auto label = CCLabelBMFont::create(head, "bigFont.fnt");
         label->setScale(0.750);
         label->setPositionX(0);
