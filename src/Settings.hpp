@@ -8,9 +8,17 @@
 #include <sstream>
 #include <iostream>
 using namespace geode::prelude;
-int Heading = 0
+int Heading = 0;
 class Settings;
-
+void HeadingUno(auto thisui, float width) {
+         auto menu = CCMenu::create();
+        auto label = CCLabelBMFont::create("Remove / Disable", "bigFont.fnt");
+        label->setScale(0.750);
+        label->setPositionX(0);
+        menu->setPosition(width / 2, 18.f);
+        menu->addChild(label);
+        thisui->addChild(menu);
+}
 class Settings : public SettingValue {
 protected:
     std::string m_placeholder;
@@ -34,15 +42,9 @@ protected:
         if (!SettingNode::init(value))
             return false;
         this->setContentSize({ width, 35.f });
-        Heading=Heading+1;
+        Heading=Heading+1
         if (Heading == 1) {
-         auto menu = CCMenu::create();
-        auto label = CCLabelBMFont::create("Remove / Disable", "bigFont.fnt");
-        label->setScale(0.750);
-        label->setPositionX(0);
-        menu->setPosition(width / 2, 18.f);
-        menu->addChild(label);
-        thisui->addChild(menu);
+        HeadingUno(this,width);
         }
         else {
             auto menu = CCMenu::create();
@@ -51,7 +53,7 @@ protected:
         label->setPositionX(0);
         menu->setPosition(width / 2, 18.f);
         menu->addChild(label);
-        thisui->addChild(menu);
+        this->addChild(menu);
         }
         return true;
     }
