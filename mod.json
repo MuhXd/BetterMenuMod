@@ -22,9 +22,7 @@
 		"default": true
 	},
 	"exit-heading": {
-		"type": "custom",
-		"mode": "test",
-		"txt": "t"
+		"type": "custom"
 	 },
 	"EnableExitGameButton": {
 		"name": "Exit Button",
@@ -32,6 +30,21 @@
 		"type": "bool",
 		"default": true
 	},
+	"HideName": {
+		"name": "Hide Username",
+		"description": "This setting Hides the players name from the main menu",
+		"type": "bool",
+		"default": true
+	},
+	"replacename": {
+		"name": "Hide Real Username",
+		"description": "This replaces your Username with 'Streamer'",
+		"type": "bool",
+		"default": true
+	},
+	"Shortcuts-heading": {
+		"type": "custom"
+	 },
 	"ShortcutMyLevel": {
 		"name": "My Levels Shortcut",
 		"description": "Adds my Levels to the Shortcuts location",
@@ -62,18 +75,9 @@
 		"type": "bool",
 		"default": true
 	},
-	"replacename": {
-		"name": "Hide Real Username",
-		"description": "This replaces your Username with 'Streamer'",
-		"type": "bool",
-		"default": true
-	},
-	"HideName": {
-		"name": "Hide Username",
-		"description": "This setting Hides the players name from the main menu",
-		"type": "bool",
-		"default": true
-	},
+	"MenuPos-heading": {
+		"type": "custom"
+	 },
 	"MoveMenuPos": {
 		"name": "Move Bottom Menu to left",
 		"description": "Moves the Bottom side menu to the right and moves the left side menu to the bottom",

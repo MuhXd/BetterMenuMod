@@ -9,4 +9,6 @@ SettingNode* Settings::createNode(float width) {
 
 $on_mod(Loaded) {
     Mod::get()->addCustomSetting<Settings>("exit-heading", "none");
+    Mod::get()->addCustomSetting<Settings>("Shortcuts-heading", "none");
+    Mod::get()->addCustomSetting<Settings>("MenuPos-heading", "none");
 }
