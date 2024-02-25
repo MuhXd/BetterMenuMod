@@ -15,15 +15,15 @@
         "Customization"
     ],
 	"settings": {
-	"RunMainMenu": {
+	"exit-heading": {
+		"type": "custom"
+	 },
+	 "RunMainMenu": {
 		"name": "Main Menu Modifications",
 		"description": "This settings Enables the main menu (Note: This will be for other menus when i am finished)",
 		"type": "bool",
 		"default": true
 	},
-	"exit-heading": {
-		"type": "custom"
-	 },
 	"EnableExitGameButton": {
 		"name": "Exit Button",
 		"description": "Makes the game be able to close",

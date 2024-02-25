@@ -7,18 +7,17 @@
 #include <string>
 #include <sstream>
 #include <iostream>
+#include <string>
+#include <vector>
 using namespace geode::prelude;
 int Heading = 0;
 class Settings;
-void HeadingUno(auto thisui, float width) {
-         auto menu = CCMenu::create();
-        auto label = CCLabelBMFont::create("Remove / Disable", "bigFont.fnt");
-        label->setScale(0.750);
-        label->setPositionX(0);
-        menu->setPosition(width / 2, 18.f);
-        menu->addChild(label);
-        thisui->addChild(menu);
-}
+
+std::vector<std::string> Headings = {
+    "Remove / Disable",
+    "Shortcuts",
+    "Menu Manipulation"
+};
 class Settings : public SettingValue {
 protected:
     std::string m_placeholder;
@@ -43,20 +42,15 @@ protected:
             return false;
         this->setContentSize({ width, 35.f });
         Heading=Heading+1;
-        if (Heading == 1) {
-        HeadingUno(this,width);
-        }
-        else {
-            auto menu = CCMenu::create();
+        auto menu = CCMenu::create();
         auto label = CCLabelBMFont::create("Gay sex", "bigFont.fnt");
         label->setScale(0.750);
         label->setPositionX(0);
         menu->setPosition(width / 2, 18.f);
-        menu->addChild(label);
         this->addChild(menu);
-        }
-
-        if (Heading == 3) {
+        label->setString(Headings[Heading]) // Remove / Disable
+        menu->addChild(label);
+        if (Heading > ( Headings.size() - 1) ) {
             Heading = 0;
         };
         return true;
