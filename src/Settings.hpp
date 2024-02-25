@@ -43,7 +43,8 @@ protected:
         this->setContentSize({ width, 35.f });
         Heading=Heading+1;
         auto menu = CCMenu::create();
-        auto label = CCLabelBMFont::create(Headings[Heading], "bigFont.fnt");
+        std::string head = Headings[Heading]
+        auto label = CCLabelBMFont::create(head, "bigFont.fnt");
         label->setScale(0.750);
         label->setPositionX(0);
         menu->setPosition(width / 2, 18.f);
