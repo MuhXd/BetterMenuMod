@@ -57,8 +57,8 @@ protected:
         }
 
         if (Heading == 3) {
-            Heading = 0
-        }
+            Heading = 0;
+        };
         return true;
     }
 
