@@ -192,8 +192,13 @@ public:
 };
 
 
-void createHeading(auto thisL, Settings* value) {
-         std::string head = Mod::get()->getSettingDefinition(value->getKey())->get<CustomSetting>()->json->get<std::string>("text");
+void createHeading(auto width,auto thisL, Settings* value) {
+        if(value) {
+            std::string head = Mod::get()->getSettingDefinition(value->getKey())->get<CustomSetting>()->json->get<std::string>("text");
+        }
+        else {
+            head = "ERROR LOADING"
+        }
         auto menu = CCMenu::create();
         auto label = CCLabelBMFont::create(head, "bigFont.fnt");
         label->setScale(0.750);
@@ -227,7 +232,7 @@ protected:
         this->setContentSize({ width, 35.f });
             std::string Mode = Mod::get()->getSettingDefinition(value->getKey())->get<CustomSetting>()->json->get<std::string>("mode");
         if(Mode == "Heading") {
-            createHeading(this,value)
+            createHeading(width,this,value);
         };
         
         return true;
@@ -262,7 +267,10 @@ public:
         };
          if(Mode == "m-pos") {
              auto ret = new SettingPosNode;
-        };
+        }
+        else {
+            auto ret = new SettingsNode
+        }
         if (ret && ret->init(value, width)) {
             ret->autorelease();
             return ret;
