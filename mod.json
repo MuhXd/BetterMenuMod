@@ -88,6 +88,7 @@
 		"type": "custom",
 		"mode" : "m-pos",
 		"name": "Placement",
+		"text": "placed",
 		"description": "Where the menu should be placed.\n1 = <cy>Middle</c> | 2 = <cy>Top</c>\n3 = <cy>Right</c> | 4 = <cy>Left</c>"
 	 },
 	"MoveMenuPos": {
