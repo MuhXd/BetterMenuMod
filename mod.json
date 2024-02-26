@@ -16,7 +16,9 @@
     ],
 	"settings": {
 	"exit-heading": {
-		"type": "custom"
+		"type": "custom",
+		"mode" : "Heading",
+		"text": "Remove / Disable"
 	 },
 	 "RunMainMenu": {
 		"name": "Main Menu Modifications",
@@ -43,7 +45,9 @@
 		"default": true
 	},
 	"Shortcuts-heading": {
-		"type": "custom"
+		"type": "custom",
+		"mode" : "Heading",
+		"text": "Shortcuts"
 	 },
 	"ShortcutMyLevel": {
 		"name": "My Levels Shortcut",
@@ -76,7 +80,15 @@
 		"default": true
 	},
 	"MenuPos-heading": {
-		"type": "custom"
+		"type": "custom",
+		"mode" : "Heading",
+		"text": "Menu Manipulation"
+	 },
+	 "MenuPos-newtest": {
+		"type": "custom",
+		"mode" : "m-pos",
+		"name": "Placement",
+		"description": "Where the menu should be placed.\n1 = <cy>Middle</c> | 2 = <cy>Top</c>\n3 = <cy>Right</c> | 4 = <cy>Left</c>"
 	 },
 	"MoveMenuPos": {
 		"name": "Move Bottom Menu to left",
