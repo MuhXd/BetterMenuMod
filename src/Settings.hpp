@@ -52,7 +52,6 @@ public:
 
 
 void createHeading(auto width,auto thisL, auto name) {
-        
         auto menu = CCMenu::create();
         auto label = CCLabelBMFont::create(name, "bigFont.fnt");
         label->setScale(0.750);
