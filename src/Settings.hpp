@@ -51,15 +51,10 @@ public:
 };
 
 
-void createHeading(auto width,auto thisL, auto value) {
-        if(value) {
-            std::string name = Mod::get()->getSettingDefinition(value->getKey())->get<CustomSetting>()->json->get<std::string>("name");
-        }
-        else {
-            auto head = "ERROR LOADING";
-        }
+void createHeading(auto width,auto thisL, auto name) {
+        
         auto menu = CCMenu::create();
-        auto label = CCLabelBMFont::create(head.c_str(), "bigFont.fnt");
+        auto label = CCLabelBMFont::create(name, "bigFont.fnt");
         label->setScale(0.750);
         label->setPositionX(0);
         menu->setPosition(width / 2, 18.f);
@@ -91,7 +86,7 @@ protected:
         this->setContentSize({ width, 35.f });
             std::string Mode = Mod::get()->getSettingDefinition(value->getKey())->get<CustomSetting>()->json->get<std::string>("mode").c_str();
         if(Mode == "Heading") {
-            createHeading(width,this,value);
+            createHeading(width,this,Mod::get()->getSettingDefinition(value->getKey())->get<CustomSetting>()->json->get<std::string>("text").c_str());
         }
        
         
