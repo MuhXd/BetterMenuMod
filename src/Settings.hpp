@@ -93,15 +93,6 @@ protected:
         if(Mode == "Heading") {
             createHeading(width,this,value);
         }
-        else {
-        bool hasNonDefaultValue() override {
-            return false;
-        }
-        bool hasUncommittedChanges() override {
-            return true;
-        }
-                    createHeading(width,this,value);
-        }
         
         return true;
     }
