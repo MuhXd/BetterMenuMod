@@ -4,9 +4,34 @@
 #include <Geode/loader/Loader.hpp>
 #include <UIBuilder.hpp>
 #include <Geode/ui/GeodeUI.hpp>
+#include "Settings.hpp"
 #include <Geode/cocos/label_nodes/CCLabelBMFont.h>
 static geode::Loader* get();
 using namespace geode::prelude;
+bool r = false;
+bool v = false;
+void GetIdsPos() {
+     int menupos = Mod::get()->getSettingValue<SettingPosStruct>("MenuPos-pos").m_pos;
+  switch (menupos) {
+        case 1: 
+        r=false;
+        v=false;
+        break;
+        case 2:
+        r=false;
+        v=true;
+        break;
+        case 3:
+        r=true;
+        v=true;
+        break;
+        case 4: 
+        r=true;
+        v=false;
+        break;
+
+  }
+}
 class $modify(MenuLayer) { 
 /*
 'ewww
@@ -47,13 +72,15 @@ mat (@mat.4) - 2024
                     this->getChildByID("close-menu")->setVisible(false);
                 }
             }
+            
             bool anti = false;
             auto winSize = CCDirector::get()->getWinSize();
             this->getChildByID("social-media-menu")->setVisible(false);
             if (Mod::get()->getSettingValue<bool>("HideName"))
                 this->getChildByID("player-username")->setVisible(false);
             // Move the menus around
-            if (Mod::get()->getSettingValue<bool>("MoveMenuPos")) {
+            GetIdsPos(); // loads the r and v pos values
+            if (r) {
                 Build(this->getChildByID("right-side-menu"))
                     .pos(winSize.width / 2, winSize.height / 4.2)
                     .scale(1.225f)
@@ -62,8 +89,7 @@ mat (@mat.4) - 2024
                         ->setGap(2.f)
                         ->setAxisAlignment(AxisAlignment::Center)
                     ).updateLayout();
-            // i don't wanna get into custom settings please, Don't make me. 
-if (Mod::get()->getSettingValue<bool>("MoveMenuPosFlip")) {
+if (v) {
                 Build(this->getChildByID("bottom-menu"))
                     .contentSize({35.750, 221.f})
                     .pos(winSize.width - 22, winSize.height - 139)
@@ -107,8 +133,7 @@ else {
                     .anchorPoint({0.f,0.5});
 }
             }
-            //  😱 yea also Croozy 😱 
-            else if (Mod::get()->getSettingValue<bool>("MoveMenuPosFlip"))
+            else if (v)
             {
               Build(this->getChildByID("bottom-menu")).posY(winSize.height-35.5);
               if (Mod::get()->getSettingValue<bool>("RightSide")) {
@@ -137,6 +162,12 @@ else {
                         ->setGrowCrossAxis(false)
                         ->setCrossAxisOverflow(true)
                         ).updateLayout();
+                        if (!r) {
+                            if (!v) {
+                                int old = this->getChildByID("bottom-menu")->getPositionY();
+                                Build(this->getChildByID("bottom-menu")).posY(old+30);
+                            }
+                        }
 
             }
             // Creates the Menu
@@ -217,9 +248,9 @@ else {
             }
             
             auto Menu2_2=shortcutMenu_2;
-            if (Mod::get()->getSettingValue<bool>("MoveMenuPosFlip")) {
+            if (v) {
               Menu2_2=shortcutMenu;
-               if (!Mod::get()->getSettingValue<bool>("MoveMenuPos")) {
+               if (!r) {
                     Menu2_2=shortcutMenu_2;
                }
             }

@@ -5,7 +5,7 @@
 		"android": "2.205",
 		"mac": "2.200"
 	},
-	"version": "v1.0.4-beta.14",
+	"version": "v2.0.0",
 	"id": "muhammadgames.bettermenu",
 	"name": "Better Menu",
 	"developer": "Viper",
@@ -44,6 +44,21 @@
 		"type": "bool",
 		"default": true
 	},
+	"MenuPos-heading": {
+		"type": "custom",
+		"mode" : "Heading",
+		"text": "Menu Manipulation"
+	 },
+	 "MenuPos-pos": {
+		"type": "custom",
+		"mode" : "Hardcoded"
+	 },
+	"RightSide": {
+		"name": "Right Menu to Shortcuts",
+		"description": "Moves the right menu near the Shortcuts",
+		"type": "bool",
+		"default": false
+	},
 	"Shortcuts-heading": {
 		"type": "custom",
 		"mode" : "Heading",
@@ -78,36 +93,6 @@
 		"description": "Adds Weekly button to Shortcuts",
 		"type": "bool",
 		"default": true
-	},
-	"MenuPos-heading": {
-		"type": "custom",
-		"mode" : "Heading",
-		"text": "Menu Manipulation"
-	 },
-	 "MenuPos-newtest": {
-		"type": "custom",
-		"mode" : "m-pos",
-		"name": "Placement",
-		"text": "placed",
-		"description": "Where the menu should be placed.\n1 = <cy>Middle</c> | 2 = <cy>Top</c>\n3 = <cy>Right</c> | 4 = <cy>Left</c>"
-	 },
-	"MoveMenuPos": {
-		"name": "Move Bottom Menu to left",
-		"description": "Moves the Bottom side menu to the right and moves the left side menu to the bottom",
-		"type": "bool",
-		"default": true
-	},
-	"MoveMenuPosFlip": {
-		"name": "Flip Bottom Menu",
-		"description": "Flips the menu (left to right or below to above)",
-		"type": "bool",
-		"default": true
-	},
-	"RightSide": {
-		"name": "Right Menu to Shortcuts",
-		"description": "Moves the right menu near the Shortcuts",
-		"type": "bool",
-		"default": false
 	}
 }
 }

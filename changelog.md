@@ -1,4 +1,7 @@
 # ChangeLog
+## BetterMenu V2
+* Setting to Move the menu position remade
+* Fixed the Right side to shortcuts overlapping bug
 ### BetterMenu-beta.14
 * Support for Coop's Display name mod
 * Headers in settings for easier reading and sorting
