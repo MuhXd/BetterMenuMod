@@ -192,12 +192,12 @@ public:
 };
 
 
-void createHeading(auto width,auto thisL, Settings* value) {
+void createHeading(auto width,auto thisL, auto value) {
         if(value) {
             std::string head = Mod::get()->getSettingDefinition(value->getKey())->get<CustomSetting>()->json->get<std::string>("text");
         }
         else {
-            head = "ERROR LOADING"
+            auto head = "ERROR LOADING";
         }
         auto menu = CCMenu::create();
         auto label = CCLabelBMFont::create(head, "bigFont.fnt");
