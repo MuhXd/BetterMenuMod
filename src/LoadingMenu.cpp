@@ -119,10 +119,12 @@ else {
                     .layout(ColumnLayout::create()->setGap(0))
                     .updateLayout();
                 anti=true;
-                Build(this->getChildByID("close-menu"))
+                if (this->getChildByID("close-menu")) {
+                    Build(this->getChildByID("close-menu"))
                     .pos(winSize.width - 105, winSize.height - 20)
                     .layout(RowLayout::create()->setAxisAlignment(AxisAlignment::End))
                     .updateLayout();
+                };
                     Build(this->getChildByID("profile-menu"))
                     .layout(RowLayout::create()->setAxisAlignment(AxisAlignment::Start))
                     .pos(48, winSize.height - 20)
