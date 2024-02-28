@@ -338,9 +338,9 @@ else {
             float beforemoveposX = this->getChildByID("bottom-menu")->getPositionX();
             if (r) {
                 if (v) {
-                    this->getChildByID("bottom-menu")->setPositionX( (beforemoveposX - 100) );
-                }  else {
                     this->getChildByID("bottom-menu")->setPositionX( (beforemoveposX + 100) );
+                }  else {
+                    this->getChildByID("bottom-menu")->setPositionX( (beforemoveposX - 100) );
                 }   
             } else {
                 if (v) {
