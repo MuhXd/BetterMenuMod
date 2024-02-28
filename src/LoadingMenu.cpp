@@ -332,7 +332,7 @@ else {
             Spr->setID("main-title");
             this->addChild(Spr);
         };
-    
+    #ifdef GEODE_IS_WINDOWS && GEODE_IS_ANDROID
         if (Mod::get()->getSettingValue<bool>("MenuMovement")) {
             float beforemoveposY = this->getChildByID("bottom-menu")->getPositionY();
             float beforemoveposX = this->getChildByID("bottom-menu")->getPositionX();
@@ -352,7 +352,7 @@ else {
             }
             this->getChildByID("bottom-menu")->runAction(CCEaseInOut::create(CCMoveTo::create(1.0f, { beforemoveposX, beforemoveposY }), 2.0f));
         };
-
+#endif
         return true;
     }
 };
