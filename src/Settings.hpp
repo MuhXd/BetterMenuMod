@@ -169,7 +169,7 @@ protected:
                     .intoMenuItem([](auto target) {
                        FLAlertLayer::create(
                                  "Menu Position",
-                                 "Where the menu should be placed.\n1 = <cy>Bottom</c> | 2 = <cy>Top</c>\n3 = <cy>Right</c> | 4 = <cy>Left</c>",
+                                 "Where the menu should be placed.",
                                   "OK"
                                 )->show();
                     })

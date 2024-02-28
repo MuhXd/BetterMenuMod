@@ -16,5 +16,6 @@ $on_mod(Loaded) {
     Mod::get()->addCustomSetting<Settings>("exit-heading", "none");
     Mod::get()->addCustomSetting<Settings>("Shortcuts-heading", "none");
     Mod::get()->addCustomSetting<Settings>("MenuPos-heading", "none");
-     Mod::get()->addCustomSetting<SettingPosValue>("MenuPos-pos", 4);
+    Mod::get()->addCustomSetting<SettingPosValue>("MenuPos-pos", 4);
+    Mod::get()->addCustomSetting<Settings>("Joke-Features", "none");
 }

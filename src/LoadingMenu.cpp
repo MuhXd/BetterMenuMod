@@ -10,6 +10,20 @@ static geode::Loader* get();
 using namespace geode::prelude;
 bool r = false;
 bool v = false;
+void PlaySoundEffect(auto effect){
+	if (Mod::get()->getSettingValue<bool>("SFX")) {
+		FMODAudioEngine::sharedEngine()->playEffect(effect);
+	};
+}
+
+
+class FakeLayer : public CCLayer {
+public:
+void onGeode(CCObject*) {
+		PlaySoundEffect("UwU_1.mp3"_spr);
+		geode::openModsList();
+	}
+};
 void GetIdsPos() {
      int menupos = Mod::get()->getSettingValue<SettingPosStruct>("MenuPos-pos").m_pos;
   switch (menupos) {
@@ -41,7 +55,13 @@ mat (@mat.4) - 2024
      static void onModify(auto& self) {
         self.setHookPriority("MenuLayer::init", -1); // For the icon profile bug fix
     }
-    
+    void onPlay(CCObject* sender) {
+        MenuLayer::onPlay(sender);
+         if (Mod::get()->getSettingValue<bool>("Merp")) {
+            PlaySoundEffect("merp.mp3"_spr);
+         };
+    };
+
  void onQuit(CCObject* sender) {
         if (Mod::get()->getSettingValue<bool>("EnableExitGameButton")) {
             MenuLayer::onQuit(sender);
@@ -281,7 +301,57 @@ else {
                if (!Loader::get()->isModLoaded("coopeeo.customname")) {
                     static_cast<cocos2d::CCLabelBMFont*>(this->getChildByID("player-username"))->setString("Streamer");
                }
-        }
+        };
+
+        if (Mod::get()->getSettingValue<bool>("Uwugeode")) {
+        auto geodeButton = dynamic_cast<CCMenuItemSpriteExtra*>(
+		getChildByIDRecursive("geode.loader/geode-button")
+	    );
+		geodeButton->m_pfnSelector = menu_selector(FakeLayer::onGeode);
+		 for(auto items : CCArrayExt<CCNode*>(this->getChildByIDRecursive("geode.loader/geode-button")->getChildren())) {
+			auto g=items;
+			if (auto icon = getChildOfType<CCSprite>(g, 0)) {
+        	auto Spr = CCSprite::create("gwode.png"_spr);
+			Spr->setScale(0.2);
+			Spr->setPositionX(icon->getPositionX());
+			Spr->setPositionY(icon->getPositionY());
+			g->addChild(Spr);
+			icon->setVisible(false);
+			break;
+    	    };
+		 }
+         };
+
+        if (Mod::get()->getSettingValue<bool>("Merp")) {
+            auto title = this->getChildByID("main-title");
+            auto titlePos = title->getPosition();
+            auto Spr = CCSprite::create("MERP.png"_spr);
+            Spr->setPositionX(titlePos.x);
+            Spr->setPositionY(titlePos.y);
+            this->removeChildByID("main-title");
+            Spr->setID("main-title");
+            this->addChild(Spr);
+        };
+
+        if (Mod::get()->getSettingValue<bool>("MenuMovement")) {
+            float beforemoveposY = this->getChildByID("bottom-menu")->getPositionY();
+            float beforemoveposX = this->getChildByID("bottom-menu")->getPositionX();
+            if (r) {
+                if (v) {
+                    this->getChildByID("bottom-menu")->setPositionX( (beforemoveposX - 100) );
+                }  else {
+                    this->getChildByID("bottom-menu")->setPositionX( (beforemoveposX + 100) );
+                }   
+            } else {
+                if (v) {
+                    this->getChildByID("bottom-menu")->setPositionY( (beforemoveposY + 100) );
+                }       
+                else {
+                    this->getChildByID("bottom-menu")->setPositionY( (beforemoveposY - 100) );
+                }  
+            }
+            this->getChildByID("bottom-menu")->runAction(CCEaseInOut::create(CCMoveTo::create(1.0f, { beforemoveposX, beforemoveposY }), 2.0f));
+        };
 
         return true;
     }
