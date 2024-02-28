@@ -5,7 +5,11 @@
 		"android": "2.205",
 		"mac": "2.200"
 	},
+<<<<<<< HEAD
 	"version": "v2.0.1-beta.2",
+=======
+	"version": "v2.0.1-beta.1",
+>>>>>>> f37ebc9a9df709155d2b118ad712c79c9bd5fae4
 	"id": "muhammadgames.bettermenu",
 	"name": "Better Menu",
 	"developer": "Viper",
