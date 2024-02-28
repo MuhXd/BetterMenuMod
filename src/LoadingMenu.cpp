@@ -332,7 +332,7 @@ else {
             Spr->setID("main-title");
             this->addChild(Spr);
         };
-
+        #ifdef mac_os
         if (Mod::get()->getSettingValue<bool>("MenuMovement")) {
             float beforemoveposY = this->getChildByID("bottom-menu")->getPositionY();
             float beforemoveposX = this->getChildByID("bottom-menu")->getPositionX();
