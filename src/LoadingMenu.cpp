@@ -107,7 +107,9 @@ mat (@mat.4) - 2024
         if (!MenuLayer::init())
             return false;
 
-        if (Mod::get()->getSettingValue<bool>("RunMainMenu")) {   
+        if (!Mod::get()->getSettingValue<bool>("RunMainMenu")) {   
+            return true;
+        };
 
             if (!Mod::get()->getSettingValue<bool>("EnableExitGameButton")) {
                 if(this->getChildByID("close-menu")) {
@@ -318,7 +320,7 @@ else {
             Menu2_2->updateLayout();
             shortcutMenu->updateLayout();
             SearchMenu->updateLayout();
-        }
+            // newer stuff
         if (Mod::get()->getSettingValue<bool>("replacename")) {
                if (!Loader::get()->isModLoaded("coopeeo.customname")) {
                     static_cast<cocos2d::CCLabelBMFont*>(this->getChildByID("player-username"))->setString("Streamer");
@@ -360,22 +362,22 @@ else {
             float beforemoveposX = this->getChildByID("bottom-menu")->getPositionX();
             if (r) {
                 if (v) {
-                    this->getChildByID("bottom-menu")->setPositionX( (beforemoveposX + 100) );
+                    this->getChildByID("bottom-menu")->setPositionX( (winSize.width + 45 ) );
                 }  else {
-                    this->getChildByID("bottom-menu")->setPositionX( (beforemoveposX - 100) );
+                    this->getChildByID("bottom-menu")->setPositionX( (0 - 45) );
                 }   
             } else {
                 if (v) {
-                    this->getChildByID("bottom-menu")->setPositionY( (beforemoveposY + 100) );
+                    this->getChildByID("bottom-menu")->setPositionY( (winSize.height + 45) );
                 }       
                 else {
-                    this->getChildByID("bottom-menu")->setPositionY( (beforemoveposY - 100) );
+                    this->getChildByID("bottom-menu")->setPositionY( (0 - 45) );
                 }  
             }
-            #if defined(GEODE_IS_WINDOWS) || defined(GEODE_IS_ANDROID)
-               this->getChildByID("bottom-menu")->runAction(CCEaseInOut::create(CCMoveTo::create(1.0f, { beforemoveposX, beforemoveposY }), 1.0f));
+            #if defined(GEODE_IS_MACOS) 
+                this->getChildByID("bottom-menu")->runAction(CCMoveTo::create(0.5f,{ beforemoveposX, beforemoveposY }));
             #else
-                this->getChildByID("bottom-menu")->runAction(CCMoveTo::create(1.0f,{ beforemoveposX, beforemoveposY }));
+                this->getChildByID("bottom-menu")->runAction(CCEaseIn::create(CCMoveTo::create(0.5f, { beforemoveposX, beforemoveposY }), 0.35f));
            #endif
         };
         return true;
