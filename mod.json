@@ -62,9 +62,9 @@
 	 },
 	 "MenuMovement": {
 		"name": "Bottom Menu load Animation",
-		"description": "This setting makes the bottom menu move when loading",
+		"description": "This setting makes the bottom menu move when loading (not compatible on macos)",
 		"type": "bool",
-		"default": true
+		"default": false
 	},
 	"RightSide": {
 		"name": "Right Menu to Shortcuts",

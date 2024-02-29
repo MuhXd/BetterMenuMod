@@ -4,6 +4,12 @@
 #include <Geode/loader/Loader.hpp>
 #include <UIBuilder.hpp>
 #include <Geode/ui/GeodeUI.hpp>
+#include <chrono>
+#include <thread>
+#include <queue>
+#include <string>
+#include <sstream>
+#include <iostream>
 #include "Settings.hpp"
 #include <Geode/cocos/label_nodes/CCLabelBMFont.h>
 static geode::Loader* get();
@@ -15,6 +21,22 @@ void PlaySoundEffect(auto effect){
 		FMODAudioEngine::sharedEngine()->playEffect(effect);
 	};
 }
+void Script(int P, auto object, float speed, float Pos) {
+    if (P == 1) {
+        auto add = object->getPositionY() - Pos;
+        add = add / speed;
+        add = add * 0.001;
+         while (!object->getPositionY() - Pos == 0) {
+            auto posobject = object->getPositionY();
+            object->setPositionY(posobject+add);
+            std::this_thread::sleep_for(std::chrono::milliseconds(1));
+        }
+    }
+};
+
+void BottomMenu(auto layer, auto d) {
+    Script(1,layer,2);
+};
 
 
 class FakeLayer : public CCLayer {
@@ -332,15 +354,16 @@ else {
             Spr->setID("main-title");
             this->addChild(Spr);
         };
-    #ifdef GEODE_IS_WINDOWS && GEODE_IS_ANDROID
+
         if (Mod::get()->getSettingValue<bool>("MenuMovement")) {
+           //  
             float beforemoveposY = this->getChildByID("bottom-menu")->getPositionY();
             float beforemoveposX = this->getChildByID("bottom-menu")->getPositionX();
             if (r) {
                 if (v) {
-                    this->getChildByID("bottom-menu")->setPositionX( (beforemoveposX - 100) );
-                }  else {
                     this->getChildByID("bottom-menu")->setPositionX( (beforemoveposX + 100) );
+                }  else {
+                    this->getChildByID("bottom-menu")->setPositionX( (beforemoveposX - 100) );
                 }   
             } else {
                 if (v) {
@@ -350,9 +373,13 @@ else {
                     this->getChildByID("bottom-menu")->setPositionY( (beforemoveposY - 100) );
                 }  
             }
-            this->getChildByID("bottom-menu")->runAction(CCEaseInOut::create(CCMoveTo::create(1.0f, { beforemoveposX, beforemoveposY }), 2.0f));
+            #ifdef GEODE_IS_WINDOWS || GEODE_IS_ANDROID
+               this->getChildByID("bottom-menu")->runAction(CCEaseInOut::create(CCMoveTo::create(1.0f, { beforemoveposX, beforemoveposY }), 1.0f));
+            #else
+                this->getChildByID("bottom-menu")->runAction(CCMoveTo::create(1.0f,{ beforemoveposX, beforemoveposY }));
+           #endif
         };
-#endif
+
         return true;
     }
 };
