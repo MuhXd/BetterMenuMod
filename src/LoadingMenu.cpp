@@ -372,7 +372,7 @@ else {
                     this->getChildByID("bottom-menu")->setPositionY( (beforemoveposY - 100) );
                 }  
             }
-            #ifdef GEODE_IS_WINDOWS || GEODE_IS_ANDROID
+            #if defined(GEODE_IS_WINDOWS) || defined(GEODE_IS_ANDROID)
                this->getChildByID("bottom-menu")->runAction(CCEaseInOut::create(CCMoveTo::create(1.0f, { beforemoveposX, beforemoveposY }), 1.0f));
             #else
                 this->getChildByID("bottom-menu")->runAction(CCMoveTo::create(1.0f,{ beforemoveposX, beforemoveposY }));
