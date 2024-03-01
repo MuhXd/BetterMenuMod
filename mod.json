@@ -12,8 +12,7 @@
 	"repository": "https://github.com/MuhXd/BetterMenuMod",
 	"description": "This mod is used for a better menu for the game. This Mod aim is to have a better experience on the menus",
 	"tags": [
-        "Customization",
-		"MenuLayer"
+        "Customization"
     ],
 	"resources": {
 		"files": [
