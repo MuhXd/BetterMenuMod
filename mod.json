@@ -5,15 +5,14 @@
 		"android": "2.205",
 		"mac": "2.200"
 	},
-	"version": "v2.0.1-beta.2",
+	"version": "v2.0.2",
 	"id": "muhammadgames.bettermenu",
 	"name": "Better Menu",
 	"developer": "Viper",
 	"repository": "https://github.com/MuhXd/BetterMenuMod",
 	"description": "This mod is used for a better menu for the game. This Mod aim is to have a better experience on the menus",
 	"tags": [
-        "Customization",
-		"MenuLayer"
+        "Customization"
     ],
 	"resources": {
 		"files": [
@@ -38,6 +37,18 @@
 		"description": "Makes the game be able to close",
 		"type": "bool",
 		"default": true
+	},
+	"NoNewGroundsButton": {
+		"name": "No New Grounds",
+		"description": "Removes the newgrounds button",
+		"type": "bool",
+		"default": true
+	},
+	"MoreGamesBottomMenu": {
+		"name": "More Games",
+		"description": "Creates a newgames button in the bottom menu",
+		"type": "bool",
+		"default": false
 	},
 	"HideName": {
 		"name": "Hide Username",

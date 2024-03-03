@@ -8,6 +8,7 @@
 #include <thread>
 #include <queue>
 #include <string>
+#include <Geode/ui/BasedButtonSprite.hpp>
 #include <sstream>
 #include <iostream>
 #include "Settings.hpp"
@@ -317,9 +318,31 @@ else {
                     .pos(0, 0)
                     .parent(Menu2_2);
             }
+
+              if (Mod::get()->getSettingValue<bool>("NoNewGroundsButton")) {
+                if (auto newgrounds = this->getChildByID("bottom-menu")->getChildByIDRecursive("newgrounds-button"))
+                { 
+                    newgrounds->removeFromParent();
+                };
+              }
+              if (Mod::get()->getSettingValue<bool>("MoreGamesBottomMenu")) {
+         
+            auto btn = CircleButtonSprite::createWithSprite(
+                "epic_text.png"_spr,
+                1.15f,
+                CircleBaseColor::Green,
+                CircleBaseSize::MediumAlt
+            );
+            
+		auto btnee = CCMenuItemSpriteExtra::create(btn, this, menu_selector(MenuLayer::onMoreGames));
+
+            this->getChildByID("bottom-menu")->addChild(btnee);
+              }
+
             Menu2_2->updateLayout();
             shortcutMenu->updateLayout();
             SearchMenu->updateLayout();
+            this->getChildByID("bottom-menu")->updateLayout();
             // newer stuff
         if (Mod::get()->getSettingValue<bool>("replacename")) {
                if (!Loader::get()->isModLoaded("coopeeo.customname")) {
