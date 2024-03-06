@@ -5,7 +5,7 @@
 		"android": "2.205",
 		"mac": "2.200"
 	},
-	"version": "v2.0.2",
+	"version": "v2.0.3",
 	"id": "muhammadgames.bettermenu",
 	"name": "Better Menu",
 	"developer": "Viper",
@@ -73,7 +73,7 @@
 	 },
 	 "MenuMovement": {
 		"name": "Bottom Menu load Animation",
-		"description": "This setting makes the bottom menu move when loading (less compatible on macos)",
+		"description": "This setting makes the bottom menu move when loading",
 		"type": "bool",
 		"default": true
 	},
