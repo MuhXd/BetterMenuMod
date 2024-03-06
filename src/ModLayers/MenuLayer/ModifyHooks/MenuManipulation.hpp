@@ -1,6 +1,6 @@
 #pragma once
 #include <Geode/Geode.hpp>
-#include "../Settings/Settings.hpp"
+#include "../../Settings/Settings.hpp"
 #include <UIBuilder.hpp>
 using namespace geode::prelude;
 bool v = false;
