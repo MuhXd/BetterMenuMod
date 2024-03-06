@@ -31,6 +31,7 @@ void GetIdsPos() {
 }
 static void setupMenuPositions(auto layer) {
     auto winSize = CCDirector::get()->getWinSize();
+    GetIdsPos();
 // move right/left or whatever
  if (r) {
                 Build(layer->getChildByID("right-side-menu"))
