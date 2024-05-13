@@ -1,3 +1,4 @@
+#pragma once
 #include <Geode/Geode.hpp>
 #include <UIBuilder.hpp>
 #include "../../Settings/Settings.hpp"
@@ -109,5 +110,6 @@ Build(layer->getChildByID("profile-menu"))
                 Build(layer->getChildByID("player-username"))
                     .pos(222222,  winSize.height - 222222)
                     .anchorPoint({0.f,0.5});
+ layer->getChildByID("more-games-menu")->setVisible(false);
 return;
 }
