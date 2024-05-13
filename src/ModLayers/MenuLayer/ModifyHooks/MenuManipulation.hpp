@@ -128,6 +128,7 @@ else {
             }
 
             // tween the menu
+if (!Mod::get()->getSettingValue<bool>("compact-main-menu")) {
       if (Mod::get()->getSettingValue<bool>("MenuMovement")) {
             float beforemoveposY = layer->getChildByID("bottom-menu")->getPositionY();
             float beforemoveposX = layer->getChildByID("bottom-menu")->getPositionX();
@@ -145,8 +146,9 @@ else {
                     layer->getChildByID("bottom-menu")->setPositionY( (0 - 45) );
                 }  
             }
-             layer->getChildByID("bottom-menu")->runAction(CCEaseIn::create(CCMoveTo::create(0.5f, { beforemoveposX, beforemoveposY }), 0.35f));
+                layer->getChildByID("bottom-menu")->runAction(CCEaseIn::create(CCMoveTo::create(0.5f, { beforemoveposX, beforemoveposY }), 0.35f));
         };
+}
 
             return;
 

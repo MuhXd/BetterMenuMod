@@ -5,7 +5,7 @@
 		"android": "2.205",
 		"mac": "2.200"
 	},
-	"version": "v2.0.4-beta.1",
+	"version": "v2.0.4-beta.2",
 	"id": "muhammadgames.bettermenu",
 	"name": "Better Menu",
 	"developer": "Viper",
@@ -71,6 +71,12 @@
 		"type": "custom",
 		"mode" : "Hardcoded"
 	 },
+	 "compact-main-menu": {
+		"name": "Compact Mode",
+		"description": "This makes the menu compact",
+		"type": "bool",
+		"default": false
+	},
 	 "MenuMovement": {
 		"name": "Bottom Menu load Animation",
 		"description": "This setting makes the bottom menu move when loading",
@@ -138,6 +144,17 @@
 	"Merp": {
 		"name": "Merp",
 		"description": "Plays a merp when pressing spacebar",
+		"type": "bool",
+		"default": false
+	},
+	"Experment-heading": {
+		"type": "custom",
+		"mode" : "Heading",
+		"text": "Expermental Settings"
+	 },
+	"TaskKill-Process": {
+		"name": "Shadow-Window Bug fix",
+		"description": "If you have a ShadowWindow bug due to megahack then Enable this, you may lose data when you exit, please save before closing",
 		"type": "bool",
 		"default": false
 	}

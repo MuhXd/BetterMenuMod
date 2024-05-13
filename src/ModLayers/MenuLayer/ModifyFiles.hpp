@@ -4,3 +4,4 @@
 #include "ModifyHooks/MenuManipulation.hpp"
 #include "ModifyHooks/Shortcuts.hpp"
 #include "ModifyHooks/hideshow.hpp"
+#include "ModifyHooks/compact.hpp"

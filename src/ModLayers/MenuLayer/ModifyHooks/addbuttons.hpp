@@ -18,7 +18,7 @@ if (Mod::get()->getSettingValue<bool>("NoNewGroundsButton")) {
             );
             
 		        auto btnee = CCMenuItemSpriteExtra::create(btn, layer, menu_selector(MenuLayer::onMoreGames));
-
+            btnee->setID("MoreGames"_spr);
             layer->getChildByID("bottom-menu")->addChild(btnee);
               };
 
