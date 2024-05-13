@@ -16,12 +16,9 @@ else()
 endif()
 
 add_subdirectory($ENV{GEODE_SDK} ${CMAKE_CURRENT_BINARY_DIR}/geode)
-if(WINDOWS)
-CPMAddPackage("gh:camila314/UIBuilder#main")
-else()
-CPMAddPackage("gh:MuhXd/uibuilder_Docs#main")
-endif()
 
+message("Adding UiBuilder")
+CPMAddPackage("gh:MuhXd/uibuilder_Docs#main")
 target_link_libraries(${PROJECT_NAME} UIBuilder)
 
 setup_geode_mod(${PROJECT_NAME})
