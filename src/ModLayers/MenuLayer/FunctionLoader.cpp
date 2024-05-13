@@ -41,7 +41,7 @@ switch that out for $modify'
 mat (@mat.4) - 2024
 */
      static void onModify(auto& self) {
-        self.setHookPriority("MenuLayer::init", -1); // For the icon profile bug fix
+        (void)self.setHookPriority("MenuLayer::init", -1); // For the icon profile bug fix
     }
     void onPlay(CCObject* sender) {
         MenuLayer::onPlay(sender);
