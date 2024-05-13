@@ -1,7 +1,6 @@
 #include <Geode/Geode.hpp>
 #include <UIBuilder.hpp>
 #include "../../Settings/Settings.hpp"
-static CCMenuItemSpriteExtra* m_objectbettermenuhide = nullptr; // object->getParent() ??????
 using namespace geode::prelude;
 static void compactmenu(auto layer) {
 if (!Mod::get()->getSettingValue<bool>("compact-main-menu")) {
