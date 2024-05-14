@@ -3,7 +3,7 @@
 #include <UIBuilder.hpp>
 #include "../../Settings/Settings.hpp"
 static CCMenuItemSpriteExtra* m_objectbettermenuhide = nullptr; // object->getParent() ??????
-class pl : public CCLayer {
+class pl : public CCLayer { // yes
 public:
 void bettermenuhide(auto object) {
     bool enabled = m_objectbettermenuhide->getChildByIDRecursive("hiding"_spr)->isVisible();
