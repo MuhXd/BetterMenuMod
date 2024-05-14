@@ -3,6 +3,22 @@
 #include <UIBuilder.hpp>
 #include "../../Settings/Settings.hpp"
 static CCMenuItemSpriteExtra* m_objectbettermenuhide = nullptr; // object->getParent() ??????
+class pl : public CCLayer {
+public:
+void bettermenuhide(auto object) {
+    bool enabled = m_objectbettermenuhide->getChildByIDRecursive("hiding"_spr)->isVisible();
+        if (auto sc = m_objectbettermenuhide->getParent()) {
+            if (auto layer = sc->getParent()) {
+                layer->getChildByIDRecursive("bottom-menu")->setVisible(!enabled);
+                if (layer->getChildByIDRecursive("shortcuts-menu-Fix"_spr)) {layer->getChildByIDRecursive("shortcuts-menu-Fix"_spr)->setVisible(!enabled);};
+                if (layer->getChildByIDRecursive("search-menu"_spr)) {layer->getChildByIDRecursive("search-menu"_spr)->setVisible(!enabled);};
+                 if (layer->getChildByIDRecursive("shortcuts-menu-Fix"_spr)) {layer->getChildByIDRecursive("shortcuts-menu-Fix"_spr)->setVisible(!enabled);};
+                m_objectbettermenuhide->getChildByIDRecursive("hiding"_spr)->setVisible(!enabled);
+                m_objectbettermenuhide->getChildByIDRecursive("showing"_spr)->setVisible(enabled);
+            }
+        }
+	}
+};
 using namespace geode::prelude;
 static void compactmenu(auto layer) {
 if (!Mod::get()->getSettingValue<bool>("compact-main-menu")) {
@@ -40,24 +56,6 @@ auto btn = CircleButtonSprite::createWithSprite(
                 CircleBaseColor::Green,
                 CircleBaseSize::MediumAlt
             );
-
-class pl : public CCLayer {
-public:
-void bettermenuhide(auto object) {
-    bool enabled = m_objectbettermenuhide->getChildByIDRecursive("hiding"_spr)->isVisible();
-        if (auto sc = m_objectbettermenuhide->getParent()) {
-            if (auto layer = sc->getParent()) {
-                layer->getChildByIDRecursive("bottom-menu")->setVisible(!enabled);
-                if (layer->getChildByIDRecursive("shortcuts-menu-Fix"_spr)) {layer->getChildByIDRecursive("shortcuts-menu-Fix"_spr)->setVisible(!enabled);};
-                if (layer->getChildByIDRecursive("search-menu"_spr)) {layer->getChildByIDRecursive("search-menu"_spr)->setVisible(!enabled);};
-                 if (layer->getChildByIDRecursive("shortcuts-menu-Fix"_spr)) {layer->getChildByIDRecursive("shortcuts-menu-Fix"_spr)->setVisible(!enabled);};
-                m_objectbettermenuhide->getChildByIDRecursive("hiding"_spr)->setVisible(!enabled);
-                m_objectbettermenuhide->getChildByIDRecursive("showing"_spr)->setVisible(enabled);
-            }
-        }
-	}
-};
-
 auto btnee = CCMenuItemSpriteExtra::create(btn, compact, menu_selector(pl::bettermenuhide));
 m_objectbettermenuhide = btnee;
 compact->addChild(btnee);
