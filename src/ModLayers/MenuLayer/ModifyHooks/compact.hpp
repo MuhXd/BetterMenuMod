@@ -109,5 +109,11 @@ Build(layer->getChildByID("profile-menu"))
                     .pos(222222,  winSize.height - 222222)
                     .anchorPoint({0.f,0.5});
  layer->getChildByID("more-games-menu")->setVisible(false);
+
+ if (!Mod::get()->getSettingValue<bool>("RightSide")) { 
+    int old = layer->getChildByID("bottom-menu")->getPositionY();
+    Build(layer->getChildByID("bottom-menu")).posY(old+30);
+ }
+ 
 return;
 }

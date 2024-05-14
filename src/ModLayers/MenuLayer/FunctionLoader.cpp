@@ -5,9 +5,33 @@
 #include <UIBuilder.hpp>
 #include <Geode/ui/GeodeUI.hpp>
 #include "ModifyFiles.hpp"
+#ifdef GEODE_IS_WINDOWS
+#include <cstdlib>
+#include <windows.h>
+#include <shellapi.h>
+#endif
 static geode::Loader* get();
 using namespace geode::prelude;
 
+#ifdef GEODE_IS_WINDOWS
+bool RunAsAdmin(HWND hwnd, LPCSTR lpFile, LPCSTR lpParameters) {
+    SHELLEXECUTEINFOA sei = { sizeof(sei) };
+    sei.lpVerb = "runas";
+    sei.lpFile = lpFile;
+    sei.lpParameters = lpParameters;
+    sei.hwnd = hwnd;
+    sei.nShow = SW_NORMAL;
+
+    if (!ShellExecuteExA(&sei)) {
+        DWORD dwError = GetLastError();
+        if (dwError == ERROR_CANCELLED)
+            // The user refused the elevation.
+            return false;
+        // More error handling here...
+    }
+    return true;
+}
+#endif
 
 
 class $modify(MenuLayer) { 
@@ -28,7 +52,21 @@ mat (@mat.4) - 2024
 
  void onQuit(CCObject* sender) {
         if (Mod::get()->getSettingValue<bool>("EnableExitGameButton")) {
-            
+                #ifdef GEODE_IS_WINDOWS
+            if (Mod::get()->getSettingValue<bool>("TaskKill-Process")) {   
+                geode::createQuickPopup(
+				"Quit Game",
+				"Are you sure you want to <cr>Task Kill</c> the game?",
+				"Cancel", "Yes",
+				[this, sender](auto, bool btn2) {
+					if (btn2) {
+						RunAsAdmin(NULL, "cmd.exe", "/c TASKKILL /IM GeometryDash.exe /F");
+					}
+                }
+			);
+            return;
+		};
+            #endif
 
             MenuLayer::onQuit(sender);
         }
@@ -42,7 +80,22 @@ mat (@mat.4) - 2024
             )->show();
         }
         else {
-                
+                 #ifdef GEODE_IS_WINDOWS
+            if (Mod::get()->getSettingValue<bool>("TaskKill-Process")) {   
+                geode::createQuickPopup(
+				"Quit Game",
+				"Are you sure you want to <cr>Task Kill</c> the game?",
+				"Cancel", "Yes",
+				[this, sender](auto, bool btn2) {
+					if (btn2) {
+						RunAsAdmin(NULL, "cmd.exe", "/c TASKKILL /IM GeometryDash.exe /F");
+					}
+                }
+			);
+            return;
+		};
+            #endif
+
              MenuLayer::onQuit(sender);
         }
         };
