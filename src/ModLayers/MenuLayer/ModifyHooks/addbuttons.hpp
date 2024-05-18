@@ -55,6 +55,16 @@ if (Mod::get()->getSettingValue<bool>("NoNewGroundsButton")) {
             }
               if (Mod::get()->getSettingValue<bool>("MyLevelbutton")) {
               createbuttonquicker(layer,"MyLevelbutton"_spr,"EditButtonSprite.png"_spr,menu_selector(CreatorLayerForBetterMenu::onMyLevels));
+              // yes i rather write code then change the sprite
+            if (layer->getChildByIDRecursive("MyLevelbutton"_spr)) {
+               for(auto items : CCArrayExt<CCNode*>(layer->getChildByIDRecursive("MyLevelbutton"_spr)->getChildren())) {
+			        if (auto icon = getChildOfType<CCSprite>(items, 0)) {
+			          icon->setPositionX(26);
+                icon->setPositionY(28);
+			          break;
+    	    };
+		 }
+            }
             }
 
      layer->getChildByID("bottom-menu")->updateLayout();
