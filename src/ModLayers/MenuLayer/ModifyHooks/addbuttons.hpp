@@ -59,7 +59,7 @@ if (Mod::get()->getSettingValue<bool>("NoNewGroundsButton")) {
             if (layer->getChildByIDRecursive("MyLevelbutton"_spr)) {
                for(auto items : CCArrayExt<CCNode*>(layer->getChildByIDRecursive("MyLevelbutton"_spr)->getChildren())) {
 			        if (auto icon = getChildOfType<CCSprite>(items, 0)) {
-			          icon->setPositionX(26);
+			          icon->setPositionX(25.5f);
                 icon->setPositionY(28);
 			          break;
     	    };
