@@ -108,10 +108,14 @@ static void setupshortcuts(auto layer) {
             Menu2_2->updateLayout();
             SearchMenu->updateLayout();
             shortcutMenu->updateLayout();
+            // fixes with compact
             if (Mod::get()->getSettingValue<bool>("compact-main-menu")) {
                 if (layer->getChildByIDRecursive("shortcuts-menu-Fix"_spr)) {layer->getChildByIDRecursive("shortcuts-menu-Fix"_spr)->setVisible(false);};
                 if (layer->getChildByIDRecursive("search-menu"_spr)) {layer->getChildByIDRecursive("search-menu"_spr)->setVisible(false);};
                 if (layer->getChildByIDRecursive("shortcuts-menu-Fix"_spr)) {layer->getChildByIDRecursive("shortcuts-menu-Fix"_spr)->setVisible(false);};
+                if (layer->getChildByIDRecursive("shortcuts-menu"_spr)) {
+                    layer->getChildByIDRecursive("shortcuts-menu"_spr)->setPositionX(30);
+                }
             }
             return;
 

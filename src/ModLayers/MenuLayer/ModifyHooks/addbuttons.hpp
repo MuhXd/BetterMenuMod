@@ -2,6 +2,31 @@
 #include <Geode/Geode.hpp>
 #include <UIBuilder.hpp>
 using namespace geode::prelude;
+void createbuttonquicker(CCLayer* layer, const char* name, auto sprite, SEL_MenuHandler menuSel) {
+    auto btn = CircleButtonSprite::createWithSprite(
+        sprite,
+        1.15f,
+        CircleBaseColor::Green,
+        CircleBaseSize::MediumAlt
+    );
+
+    auto btnee = CCMenuItemSpriteExtra::create(btn, layer, menuSel);
+    btnee->setID(name);
+    layer->getChildByID("bottom-menu")->addChild(btnee);
+}
+class CreatorLayerForBetterMenu : public CCLayer {
+public:
+void onSavedLevels(auto target) {
+		CreatorLayer::create()->onSavedLevels(target);
+	}
+  void onOnlineLevels(auto target) {
+		 CreatorLayer::create()->onOnlineLevels(target);
+	}
+  void onMyLevels(auto target) {
+    CreatorLayer::create()->onMyLevels(target);
+  }
+};
+
 static void addbuttons(auto layer) {
 if (Mod::get()->getSettingValue<bool>("NoNewGroundsButton")) {
                 if (auto newgrounds = layer->getChildByID("bottom-menu")->getChildByIDRecursive("newgrounds-button"))
@@ -22,6 +47,15 @@ if (Mod::get()->getSettingValue<bool>("NoNewGroundsButton")) {
             btnee->setID("MoreGames"_spr);
             layer->getChildByID("bottom-menu")->addChild(btnee);
               };
+            if (Mod::get()->getSettingValue<bool>("SavedLevelsbutton")) {
+               createbuttonquicker(layer,"SavedLevels"_spr,"SavedLevels.png"_spr,menu_selector(CreatorLayerForBetterMenu::onSavedLevels));
+            }
+            if (Mod::get()->getSettingValue<bool>("Searchbutton")) {
+               createbuttonquicker(layer,"Searchbutton"_spr,"SearchShortcut.png"_spr,menu_selector(CreatorLayerForBetterMenu::onOnlineLevels));
+            }
+              if (Mod::get()->getSettingValue<bool>("MyLevelbutton")) {
+              createbuttonquicker(layer,"MyLevelbutton"_spr,"EditButtonSprite.png"_spr,menu_selector(CreatorLayerForBetterMenu::onMyLevels));
+            }
 
      layer->getChildByID("bottom-menu")->updateLayout();
 return;

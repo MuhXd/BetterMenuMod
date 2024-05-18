@@ -90,6 +90,7 @@ int menupos = Mod::get()->getSettingValue<SettingPosStruct>("MenuPos-pos").m_pos
 if (menupos == 3) {
     layer->getChildByID("bottom-menu")->setPositionY(layer->getChildByID("bottom-menu")->getPositionY() - 50);
 }
+
 Build(layer->getChildByID("right-side-menu"))
         .layout(
                 RowLayout::create()
@@ -102,12 +103,13 @@ Build(layer->getChildByID("right-side-menu"))
 
 Build(layer->getChildByID("profile-menu"))
                     .layout(RowLayout::create()->setAxisAlignment(AxisAlignment::Start))
-                    .pos(222222, winSize.height - 222222)
+                    .pos(42, 23)
                     .scale(0.575f);
 
                 Build(layer->getChildByID("player-username"))
-                    .pos(222222,  winSize.height - 222222)
+                    .pos(2,  layer->getChildByID("profile-menu")->getPositionY()+20)
                     .anchorPoint({0.f,0.5});
+
  layer->getChildByID("more-games-menu")->setVisible(false);
 
  if (!Mod::get()->getSettingValue<bool>("RightSide")) { 

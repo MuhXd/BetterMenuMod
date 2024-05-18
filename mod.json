@@ -5,7 +5,7 @@
 		"android": "2.205",
 		"mac": "2.200"
 	},
-	"version": "v2.0.4-beta.2",
+	"version": "v2.0.4-beta.3",
 	"id": "muhammadgames.bettermenu",
 	"name": "Better Menu",
 	"developer": "Viper",
@@ -43,12 +43,6 @@
 		"description": "Removes the newgrounds button",
 		"type": "bool",
 		"default": true
-	},
-	"MoreGamesBottomMenu": {
-		"name": "More Games",
-		"description": "Creates a newgames button in the bottom menu",
-		"type": "bool",
-		"default": false
 	},
 	"HideName": {
 		"name": "Hide Username",
@@ -89,6 +83,36 @@
 		"type": "bool",
 		"default": false
 	},
+	"buttons-heading": {
+		"type": "custom",
+		"mode" : "Heading",
+		"text": "Bottom menu buttons"
+	 },
+	 "MoreGamesBottomMenu": {
+		"name": "More Games",
+		"description": "Creates a newgames button in the bottom menu",
+		"type": "bool",
+		"default": false
+	},
+	"MyLevelbutton": {
+		"name": "My Levels",
+		"description": "Creates a My levels button in the bottom menu",
+		"type": "bool",
+		"default": true
+	},
+	"SavedLevelsbutton": {
+		"name": "Saved levels",
+		"description": "Creates a Saved levels button in the bottom menu",
+		"type": "bool",
+		"default": true
+	},
+	"Searchbutton": {
+		"name": "Search",
+		"description": "Creates a Search button in the bottom menu",
+		"type": "bool",
+		"default": true
+	},
+
 	"Shortcuts-heading": {
 		"type": "custom",
 		"mode" : "Heading",
