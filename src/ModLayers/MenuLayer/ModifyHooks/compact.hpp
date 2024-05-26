@@ -28,7 +28,7 @@ auto winSize = CCDirector::get()->getWinSize();
 auto compact = Build<CCMenu>::create()
                 .pos(winSize.width - 90 ,  0) // 109
                 .anchorPoint({0, 0})
-                .scale(0.8)
+                .scale(0.8f)
                 .parent(layer)
                 .contentSize({109.000f, 48.108f})
                 .layout(

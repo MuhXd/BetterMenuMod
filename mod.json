@@ -1,5 +1,5 @@
 {
-	"geode": "2.0.0-beta.26",
+	"geode": "2.0.0-beta.27",
 	"gd": {
 		"win": "2.204",
 		"android": "2.205",
@@ -98,19 +98,19 @@
 		"name": "My Levels",
 		"description": "Creates a My levels button in the bottom menu",
 		"type": "bool",
-		"default": true
+		"default": false
 	},
 	"SavedLevelsbutton": {
 		"name": "Saved levels",
 		"description": "Creates a Saved levels button in the bottom menu",
 		"type": "bool",
-		"default": true
+		"default": false
 	},
 	"Searchbutton": {
 		"name": "Search",
 		"description": "Creates a Search button in the bottom menu",
 		"type": "bool",
-		"default": true
+		"default": false
 	},
 
 	"Shortcuts-heading": {

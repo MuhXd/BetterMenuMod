@@ -30,7 +30,7 @@ static void JokesMain(auto layer) {
 			auto g=items;
 			if (auto icon = getChildOfType<CCSprite>(g, 0)) {
         	auto Spr = CCSprite::create("gwode.png"_spr);
-			Spr->setScale(0.2);
+			Spr->setScale(0.2f);
 			Spr->setPositionX(icon->getPositionX());
 			Spr->setPositionY(icon->getPositionY());
 			g->addChild(Spr);
