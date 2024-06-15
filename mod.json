@@ -1,11 +1,7 @@
 {
-	"geode": "2.0.0-beta.27",
-	"gd": {
-		"win": "2.204",
-		"android": "2.205",
-		"mac": "2.200"
-	},
-	"version": "v2.0.4-beta.3",
+	"geode": "3.0.0-beta.1",
+	"platforms": ["android", "win", "mac"],
+	"version": "v2.0.4-beta.4",
 	"id": "muhammadgames.bettermenu",
 	"name": "Better Menu",
 	"developer": "Viper",
