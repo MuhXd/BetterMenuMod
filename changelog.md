@@ -1,6 +1,7 @@
 # ChangeLog
 ## PUSH TO 2.206 NEW INDEX
 * yay!
+* Buttons for each shortcut do not default to true
 ### BetterMenu V2.04-beta.3
 * Compact mode 
 * Buttons for each shortcut
