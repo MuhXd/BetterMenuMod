@@ -25,7 +25,7 @@ static void setupshortcuts(auto layer) {
                auto Button =  Build<CCSprite>::createSpriteName("GJ_searchBtn_001.png")
                     .intoMenuItem([](auto target) {
                        // CreatorLayer::create()->onOnlineLevels(target);
-                        reinterpret_cast<CreatorLayer*>(this)->onOnlineLevels(target);
+                        reinterpret_cast<CreatorLayer*>(target)->onOnlineLevels(target);
                     })
                     .scale(0.75f)
                     .pos(0, 0)
@@ -66,7 +66,7 @@ static void setupshortcuts(auto layer) {
                     .scale(0.4f)
                     .intoMenuItem([](auto target) {
                        // CreatorLayer::create()->onMyLevels(target);
-                        reinterpret_cast<CreatorLayer*>(this)->onMyLevels(target);
+                        reinterpret_cast<CreatorLayer*>(target)->onMyLevels(target);
                     })
                     .parent(shortcutMenu)
                     .id("my-levels-btn"_spr);
@@ -78,7 +78,7 @@ static void setupshortcuts(auto layer) {
                     .scale(0.7f)
                     .intoMenuItem([](auto target) {
                         //CreatorLayer::create()->onSavedLevels(target);
-                        reinterpret_cast<CreatorLayer*>(this)->onSavedLevels(target);
+                        reinterpret_cast<CreatorLayer*>(target)->onSavedLevels(target);
                     })
                     .parent(shortcutMenu)
                     .id("saved-levels-btn"_spr);
@@ -96,7 +96,7 @@ static void setupshortcuts(auto layer) {
                 auto Button = Build<CCSprite>::createSpriteName("GJ_sStarsIcon_001.png")
                     .intoMenuItem([](auto target) {
                        // CreatorLayer::create()->onDailyLevel(target);
-                       reinterpret_cast<CreatorLayer*>(this)->onDailyLevel(target);
+                       reinterpret_cast<CreatorLayer*>(target)->onDailyLevel(target);
                     })
                     .pos(0, 0)
                     .parent(Menu2_2);
@@ -105,7 +105,7 @@ static void setupshortcuts(auto layer) {
                 auto Button = Build<CCSprite>::createSpriteName("difficulty_06_btn_001.png")
                     .intoMenuItem([](auto target) {
                         //CreatorLayer::create()->onWeeklyLevel(target);
-                         reinterpret_cast<CreatorLayer*>(this)->onWeeklyLevel(target);
+                         reinterpret_cast<CreatorLayer*>(target)->onWeeklyLevel(target);
                     })
                     .pos(0, 0)
                     .parent(Menu2_2);
