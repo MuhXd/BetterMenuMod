@@ -1,4 +1,6 @@
 # ChangeLog
+### BetterMenu V2.04-beta.5
+* Pages api Fix
 ## PUSH TO 2.206 NEW INDEX
 * yay!
 * Buttons for each shortcut do not default to true

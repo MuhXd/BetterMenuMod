@@ -6,7 +6,7 @@
 		"mac": "2.206"
 	},
 	"platforms": ["android", "win", "mac"],
-	"version": "v2.0.4-beta.4",
+	"version": "v2.0.4-beta.5",
 	"id": "muhammadgames.bettermenu",
 	"name": "Better Menu",
 	"developer": "Viper",

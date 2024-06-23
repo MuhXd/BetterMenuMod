@@ -4,5 +4,5 @@ Wow very cool
 # Contributors
 * camila314 - Clean Up of Main code and New use of UIBuilder
 * Croozy (croozington) - New Logo (Discord User)
-
-### Thanks gdutils for custom settings :30
+* Alphalaneous (Ashton) - slight clean up of code and bug fix
+### Thanks gdutils for custom settings :3
