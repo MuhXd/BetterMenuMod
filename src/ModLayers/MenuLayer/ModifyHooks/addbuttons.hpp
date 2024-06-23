@@ -18,15 +18,15 @@ class CreatorLayerForBetterMenu : public CCLayer {
 public:
 void onSavedLevels(auto target) {
 		//CreatorLayer::create()->onSavedLevels(target);
-    reinterpret_cast<CreatorLayer*>(this)->onSavedLevels(target);
+    reinterpret_cast<CreatorLayer*>(target)->onSavedLevels(target);
 	}
   void onOnlineLevels(auto target) {
 		 CreatorLayer::create()->onOnlineLevels(target);
-     reinterpret_cast<CreatorLayer*>(this)->onOnlineLevels(target);
+     reinterpret_cast<CreatorLayer*>(target)->onOnlineLevels(target);
 	}
   void onMyLevels(auto target) {
   //  CreatorLayer::create()->onMyLevels(target);
-    reinterpret_cast<CreatorLayer*>(this)->onMyLevels(target);
+    reinterpret_cast<CreatorLayer*>(target)->onMyLevels(target);
   }
 };
 
