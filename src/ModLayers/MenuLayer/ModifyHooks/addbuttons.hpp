@@ -21,7 +21,7 @@ void onSavedLevels(auto target) {
     reinterpret_cast<CreatorLayer*>(target)->onSavedLevels(target);
 	}
   void onOnlineLevels(auto target) {
-		 CreatorLayer::create()->onOnlineLevels(target);
+		 //CreatorLayer::create()->onOnlineLevels(target);
      reinterpret_cast<CreatorLayer*>(target)->onOnlineLevels(target);
 	}
   void onMyLevels(auto target) {
