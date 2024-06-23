@@ -33,6 +33,21 @@ bool RunAsAdmin(HWND hwnd, LPCSTR lpFile, LPCSTR lpParameters) {
 }
 #endif
 
+// separate hook to run tween after pages api updates the menu
+
+class $modify(MenuLayer) { 
+
+    static void onModify(auto& self) {
+        (void)self.setHookPriority("MenuLayer::init", INT_MIN/2-1); // For the pages bugfix
+    }
+
+    bool init() {
+        if (!MenuLayer::init())
+            return false;
+        runTween(this);
+        return true;
+    }
+};
 
 class $modify(MenuLayer) { 
 /*
@@ -40,8 +55,8 @@ class $modify(MenuLayer) {
 switch that out for $modify'
 mat (@mat.4) - 2024
 */
-     static void onModify(auto& self) {
-        (void)self.setHookPriority("MenuLayer::init", -1); // For the icon profile bug fix
+    static void onModify(auto& self) {
+        (void)self.setHookPriority("MenuLayer::init", -1); // For the icon profile bug fix and pages bugfix
     }
     void onPlay(CCObject* sender) {
         MenuLayer::onPlay(sender);
