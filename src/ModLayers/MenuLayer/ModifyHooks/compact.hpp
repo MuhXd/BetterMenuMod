@@ -139,3 +139,8 @@ static void compactmenu(auto layer) {
     
     return;
 }
+static void compactmainmenuFix(auto layer) {
+    if (Mod::get()->getSettingValue<bool>("compact-main-menu")) {
+        layer->getChildByIDRecursive("bottom-menu")->setVisible(false);
+    }
+}

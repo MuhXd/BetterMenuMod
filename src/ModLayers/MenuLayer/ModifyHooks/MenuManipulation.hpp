@@ -32,6 +32,7 @@ void GetIdsPos() {
             break;
     }
 }
+
 static void setupMenuPositions(auto layer) {
     auto winSize = CCDirector::get()->getWinSize();
     GetIdsPos();

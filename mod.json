@@ -6,14 +6,14 @@
 		"mac": "2.206"
 	},
 	"platforms": ["android", "win", "mac"],
-	"version": "v2.0.4-beta.5",
+	"version": "v2.0.4-beta.6",
 	"id": "muhammadgames.bettermenu",
 	"name": "Better Menu",
 	"developer": "Viper",
 	"repository": "https://github.com/MuhXd/BetterMenuMod",
 	"description": "This mod is used for a better menu for the game. This Mod aim is to have a better experience on the menus",
 	"tags": [
-        "Customization"
+        "offline","enhancement","interface","customization"
     ],
 	"resources": {
 		"files": [

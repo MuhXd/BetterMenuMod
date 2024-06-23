@@ -1,4 +1,7 @@
 # ChangeLog
+### BetterMenu V2.04-beta.6
+* my bad i didn't test (bug fix compact mode)
+* mod tags
 ### BetterMenu V2.04-beta.5
 * Pages api Fix
 ## PUSH TO 2.206 NEW INDEX
