@@ -45,6 +45,7 @@ class $modify(MenuLayer) {
         if (!MenuLayer::init())
             return false;
         runTween(this);
+        compactmainmenuFix(this);
         return true;
     }
 };
