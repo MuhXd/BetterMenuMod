@@ -1,3 +1,4 @@
+/*
 #include <Geode/Geode.hpp>
 #include <UIBuilder.hpp>
 #include <Geode/ui/MDPopup.hpp>
@@ -109,3 +110,4 @@ class $modify(CCMenu) {
         }
     }
 }; //geode.loader/homepage.png
+*/
