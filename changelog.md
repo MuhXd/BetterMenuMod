@@ -1,4 +1,7 @@
 # ChangeLog
+### BetterMenu V2.04-beta.7
+* Bug fixes
+* Changes to linked social
 ### BetterMenu V2.04-beta.6
 * my bad i didn't test (bug fix compact mode)
 * mod tags
