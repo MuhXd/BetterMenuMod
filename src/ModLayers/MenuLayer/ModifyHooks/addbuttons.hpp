@@ -70,6 +70,6 @@ static void addbuttons(auto layer) {
     	        };
 		    }
         }
-    }
+    } // fish react person above me
     layer->getChildByID("bottom-menu")->updateLayout();
 }

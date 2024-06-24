@@ -70,13 +70,14 @@ static void setupMenuPositions(auto layer) {
                     .layout(RowLayoutFix_IconProfile->setAxisAlignment(AxisAlignment::End))
                     .contentSize({111.000f, 58.000f})
                     .scale(0.575f);   
-                if (Loader::get()->isModLoaded("capeling.icon_profile_2.2")) {
+                if (Loader::get()->isModLoaded("capeling.icon_profile")) {
                     profileMenu->setRotationY(180);
                     profileMenu->setRotationX(0);
                     RowLayoutFix_IconProfile->setAxisAlignment(AxisAlignment::Start);
                 }
                 profileMenu->updateLayout();
             }
+
 
             if(CCNode* playerUsername = layer->getChildByID("player-username")){
                 Build(playerUsername)

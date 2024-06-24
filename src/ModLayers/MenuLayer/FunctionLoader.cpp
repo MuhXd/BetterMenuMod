@@ -10,6 +10,11 @@
 #include <windows.h>
 #include <shellapi.h>
 #endif
+
+// english or german
+// english : somewhere go find it
+// german : somewhere go find it
+
 static geode::Loader* get();
 using namespace geode::prelude;
 
@@ -33,6 +38,7 @@ bool RunAsAdmin(HWND hwnd, LPCSTR lpFile, LPCSTR lpParameters) {
 }
 #endif
 
+
 // separate hook to run tween after pages api updates the menu
 
 class $modify(MenuLayer) { 
@@ -44,11 +50,19 @@ class $modify(MenuLayer) {
     bool init() {
         if (!MenuLayer::init())
             return false;
+            
+        if (!Mod::get()->getSettingValue<bool>("RunMainMenu")) {   
+            return true;
+        };
+
         runTween(this);
         compactmainmenuFix(this);
         return true;
     }
 };
+
+// German
+// Der erste, der sich bewegt, ist schwul
 
 class $modify(MenuLayer) { 
 /*
@@ -116,6 +130,9 @@ mat (@mat.4) - 2024
         }
         };
     };
+
+// English
+// First one who moves is gay
 
     bool init() {
         if (!MenuLayer::init())
