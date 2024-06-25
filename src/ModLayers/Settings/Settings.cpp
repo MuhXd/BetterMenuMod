@@ -20,4 +20,5 @@ $on_mod(Loaded) {
     Mod::get()->addCustomSetting<Settings>("MenuPos-heading", "none");
     Mod::get()->addCustomSetting<SettingPosValue>("MenuPos-pos", 4);
     Mod::get()->addCustomSetting<Settings>("Joke-Features", "none");
+    Mod::get()->addCustomSetting<Settings>("replaces-heading", "none");
 }
