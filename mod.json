@@ -113,7 +113,17 @@
 		"type": "bool",
 		"default": false
 	},
-
+	"replaces-heading": {
+		"type": "custom",
+		"mode" : "Heading",
+		"text": "Replacement"
+	 },
+	 "Geode-Server": {
+		"name": "Geode button",
+		"description": "Replaces geode button with the server icon one",
+		"type": "bool",
+		"default": false
+	},
 	"Shortcuts-heading": {
 		"type": "custom",
 		"mode" : "Heading",

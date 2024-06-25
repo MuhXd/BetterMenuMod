@@ -20,7 +20,24 @@ void onGeode(CCObject*) {
 };
 
 static void JokesMain(auto layer) {
-
+	if (Mod::get()->getSettingValue<bool>("Geode-Server")) {
+		 auto geodeButton = dynamic_cast<CCMenuItemSpriteExtra*>(
+		layer->getChildByIDRecursive("geode.loader/geode-button")
+	    );
+		for(auto items : CCArrayExt<CCNode*>(layer->getChildByIDRecursive("geode.loader/geode-button")->getChildren())) {
+			auto g=items;
+				if (auto icon = getChildOfType<CCSprite>(g, 0)) {
+				auto Spr = CCSprite::create("geodeservericon.png"_spr);
+				Spr->setScale(0.2f);
+				Spr->setPositionX(icon->getPositionX());
+				Spr->setPositionY(icon->getPositionY());
+				g->addChild(Spr);
+				icon->setVisible(false);
+				break;
+    	    };
+		}
+		goto SkipUwu
+	};
  	if (Mod::get()->getSettingValue<bool>("Uwugeode")) {
         auto geodeButton = dynamic_cast<CCMenuItemSpriteExtra*>(
 		layer->getChildByIDRecursive("geode.loader/geode-button")
@@ -40,7 +57,7 @@ static void JokesMain(auto layer) {
     	    };
 		}
 	};
-
+	SkipUwu:
 	if (Mod::get()->getSettingValue<bool>("Merp")) {
 		auto title = layer->getChildByID("main-title");
 		auto titlePos = title->getPosition();
