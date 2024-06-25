@@ -1,4 +1,4 @@
-/*
+
 #include <Geode/Geode.hpp>
 #include <UIBuilder.hpp>
 #include <Geode/ui/MDPopup.hpp>
@@ -69,6 +69,15 @@ class $modify(CCMenu) {
                     return;
                 }
             geode::Loader::get()->queueInMainThread([this,cccccc,object] {
+            if (!this) {
+                return;
+            }
+            if (!cccccc) {
+                return;
+            }
+             if (!object) {
+                return;
+            }
             CCNode* a111111 = nullptr;
             for(auto items : CCArrayExt<CCNode*>(cccccc->getChildren())) {
 				if (items->getChildrenCount() == 2) {
@@ -110,4 +119,3 @@ class $modify(CCMenu) {
         }
     }
 }; //geode.loader/homepage.png
-*/

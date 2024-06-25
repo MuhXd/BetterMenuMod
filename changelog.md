@@ -1,4 +1,6 @@
 # ChangeLog
+### BetterMenu V2.04-beta.8
+* REVERTED CHANGES UNTIL FIXED (ANDROID)
 ### BetterMenu V2.04-beta.7
 * Bug fixes
 * Changes to linked social
