@@ -36,7 +36,7 @@ static void JokesMain(auto layer) {
 				break;
     	    };
 		}
-		goto SkipUwu
+		goto SkipUwu;
 	};
  	if (Mod::get()->getSettingValue<bool>("Uwugeode")) {
         auto geodeButton = dynamic_cast<CCMenuItemSpriteExtra*>(
