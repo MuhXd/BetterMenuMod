@@ -1,4 +1,6 @@
 # ChangeLog
+### BetterMenu V2.04-beta.10 & BetterMenu V2.04-beta.11
+* Bug fixes for Android and pc
 ### BetterMenu V2.04-beta.9
 * Bug Fixes
 * Geode button replacer
