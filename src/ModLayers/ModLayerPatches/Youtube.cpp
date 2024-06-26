@@ -49,12 +49,12 @@ class $modify(CCSprite) {
                                     typeinfo_cast<CCMenuItemSpriteExtra*>(menu->getChildren()->objectAtIndex(0))->removeFromParent();
                                     menu->addChild(btnee);
                                     typeinfo_cast<CCMenuItemSpriteExtra*>(menu->getChildren()->objectAtIndex(2))->removeFromParent();
-                                    typeinfo_cast<CCMenuItemSpriteExtra*>(menu->getChildren()->objectAtIndex(2))->removeFromParent();
                                     auto weed2 =  CCSprite::createWithSpriteFrameName("gj_twitchIcon_001.png");
-                                    btn->setScale(0.7);
-                                    auto btneeweed2f = CCMenuItemSpriteExtra::create(btn, menu, menu_selector(YoutubeButton::LinkTwitch));
-                                    btnee->setPosition(typeinfo_cast<CCMenuItemSpriteExtra*>(menu->getChildren()->objectAtIndex(1))->getPosition());
+                                    weed2->setScale(0.7);
+                                    auto btneeweed2f = CCMenuItemSpriteExtra::create(weed2, menu, menu_selector(YoutubeButton::LinkTwitch));
+                                    btneeweed2f->setPosition(typeinfo_cast<CCMenuItemSpriteExtra*>(menu->getChildren()->objectAtIndex(1))->getPosition());
                                     typeinfo_cast<CCMenuItemSpriteExtra*>(menu->getChildren()->objectAtIndex(1))->removeFromParent();
+                                    menu->addChild(btneeweed2f);
                                     } 
                                 }
                             }
