@@ -6,8 +6,11 @@
 using namespace geode::prelude;
 class YoutubeButton : public CCLayer {
 public:
-void Link(CCObject*) {
+void LinkYoutube(CCObject*) {
 		geode::utils::web::openLinkInBrowser("https://www.youtube.com/channel/UC3A8dtlO94rHEkn4Kz7aB7g");
+	}
+    void LinkTwitch(CCObject*) {
+		geode::utils::web::openLinkInBrowser("https://www.twitch.tv/muhammad_mo");
 	}
 };
 
@@ -41,11 +44,17 @@ class $modify(CCSprite) {
                                  if (id == "(ID: muhammadgames.bettermenu)") {
                                     auto btn =  CCSprite::createWithSpriteFrameName("gj_ytIcon_001.png");
                                     btn->setScale(0.7);
-                                    auto btnee = CCMenuItemSpriteExtra::create(btn, menu, menu_selector(YoutubeButton::Link));
+                                    auto btnee = CCMenuItemSpriteExtra::create(btn, menu, menu_selector(YoutubeButton::LinkYoutube));
                                     btnee->setPosition(typeinfo_cast<CCMenuItemSpriteExtra*>(menu->getChildren()->objectAtIndex(0))->getPosition());
                                     typeinfo_cast<CCMenuItemSpriteExtra*>(menu->getChildren()->objectAtIndex(0))->removeFromParent();
                                     menu->addChild(btnee);
                                     typeinfo_cast<CCMenuItemSpriteExtra*>(menu->getChildren()->objectAtIndex(2))->removeFromParent();
+                                    typeinfo_cast<CCMenuItemSpriteExtra*>(menu->getChildren()->objectAtIndex(2))->removeFromParent();
+                                    auto weed2 =  CCSprite::createWithSpriteFrameName("gj_twitchIcon_001.png");
+                                    btn->setScale(0.7);
+                                    auto btneeweed2f = CCMenuItemSpriteExtra::create(btn, menu, menu_selector(YoutubeButton::LinkTwitch));
+                                    btnee->setPosition(typeinfo_cast<CCMenuItemSpriteExtra*>(menu->getChildren()->objectAtIndex(1))->getPosition());
+                                    typeinfo_cast<CCMenuItemSpriteExtra*>(menu->getChildren()->objectAtIndex(1))->removeFromParent();
                                     } 
                                 }
                             }

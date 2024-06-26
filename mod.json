@@ -5,6 +5,7 @@
 		"android": "2.206",
 		"mac": "2.206"
 	},
+	"early-load": true,
 	"platforms": ["android", "win", "mac"],
 	"version": "v2.0.4-beta.12",
 	"id": "muhammadgames.bettermenu",
@@ -19,7 +20,7 @@
 		"files": [
 			"resources/*.mp3"
 		],
-		"sprites": ["resources/*.png", "resources/geode-swelve/*.png"]
+		"sprites": ["resources/*.png"]
 	},
 	"settings": {
 	"loading-heading": {
@@ -28,7 +29,7 @@
 		"text": "Loading Menu"
 	 },
 	 "LoadingLayer-Geode-SwelvyBG": {
-		"name": "SwelvyBG Background (Texture Loader)",
+		"name": "SwelvyBG Background",
 		"description": "Converts the background to the SwelvyBG One!",
 		"type": "bool",
 		"default": true
