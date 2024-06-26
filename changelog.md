@@ -1,6 +1,7 @@
 # ChangeLog
 ### BetterMenu V2.04-beta.12
-* Swelvy BG for main menu and loading screen
+* Swelvy BG for main menu 
+* texture loader loading Swelvy BG
 ### BetterMenu V2.04-beta.10 & BetterMenu V2.04-beta.11
 * Bug fixes for Android and pc
 ### BetterMenu V2.04-beta.9
