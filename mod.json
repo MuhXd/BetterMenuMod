@@ -5,8 +5,9 @@
 		"android": "2.206",
 		"mac": "2.206"
 	},
+	"early-load": true,
 	"platforms": ["android", "win", "mac"],
-	"version": "v2.0.4-beta.11",
+	"version": "v2.0.4-beta.12",
 	"id": "muhammadgames.bettermenu",
 	"name": "Better Menu",
 	"developer": "Viper",
@@ -19,9 +20,20 @@
 		"files": [
 			"resources/*.mp3"
 		],
-		"sprites": ["resources/*.png"]
+		"sprites": ["resources/*.png", "resources/geode-swelve/*.png"]
 	},
 	"settings": {
+	"loading-heading": {
+		"type": "custom",
+		"mode" : "Heading",
+		"text": "Loading Menu"
+	 },
+	 "LoadingLayer-Geode-SwelvyBG": {
+		"name": "SwelvyBG background",
+		"description": "Converts the background to the SwelvyBG One!",
+		"type": "bool",
+		"default": true
+	},
 	"exit-heading": {
 		"type": "custom",
 		"mode" : "Heading",
@@ -123,6 +135,12 @@
 		"description": "Replaces geode button with the server icon one",
 		"type": "bool",
 		"default": false
+	},
+	"MenuLayer-Geode-SwelvyBG": {
+		"name": "SwelvyBG background",
+		"description": "Converts the background to the SwelvyBG One!",
+		"type": "bool",
+		"default": true
 	},
 	"Shortcuts-heading": {
 		"type": "custom",

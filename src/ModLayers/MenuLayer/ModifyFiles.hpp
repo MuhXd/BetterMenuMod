@@ -5,3 +5,4 @@
 #include "ModifyHooks/Shortcuts.hpp"
 #include "ModifyHooks/hideshow.hpp"
 #include "ModifyHooks/compact.hpp"
+#include "../SwelvyBG/geodeModLayerBackground.hpp"

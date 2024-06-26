@@ -153,6 +153,8 @@ mat (@mat.4) - 2024
             addbuttons(this);     
             // load joke settings
             JokesMain(this);
+            // load the background
+            SwelvyBGInsert(this,"MenuLayer");
        
         return true;
     }
