@@ -16,6 +16,7 @@ public:
                 layer->getChildByIDRecursive("bottom-menu")->setVisible(!enabled);
                 if (CCNode* node = layer->getChildByIDRecursive("shortcuts-menu-Fix"_spr)) node->setVisible(!enabled);
                 if (CCNode* node = layer->getChildByIDRecursive("search-menu"_spr)) node->setVisible(!enabled);
+                if (CCNode* node = layer->getChildByIDRecursive("shortcuts-menu-search"_spr)) node->setVisible(!enabled);
                 if (CCNode* node = layer->getChildByIDRecursive("shortcuts-menu-Fix"_spr)) node->setVisible(!enabled);
                 m_objectbettermenuhide->getChildByIDRecursive("hiding"_spr)->setVisible(!enabled);
                 m_objectbettermenuhide->getChildByIDRecursive("showing"_spr)->setVisible(enabled);

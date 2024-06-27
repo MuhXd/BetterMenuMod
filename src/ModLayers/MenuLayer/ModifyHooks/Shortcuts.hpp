@@ -3,6 +3,13 @@
 #include <UIBuilder.hpp>
 using namespace geode::prelude;
 
+class TextureLoaderBetterMenu : public CCLayer {
+public:
+    void unknown(auto target) {
+       geode::log::error("Unable to Find textureLoader!");
+    }
+    
+};
 static void setupshortcuts(auto layer) {
     auto winSize = CCDirector::get()->getWinSize();
     auto SearchMenu = Build<CCMenu>::create()
@@ -23,7 +30,9 @@ static void setupshortcuts(auto layer) {
     bool Size = false;
 
     if (Mod::get()->getSettingValue<bool>("ShortcutSearch")) {
-        layer->getChildByID("more-games-menu")->setVisible(false);
+        if ( layer->getChildByID("more-games-menu")) {
+                    layer->getChildByID("more-games-menu")->setVisible(false);
+        }
         auto Button =  Build<CCSprite>::createSpriteName("GJ_searchBtn_001.png")
             .intoMenuItem([](auto target) {
                 // CreatorLayer::create()->onOnlineLevels(target);
@@ -33,6 +42,20 @@ static void setupshortcuts(auto layer) {
             .pos(0, 0)
             .parent(SearchMenu)
             .id("search-menu"_spr);
+    }
+     if (Mod::get()->getSettingValue<bool>("TextureLDR-Shortcut") && (typeinfo_cast<CCMenuItemSpriteExtra*>(layer->getChildByIDRecursive("geode.texture-loader/texture-loader-button")))  ) {
+        if (layer->getChildByID("more-games-menu")) {
+                 layer->getChildByID("more-games-menu")->setVisible(false);
+        }
+        CCMenuItemSpriteExtra* geode_texture_loader_texture_loader_button =  typeinfo_cast<CCMenuItemSpriteExtra*>(layer->getChildByIDRecursive("geode.texture-loader/texture-loader-button"));
+         CCSprite* TextureLDR = CCSprite::create(
+            "TexturePack.png"_spr
+        );
+        auto TextureLDRe = CCMenuItemSpriteExtra::create(TextureLDR, layer, menu_selector(TextureLoaderBetterMenu::unknown) );
+        TextureLDRe->setID("texture-loader-button"_spr);
+        TextureLDRe->m_pfnSelector = geode_texture_loader_texture_loader_button->m_pfnSelector;
+        geode_texture_loader_texture_loader_button->setVisible(false); // no crash
+        SearchMenu->addChild(TextureLDRe);
     }
     auto shortcutMenu = Build<CCMenu>::create()
         .pos(7, 6)
@@ -119,6 +142,7 @@ static void setupshortcuts(auto layer) {
     if (Mod::get()->getSettingValue<bool>("compact-main-menu")) {
         if (CCNode* node = layer->getChildByIDRecursive("shortcuts-menu-Fix"_spr)) node->setVisible(false);
         if (CCNode* node = layer->getChildByIDRecursive("search-menu"_spr)) node->setVisible(false);
+        if (CCNode* node = layer->getChildByIDRecursive("shortcuts-menu-search"_spr)) node->setVisible(false);
         if (CCNode* node = layer->getChildByIDRecursive("shortcuts-menu-Fix"_spr)) node->setVisible(false);
         if (CCNode* node = layer->getChildByIDRecursive("shortcuts-menu"_spr)) node->setPositionX(30);
     }

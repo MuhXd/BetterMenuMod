@@ -7,7 +7,7 @@
 	},
 	"early-load": true,
 	"platforms": ["android", "win", "mac"],
-	"version": "v2.0.4-beta.12",
+	"version": "v2.0.4-beta.13",
 	"id": "muhammadgames.bettermenu",
 	"name": "Better Menu",
 	"developer": "Viper",
@@ -156,6 +156,12 @@
 	"ShortcutSavedLevels": {
 		"name": "Saved levels Shortcut",
 		"description": "Adds saved Levels to the Shortcuts location",
+		"type": "bool",
+		"default": true
+	},
+	"TextureLDR-Shortcut": {
+		"name": "Texture Loader",
+		"description": "Moves TextureLoader to MoreGames Button",
 		"type": "bool",
 		"default": true
 	},

@@ -1,6 +1,7 @@
 # ChangeLog
 ### BetterMenu V2.04-beta.13
 * loading Swelvy BG not only for texture loader
+* Texture loader More games replacer 
 ### BetterMenu V2.04-beta.12
 * Swelvy BG for main menu 
 * texture loader loading Swelvy BG
