@@ -1,4 +1,6 @@
 # ChangeLog
+### BetterMenu V2.04-beta.14
+* Macos
 ### BetterMenu V2.04-beta.13
 * loading Swelvy BG not only for texture loader
 * Texture loader More games replacer 
