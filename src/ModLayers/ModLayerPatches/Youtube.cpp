@@ -26,6 +26,9 @@ class $modify(CCSprite) {
         if (sprname == "geode.loader/gift.png") {
             //geode::log::debug("0 : {}",sprname);
               geode::Loader::get()->queueInMainThread([frameName,sprite] {
+                if (!sprite) {
+                    return;
+                }
                 if (auto btn = sprite->getParent()) {
                     //geode::log::debug("1 : {}",frameName);
                     if (auto menu = btn->getParent()) {
