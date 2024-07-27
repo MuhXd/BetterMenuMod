@@ -36,8 +36,9 @@ bool RunAsAdmin(HWND hwnd, LPCSTR lpFile, LPCSTR lpParameters) {
 }
 #endif
 
-// separate hook to run tween after pages api updates the menu
 
+
+// separate hook to run tween after pages api updates the menu
 class $modify(MenuLayer) { 
 
     static void onModify(auto& self) {
@@ -58,9 +59,6 @@ class $modify(MenuLayer) {
         // fixes the ui
         compactmainmenuFix(this);
 
-        if (Loader::get()->isModLoaded("ninxout.redash")) {
-
-        } // fix some weird stuff
         return true;
     }
 };

@@ -163,6 +163,11 @@ static void compactmainmenuFix(auto layer) {
         layer->getChildByIDRecursive("bottom-menu")->setVisible(Loader::get()->isModLoaded("ninxout.redash"));
         if (Loader::get()->isModLoaded("ninxout.redash")) {
             if (CCNode* node = layer->getChildByIDRecursive("right-side-menu")){ node->setPositionX(143); node->setContentSize({373.667,node->getContentSize().height}); };
+            if (CCNode* node = layer->getChildByIDRecursive("paged-right-side-menu")) { 
+                node->setUserObject("real-scale",CCFloat::create(0.575));
+                node->setScale(0.575);
+            }
         }
     }
 }
+
