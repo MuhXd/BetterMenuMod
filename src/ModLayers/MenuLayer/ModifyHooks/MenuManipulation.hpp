@@ -12,7 +12,10 @@ bool anti = false;
 // converts numbers in a square of two bool values
 void GetIdsPos() {
     int menupos = Mod::get()->getSettingValue<SettingPosStruct>("MenuPos-pos").m_pos;
-
+    // you cannot change it
+    if (Loader::get()->isModLoaded("ninxout.redash")) {
+      menupos = 1;
+    }
     switch (menupos) {
         case 1: 
             r = false;
@@ -34,7 +37,7 @@ void GetIdsPos() {
 }
 
 static void setupMenuPositions(auto layer) {
-    auto winSize = CCDirector::get()->getWinSize();
+    cocos2d::CCSize winSize = CCDirector::get()->getWinSize();
     GetIdsPos();
 
     // move right/left or whatever

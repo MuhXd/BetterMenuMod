@@ -20,16 +20,16 @@ void createbuttonquicker(CCLayer* layer, const char* name, auto sprite, SEL_Menu
 class CreatorLayerForBetterMenu : public CCLayer {
 public:
     void onSavedLevels(auto target) {
-        //CreatorLayer::create()->onSavedLevels(target);
-        reinterpret_cast<CreatorLayer*>(target)->onSavedLevels(target);
+        CreatorLayer::create()->onSavedLevels(target);
+        //reinterpret_cast<CreatorLayer*>(target)->onSavedLevels(target);
     }
     void onOnlineLevels(auto target) {
-        //CreatorLayer::create()->onOnlineLevels(target);
-        reinterpret_cast<CreatorLayer*>(target)->onOnlineLevels(target);
+        CreatorLayer::create()->onOnlineLevels(target);
+        //reinterpret_cast<CreatorLayer*>(target)->onOnlineLevels(target);
     }
     void onMyLevels(auto target) {
-        //CreatorLayer::create()->onMyLevels(target);
-        reinterpret_cast<CreatorLayer*>(target)->onMyLevels(target);
+        CreatorLayer::create()->onMyLevels(target);
+        //reinterpret_cast<CreatorLayer*>(target)->onMyLevels(target);
     }
 };
 

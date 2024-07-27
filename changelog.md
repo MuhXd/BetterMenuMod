@@ -1,4 +1,9 @@
 # ChangeLog
+### BetterMenu V2.04-beta.15
+* fixed more incompats
+* flipped the eye option
+* less incompats in the future
+* slightly better code
 ### BetterMenu V2.04-beta.14
 * Macos
 ### BetterMenu V2.04-beta.13

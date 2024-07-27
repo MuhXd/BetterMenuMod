@@ -5,19 +5,19 @@
 #include <UIBuilder.hpp>
 #include <Geode/ui/GeodeUI.hpp>
 #include "ModifyFiles.hpp"
+
+// windows only
 #ifdef GEODE_IS_WINDOWS
 #include <cstdlib>
 #include <windows.h>
 #include <shellapi.h>
 #endif
 
-// english or german
-// english : somewhere go find it
-// german : somewhere go find it
-
+// adds the loader and load geode
 static geode::Loader* get();
 using namespace geode::prelude;
 
+// windows taskkill button
 #ifdef GEODE_IS_WINDOWS
 bool RunAsAdmin(HWND hwnd, LPCSTR lpFile, LPCSTR lpParameters) {
     SHELLEXECUTEINFOA sei = { sizeof(sei) };
@@ -30,48 +30,44 @@ bool RunAsAdmin(HWND hwnd, LPCSTR lpFile, LPCSTR lpParameters) {
     if (!ShellExecuteExA(&sei)) {
         DWORD dwError = GetLastError();
         if (dwError == ERROR_CANCELLED)
-            // The user refused the elevation.
             return false;
-        // More error handling here...
     }
     return true;
 }
 #endif
-
 
 // separate hook to run tween after pages api updates the menu
 
 class $modify(MenuLayer) { 
 
     static void onModify(auto& self) {
-        (void)self.setHookPriority("MenuLayer::init", INT_MIN/2-1); // For the pages bugfix
+        (void)self.setHookPriority("MenuLayer::init", INT_MIN/2-1); 
     }
 
     bool init() {
         if (!MenuLayer::init())
             return false;
-            
+        
+        // checks if mod is disabled
         if (!Mod::get()->getSettingValue<bool>("RunMainMenu")) {   
             return true;
         };
 
+        // runs the tweens
         runTween(this);
+        // fixes the ui
         compactmainmenuFix(this);
+
+        if (Loader::get()->isModLoaded("ninxout.redash")) {
+
+        } // fix some weird stuff
         return true;
     }
 };
-
-// German
-// Der erste, der sich bewegt, ist schwul
-
+// load before pages api and after icon profile
 class $modify(MenuLayer) { 
-/*
-'ewww
-switch that out for $modify'
-mat (@mat.4) - 2024
-*/
     static void onModify(auto& self) {
-        (void)self.setHookPriority("MenuLayer::init", -1); // For the icon profile bug fix and pages bugfix
+        (void)self.setHookPriority("MenuLayer::init", -1);
     }
     void onPlay(CCObject* sender) {
         MenuLayer::onPlay(sender);
@@ -110,7 +106,7 @@ mat (@mat.4) - 2024
             )->show();
         }
         else {
-                 #ifdef GEODE_IS_WINDOWS
+        #ifdef GEODE_IS_WINDOWS
             if (Mod::get()->getSettingValue<bool>("TaskKill-Process")) {   
                 geode::createQuickPopup(
 				"Quit Game",
@@ -131,31 +127,37 @@ mat (@mat.4) - 2024
         };
     };
 
-// English
-// First one who moves is gay
 
-    bool init() {
-        if (!MenuLayer::init())
-            return false;
+bool init() {
+    if (!MenuLayer::init())
+        return false;
+    
+    // checks if mod is disabled
+    if (!Mod::get()->getSettingValue<bool>("RunMainMenu")) {   
+        return true; 
+    };
 
-        if (!Mod::get()->getSettingValue<bool>("RunMainMenu")) {   
-            return true;
-        };
-            // disables the social media and more
-            UiDisable(this);
-            // setup positions
-            setupMenuPositions(this);
-            // setup shortcuts
-            setupshortcuts(this);
-             // compactify all
-            compactmenu(this);
-            // add mod buttons
-            addbuttons(this);     
-            // load joke settings
-            JokesMain(this);
-            // load the background
-            SwelvyBGInsert(this,"MenuLayer");
+    // disables the social media and more
+    UiDisable(this);
+
+    // setup positions
+    setupMenuPositions(this);
+
+    // setup shortcuts
+    setupshortcuts(this);
+
+     // compactify all
+    compactmenu(this);
+
+    // add mod buttons
+    addbuttons(this);
+
+    // load joke settings
+    JokesMain(this);
+
+    // load the background
+    SwelvyBGInsert(this,"MenuLayer");
        
-        return true;
+    return true;
     }
 };

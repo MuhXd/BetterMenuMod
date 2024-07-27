@@ -103,7 +103,31 @@ protected:
         if (!SettingNode::init(value))
             return false;
 
-       
+       if (Loader::get()->isModLoaded("ninxout.redash")) { 
+        this->setContentSize({ width, 70.f });
+        auto label = CCLabelBMFont::create("Menu Position (disabled)", "bigFont.fnt");
+        label->setScale(0.750);
+        label->setPositionX(94);
+        label->setPositionY(36);
+        int pos  = label->getPositionX();
+        auto menu = CCMenu::create();
+        menu->setPosition(293, 23.f);
+        auto infoBtn = Build<CCSprite>::createSpriteName("GJ_infoIcon_001.png")
+                    .intoMenuItem([](auto target) {
+                       FLAlertLayer::create(
+                                 "Disabled",
+                                 "Overcharged Main Menu loaded",
+                                  "OK"
+                                )->show();
+                    })
+                    .scale(0.750)
+                    .pos(-102 , 11)
+                    .id("Pos_Info"_spr)
+                    .parent(menu);
+    
+        this->addChild(label);
+        return true;
+       }
         m_currentPos = value->getPos();
         this->setContentSize({ width, 70.f });
         auto menu = CCMenu::create();
@@ -111,7 +135,7 @@ protected:
         CCSprite* toggleOff = CCSprite::createWithSpriteFrameName("GJ_checkOff_001.png");
         toggleOn->setScale(.7F);
         toggleOff->setScale(.7F);
-        menu->setPosition(290, 23.f);
+        menu->setPosition(293, 23.f);
         tlBtn = CCMenuItemToggler::create(
             toggleOn,
             toggleOff,
@@ -155,17 +179,14 @@ protected:
         menu->addChild(trBtn);
         menu->addChild(blBtn);
         menu->addChild(brBtn);
-        menu->setPositionX(293);
+
         this->addChild(menu);
         auto label = CCLabelBMFont::create("Menu Position", "bigFont.fnt");
         label->setScale(0.750);
         label->setPositionX(94);
         label->setPositionY(36);
-        this->addChild(label);
-        //auto infoBtn
-        
         int pos  = label->getPositionX();
-         auto infoBtn = Build<CCSprite>::createSpriteName("GJ_infoIcon_001.png")
+        auto infoBtn = Build<CCSprite>::createSpriteName("GJ_infoIcon_001.png")
                     .intoMenuItem([](auto target) {
                        FLAlertLayer::create(
                                  "Menu Position",
@@ -178,7 +199,6 @@ protected:
                     .id("Pos_Info"_spr)
                     .parent(menu);
         
-        label->setScale(.6F);
         this->addChild(label);
         this->addChild(menu);
         return true;

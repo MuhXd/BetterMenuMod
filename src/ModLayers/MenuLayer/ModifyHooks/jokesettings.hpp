@@ -5,11 +5,13 @@
 
 using namespace geode::prelude;
 
+// playing sfx so i can put all handling of it in here
 void PlaySoundEffect(auto effect){
 	if (Mod::get()->getSettingValue<bool>("SFX")) {
 		FMODAudioEngine::sharedEngine()->playEffect(effect);
 	};
 }
+
 
 class FakeLayer : public CCLayer {
 public:
@@ -21,7 +23,7 @@ void onGeode(CCObject*) {
 
 static void JokesMain(auto layer) {
 	if (Mod::get()->getSettingValue<bool>("Geode-Server")) {
-		 auto geodeButton = dynamic_cast<CCMenuItemSpriteExtra*>(
+		CCMenuItemSpriteExtra* geodeButton = dynamic_cast<CCMenuItemSpriteExtra*>(
 		layer->getChildByIDRecursive("geode.loader/geode-button")
 	    );
 		for(auto items : CCArrayExt<CCNode*>(layer->getChildByIDRecursive("geode.loader/geode-button")->getChildren())) {
