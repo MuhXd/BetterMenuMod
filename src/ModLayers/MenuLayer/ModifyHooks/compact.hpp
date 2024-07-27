@@ -19,10 +19,9 @@ public:
                 if (CCNode* node = layer->getChildByIDRecursive("search-menu"_spr)) node->setVisible(!enabled);
                 if (CCNode* node = layer->getChildByIDRecursive("shortcuts-menu-search"_spr)) node->setVisible(!enabled);
                 if (CCNode* node = layer->getChildByIDRecursive("shortcuts-menu-Fix"_spr)) node->setVisible(!enabled);
-                if ( CCNode* node = layer->getChildByIDRecursive("profile-menu")) {
-                    if (Loader::get()->isModLoaded("ninxout.redash")) {
-                        node->setVisible(!enabled);
-                    }
+                if (Loader::get()->isModLoaded("ninxout.redash")) {
+                    if (CCNode* node = layer->getChildByIDRecursive("profile-menu")) node->setVisible(!enabled);
+                    if (CCNode* node = layer->getChildByIDRecursive("player-username")) node->setVisible(!enabled);
                 }
                 
                 m_objectbettermenuhide->getChildByIDRecursive("hiding"_spr)->setVisible(!enabled);
@@ -163,7 +162,6 @@ static void compactmainmenuFix(auto layer) {
     if (Mod::get()->getSettingValue<bool>("compact-main-menu")) {
         layer->getChildByIDRecursive("bottom-menu")->setVisible(Loader::get()->isModLoaded("ninxout.redash"));
         if (Loader::get()->isModLoaded("ninxout.redash")) {
-            if (CCNode* node = layer->getChildByIDRecursive("ninxout.redash/bottom-menu-bg")) node->setVisible(Loader::get()->isModLoaded("ninxout.redash"));
             if (CCNode* node = layer->getChildByIDRecursive("right-side-menu")){ node->setPositionX(143); node->setContentSize({373.667,node->getContentSize().height}); };
         }
     }
