@@ -5,7 +5,7 @@
 #include <UIBuilder.hpp>
 #include <Geode/ui/GeodeUI.hpp>
 #include "ModifyFiles.hpp"
-
+#include "../ModLayerPatches/menulayer.hpp"
 // windows only
 #ifdef GEODE_IS_WINDOWS
 #include <cstdlib>
@@ -58,7 +58,9 @@ class $modify(MenuLayer) {
         runTween(this);
         // fixes the ui
         compactmainmenuFix(this);
-
+        // Tell the mod it has loaded once
+        mlayerfinished = true;
+        
         return true;
     }
 };

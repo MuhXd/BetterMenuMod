@@ -3,6 +3,7 @@
 #include <UIBuilder.hpp>
 #include <Geode/utils/web.hpp>
 #include <Geode/modify/CCSprite.hpp>
+#include "menulayer"
 using namespace geode::prelude;
 class YoutubeButton : public CCLayer {
 public:
@@ -22,6 +23,9 @@ class $modify(CCSprite) {
 
     static CCSprite* createWithSpriteFrameName(char const* frameName) {
         CCSprite* sprite = CCSprite::createWithSpriteFrameName(frameName);
+        if (!mlayerfinished) {
+            return sprite;
+        }
         std::string sprname = frameName;
         if (sprname == "geode.loader/gift.png") {
             //geode::log::debug("0 : {}",sprname);
