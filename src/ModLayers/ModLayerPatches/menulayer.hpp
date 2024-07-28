@@ -1,2 +1,2 @@
 #pragma once
-bool mlayerfinished = false;
+static bool mlayerfinished = false;
