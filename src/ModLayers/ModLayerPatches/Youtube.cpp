@@ -16,8 +16,8 @@ void LinkYoutube(CCObject*) {
 };
 
 CCNode* menuNoDupe = nullptr;
- //geode.loader/gift.png
-
+ // idk why it crashes on some androids
+#ifndef GEODE_IS_ANDROID
 class $modify(CCSprite) {
     static void onModify(auto & self) { (void)self.setHookPriority("CCSprite::createWithSpriteFrameName", 1000); }
 
@@ -74,3 +74,4 @@ class $modify(CCSprite) {
         return sprite;
     }
 };
+#endif
