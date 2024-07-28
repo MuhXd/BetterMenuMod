@@ -103,8 +103,14 @@ static void setupMenuPositions(auto layer) {
 
             if(CCNode* closeMenu = layer->getChildByID("close-menu")){
                 Build(closeMenu)
-                    .pos(winSize.width - 105, winSize.height - 20)
-                    .layout(RowLayout::create()->setAxisAlignment(AxisAlignment::End))
+                    .pos(winSize.width - 10, winSize.height - 20)
+                    .layout(
+                        RowLayout::create()
+                        ->setAxisAlignment(AxisAlignment::End)
+                        ->setAxisReverse(true)
+                        )
+                    .contentSize({187,32.200})
+                    .anchorPoint({0.950,0.5})
                     .updateLayout();
             }
 

@@ -106,12 +106,17 @@ static void compactmenu(auto layer) {
     }
 
     // this is just in case, i don't want more incompats or crashes with new options
-    if (CCNode* searchmenu = layer->getChildByIDRecursive("shortcuts-menu-search"_spr)) searchmenu->setPositionY(winSize.height - 80);
-    if (CCNode* searchmenufix = layer->getChildByIDRecursive("shortcuts-menu-Fix"_spr)) searchmenufix->setPositionY(winSize.height - 122);
+    int menupos = Mod::get()->getSettingValue<SettingPosStruct>("MenuPos-pos").m_pos;
+    if (menupos == 4) {
+        if (CCNode* searchmenu = layer->getChildByIDRecursive("shortcuts-menu-search"_spr)) searchmenu->setPositionY(winSize.height - 110);
+        if (CCNode* searchmenufix = layer->getChildByIDRecursive("shortcuts-menu-Fix"_spr)) searchmenufix->setPositionY(winSize.height - 152);
+    } else {
+        if (CCNode* searchmenu = layer->getChildByIDRecursive("shortcuts-menu-search"_spr)) searchmenu->setPositionY(winSize.height - 80);
+        if (CCNode* searchmenufix = layer->getChildByIDRecursive("shortcuts-menu-Fix"_spr)) searchmenufix->setPositionY(winSize.height - 122);
+    }
 
     if(CCNode* bottomMenu = layer->getChildByID("bottom-menu")){
         bottomMenu->setVisible(false);
-        int menupos = Mod::get()->getSettingValue<SettingPosStruct>("MenuPos-pos").m_pos;
         if (menupos == 3) {
             bottomMenu->setPositionY(bottomMenu->getPositionY() - 50);
         }

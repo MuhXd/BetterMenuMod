@@ -12,6 +12,7 @@ static void SwelvyBGInsert(auto layer, std::string Layer) {
     }
     SwelvyBG* bg = SwelvyBG::create();
     bg->setZOrder(-1);
+    bg->setVisible(false);
     layer->addChild(bg); 
     
     if (auto l = layer->getChildByIDRecursive("main-menu-bg")) {
