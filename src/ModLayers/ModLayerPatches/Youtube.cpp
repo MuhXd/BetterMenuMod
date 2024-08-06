@@ -1,5 +1,5 @@
 
-#include <Geode/Geode.hpp>
+/*#include <Geode/Geode.hpp>
 #include <UIBuilder.hpp>
 #include <Geode/utils/web.hpp>
 #include <Geode/modify/CCSprite.hpp>
@@ -75,3 +75,54 @@ class $modify(CCSprite) {
     }
 };
 #endif
+*/
+
+#include <Geode/ui/GeodeUI.hpp>
+#include <Geode/Geode.hpp>
+#include <Geode/utils/web.hpp>
+using namespace geode::prelude;
+class YoutubeButton : public CCLayer {
+public:
+void LinkYoutube(CCObject*) {
+		geode::utils::web::openLinkInBrowser("https://www.youtube.com/channel/UC3A8dtlO94rHEkn4Kz7aB7g");
+	}
+    void LinkTwitch(CCObject*) {
+		geode::utils::web::openLinkInBrowser("https://www.twitch.tv/muhammad_mo");
+	}
+};
+
+$execute {
+    new EventListener<EventFilter<ModPopupUIEvent>>(+[](ModPopupUIEvent* event) {
+        if (event->getModID() == "muhammadgames.bettermenu") {
+            auto popup = event->getPopup();
+            // do not asume that the popup is here
+            if (popup) {
+                // do not asume the links-container is here
+                    CCMenu* links = typeinfo_cast<CCMenu*>(popup->getChildByIDRecursive("links-container"));
+                    if (links) {
+                        // do removing
+                        if (CCNode* Node = links->getChildByID("support")) Node->removeFromParent();
+                        if (CCNode* Node = links->getChildByID("discord")) Node->removeFromParent();
+                        if (CCNode* Node = links->getChildByID("homepage")) Node->removeFromParent();
+                        // Twitch check
+                        if (!links->getChildByID("Twitch"_spr)) {
+                            auto btn =  CCSprite::createWithSpriteFrameName("gj_ytIcon_001.png");
+                            btn->setScale(0.7);
+                            auto btnee = CCMenuItemSpriteExtra::create(btn, links, menu_selector(YoutubeButton::LinkYoutube));
+                            btnee->setID("Youtube"_spr);
+                            links->addChild(btnee);
+                            auto weed2 =  CCSprite::createWithSpriteFrameName("gj_twitchIcon_001.png");
+                            weed2->setScale(0.7);
+                            auto btneeweed2f = CCMenuItemSpriteExtra::create(weed2, links, menu_selector(YoutubeButton::LinkTwitch));
+                            btneeweed2f->setID("Twitch"_spr);
+                            links->addChild(btneeweed2f);
+                            // remake the list
+                            links->updateLayout();
+                        }
+                    }
+           // geode::log::debug("1: {}", event->getPopup());
+        }
+        }
+        return ListenerResult::Propagate;
+    });
+}
