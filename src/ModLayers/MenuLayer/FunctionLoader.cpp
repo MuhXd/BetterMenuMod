@@ -36,7 +36,6 @@ bool RunAsAdmin(HWND hwnd, LPCSTR lpFile, LPCSTR lpParameters) {
 #endif
 
 
-
 // separate hook to run tween after pages api updates the menu
 class $modify(MenuLayer) { 
 
@@ -128,7 +127,28 @@ class $modify(MenuLayer) {
 bool init() {
     if (!MenuLayer::init())
         return false;
-    
+     
+     // check to show popup prompting user to change their settings
+        if (!Mod::get()->setSavedValue("shown-settings-prompt", true)) {
+            geode::Loader::get()->queueInMainThread([this] {
+                auto pop = geode::createQuickPopup(
+                    "BetterMenu",
+                    "Thank you for installing the mod! Would you like to open the mod's <cr>Settings</c> to change how the menu looks",
+                    "No", "Yes",
+                    [this](FLAlertLayer* me, bool btn2) {
+                        if (btn2) {
+                            geode::Loader::get()->queueInMainThread([this] {
+                                geode::openSettingsPopup(Mod::get());
+                            });
+                        }
+                    }, false
+                );
+                pop->m_scene = this;
+                pop->show();
+            });
+        }
+
+
     // checks if mod is disabled
     if (!Mod::get()->getSettingValue<bool>("RunMainMenu")) {   
         return true; 

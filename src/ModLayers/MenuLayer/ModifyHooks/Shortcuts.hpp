@@ -12,6 +12,7 @@ public:
 };
 static void setupshortcuts(CCNode* layer) {
     // setup vars
+    int menupos = Mod::get()->getSettingValue<SettingPosStruct>("MenuPos-pos").m_pos;
     cocos2d::CCSize winSize = CCDirector::get()->getWinSize();
     // create the menu
     CCMenu* SearchMenu = Build<CCMenu>::create()
@@ -45,6 +46,24 @@ static void setupshortcuts(CCNode* layer) {
             .parent(SearchMenu)
             .id("search-menu"_spr);
     }
+
+    if (Mod::get()->getSettingValue<bool>("Leaderboard-Shortcut") && !Loader::get()->isModLoaded("ninxout.redash") && layer->getChildByIDRecursive("right-side-menu")) {
+         CCSprite* LeaderboardShortcut = CCSprite::createWithSpriteFrameName(
+            "GJ_highscoreBtn_001.png"
+        );
+        LeaderboardShortcut->setScale(0.5);
+        auto Button =  Build(LeaderboardShortcut)
+            .intoMenuItem([](auto target) {
+                 CreatorLayer::create()->onLeaderboards(target);
+                //reinterpret_cast<CreatorLayer*>(target)->onLeaderboards(target);
+            })
+            .pos(0, 0)
+            .parent(layer->getChildByIDRecursive("right-side-menu"))
+            .id("Leaderboard-menu"_spr);
+            layer->getChildByIDRecursive("right-side-menu")->updateLayout();
+    }
+
+
      if (Mod::get()->getSettingValue<bool>("TextureLDR-Shortcut") && (typeinfo_cast<CCMenuItemSpriteExtra*>(layer->getChildByIDRecursive("geode.texture-loader/texture-loader-button"))) && !Loader::get()->isModLoaded("ninxout.redash") ) {
         if (layer->getChildByID("more-games-menu")) {
                  layer->getChildByID("more-games-menu")->setVisible(false);
@@ -57,7 +76,11 @@ static void setupshortcuts(CCNode* layer) {
         TextureLDRe->setID("texture-loader-button"_spr);
         TextureLDRe->m_pfnSelector = geode_texture_loader_texture_loader_button->m_pfnSelector;
         geode_texture_loader_texture_loader_button->setVisible(false); // no crash by hiding it
+        geode_texture_loader_texture_loader_button->removeFromParent();
         SearchMenu->addChild(TextureLDRe);
+        if (CCNode* Node = layer->getChildByID("right-side-menu")) {
+            Node->updateLayout();
+        }
     }
     CCMenu* shortcutMenu = Build<CCMenu>::create()
         .pos(7, 6)
@@ -166,8 +189,40 @@ static void setupshortcuts(CCNode* layer) {
         .parent(Menu2_2);
     }
     Menu2_2->updateLayout();
-    SearchMenu->updateLayout();
     shortcutMenu->updateLayout();
+    SearchMenu->updateLayout();
+    //log::debug("SETTING IS ON! {}", menupos);
+    if(menupos == 1) {
+        if(CCNode* rightSideMenu = layer->getChildByID("right-side-menu")){
+            if (!Mod::get()->getSettingValue<bool>("RightSide")) {
+                rightSideMenu->setPositionY(rightSideMenu->getPositionY() + 40);
+                rightSideMenu->updateLayout();
+            };
+        };
+        if (SearchMenu->getChildrenCount() > 1) {
+            SearchMenu->setPositionX(winSize.width - 110);
+            SearchMenu->setScale(0.425);
+        };
+    } else {
+        if (menupos == 2) {
+            if(CCNode* rightSideMenu = layer->getChildByID("right-side-menu")){
+                if (!Mod::get()->getSettingValue<bool>("RightSide")) {
+                    rightSideMenu->setPositionY(rightSideMenu->getPositionY() + 40);
+                    rightSideMenu->updateLayout();
+                }; 
+            };
+        };
+    }
+
+    if(menupos > 2) {
+        if(CCNode* rightSideMenu = layer->getChildByID("right-side-menu")) {
+            if (rightSideMenu->getChildrenCount() > 3) {
+                SearchMenu->setPositionX(winSize.width - 110);
+                SearchMenu->setScale(0.425);
+                rightSideMenu->updateLayout();
+            };
+        };
+    };
     // fixes with compact
     if (Mod::get()->getSettingValue<bool>("compact-main-menu")) {
         if (CCNode* node = layer->getChildByIDRecursive("shortcuts-menu-Fix"_spr)) node->setVisible(Loader::get()->isModLoaded("ninxout.redash"));

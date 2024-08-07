@@ -164,6 +164,12 @@
 		"type": "bool",
 		"default": true
 	},
+	"Leaderboard-Shortcut": {
+		"name": "leaderboard Shortcut",
+		"description": "Adds a Leaderboard button",
+		"type": "bool",
+		"default": true
+	},
 	"ShortcutSearch": {
 		"name": "Search Shortcut",
 		"description": "Removes More games and replaces it with Search button",

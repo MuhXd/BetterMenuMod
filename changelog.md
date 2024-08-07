@@ -1,4 +1,11 @@
 # ChangeLog
+### BetterMenu V2.05
+* Fixed incompacts with qol
+* Popup when first installing the mod
+* Fixed restart buttons squeezeing
+* Leaderboard shortcut added
+* Overlapping fixes on some ui
+* Fixed a few bugs
 ### BetterMenu V2.04-beta.15
 * fixed more incompats
 * flipped the eye option

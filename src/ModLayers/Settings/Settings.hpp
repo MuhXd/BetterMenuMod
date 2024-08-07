@@ -182,11 +182,13 @@ protected:
 
         this->addChild(menu);
         auto label = CCLabelBMFont::create("Menu Position", "bigFont.fnt");
-        label->setScale(0.750);
+        label->setScale(0.700);
         label->setPositionX(94);
         label->setPositionY(36);
         int pos  = label->getPositionX();
-        auto infoBtn = Build<CCSprite>::createSpriteName("GJ_infoIcon_001.png")
+        CCSprite* infoicon =  CCSprite::createWithSpriteFrameName("GJ_infoIcon_001.png");
+        infoicon->setScale(0.75);
+        auto infoBtn = Build(infoicon)
                     .intoMenuItem([](auto target) {
                        FLAlertLayer::create(
                                  "Menu Position",
@@ -194,8 +196,7 @@ protected:
                                   "OK"
                                 )->show();
                     })
-                    .scale(0.750)
-                    .pos(-102 , 11)
+                    .pos(-90 , 11)
                     .id("Pos_Info"_spr)
                     .parent(menu);
         
