@@ -1,226 +1,143 @@
 {
-	"geode": "3.4.0",
+	"geode": "5.3.0",
 	"gd": {
-		"win": "2.206",
-		"android": "2.206",
-		"mac": "2.206"
+		"win": "2.2081",
+		"android": "2.2081",
+		"mac": "2.2081",
+		"ios": "2.2081"
 	},
-	"early-load": true,
-	"version": "v2.0.5",
+	"early-load": false,
+	"version": "v3.0.0-beta.1",
 	"id": "muhammadgames.bettermenu",
-	"name": "Better Menu",
-	"developer": "Viper",
-	"repository": "https://github.com/MuhXd/BetterMenuMod",
-	"description": "This mod is used for a better menu for the game. This Mod aim is to have a better experience on the menus",
+	"name": "Reforged Menu",
+	"developer": "Cosmella",
+	"links": {
+		"source": "https://github.com/Cosmella-v/BetterMenuMod"
+	},
+	"settings": {
+		"mod-toggle" : {
+			"type": "bool",
+			"name": "Disable Mod",
+			"description" : "Disable all hooks created by the mod",
+			"default" : false
+		},
+		"keybinds-title": {
+			"name": "keybinds",
+			"description": "Keybinds for the main menu",
+			"type": "title"
+		},
+		"exit-keybind": {
+			"name": "Exit Keybind",
+			"description": "Press this button to close the game",
+			"type": "keybind",
+			"default": ["Escape", "Controller_Start"],
+			"priority": -2
+		},
+		"texture-loader-keybind": {
+			"name": "Texture loader",
+			"description": "Open texture loader with a button",
+			"type": "keybind",
+			"priority": -1,
+			"default" : [""],
+			"enable-if": "loaded:geode.texture-loader",
+			"enable-if-description": "Texture loader mod is required to enable this setiing"
+		},
+		"Legacy-title": {
+            "type": "title",
+            "name": "Legacy Settings",
+			"description": "settings that restores old features to mods/gd"
+        },
+		"classic-texture-loader-btn": {
+			"name": "Texture loader button",
+			"description": "Add texture loader button back to the main main",
+			"type": "bool",
+			"default": true,
+			"enable-if": "loaded:geode.texture-loader",
+			"enable-if-description": "Texture loader mod is required to enable this setiing"
+		},
+		"Revanced-title": {
+            "type": "title",
+            "name": "Revanced Settings",
+			"description": "settings that revamp the main menu"
+        },
+		"Main-menu": {
+			"type": "custom:draggable",
+			"default": {
+				"bottom-menu" : {
+					"x" : 500,
+					"y" : 140.625,
+					"Rotation": 0, 
+					"Scale" : 1
+				},
+				"hellp" : {
+					"x" : 500,
+					"y" : 140.625,
+					"Rotation": 0, 
+					"Scale" : 1
+				}
+			},
+			"Configs" : {
+				"bottom-menu" : {
+					"ContentSizeY" : 20,
+					"ContentSizeX" : 104,
+					"CanRotate" : true,
+					"LayoutEditable" : true,
+					"CanScale" : true
+				},
+				"main-title" : {
+					"ContentSizeY" : 35,
+					"ContentSizeX" : 104,
+					"CanRotate" : true,
+					"LayoutEditable" : false,
+					"CanScale" : true
+				}
+			},
+			"name": "My awsome test thing"
+		},
+		"NoNewGroundsButton": {
+			"name": "Hide New Grounds",
+			"description": "Removes the newgrounds button",
+			"type": "bool",
+			"default": true
+		},
+		"compact-main-menu": {
+			"name": "Compact Mode",
+			"description": "This makes the menu compact",
+			"type": "bool",
+			"default": false
+		},
+		"geode-discord-icon-button": {
+			"name": "Geode server icon",
+			"description": "Replaces geode button with the server icon one",
+			"type": "bool",
+			"default": false
+		}
+	},
+	"resources": {
+		"spritesheets": {
+			"RFM_MenuSheet": [
+				"Textures/RFM_MenuSheet/*.png"
+			],
+			"RFM_Settings" : [
+				"Textures/RFM_Settings/*.png"
+			]
+		}
+	},
+	"description": "This mod is used to be 'better' version of the main menu (better being subjective)",
 	"tags": [
         "offline","enhancement","interface","customization"
     ],
-	"resources": {
-		"files": [
-			"resources/*.mp3"
-		],
-		"sprites": ["resources/*.png"]
+	"incompatibilities" : {
+		"bluescratch.main_menu_plus" : {
+			"version": ">=v1.0.0",
+			"breaking": true
+		},
+		"ninxout.redash" : {
+			"version": ">=v1.0.0",
+			"breaking": true
+		}
 	},
-	"settings": {
-	"loading-heading": {
-		"type": "custom",
-		"mode" : "Heading",
-		"text": "Loading Menu"
-	 },
-	 "LoadingLayer-Geode-SwelvyBG": {
-		"name": "SwelvyBG Background",
-		"description": "Converts the background to the SwelvyBG One!",
-		"type": "bool",
-		"default": true
-	},
-	"exit-heading": {
-		"type": "custom",
-		"mode" : "Heading",
-		"text": "Remove / Disable"
-	 },
-	 "RunMainMenu": {
-		"name": "Main Menu Modifications",
-		"description": "This settings Enables the main menu (Note: This will be for other menus when i am finished)",
-		"type": "bool",
-		"default": true
-	},
-	"EnableExitGameButton": {
-		"name": "Exit Button",
-		"description": "Makes the game be able to close",
-		"type": "bool",
-		"default": true
-	},
-	"NoNewGroundsButton": {
-		"name": "No New Grounds",
-		"description": "Removes the newgrounds button",
-		"type": "bool",
-		"default": true
-	},
-	"HideName": {
-		"name": "Hide Username",
-		"description": "This setting Hides the players name from the main menu",
-		"type": "bool",
-		"default": true
-	},
-	"replacename": {
-		"name": "Hide Real Username",
-		"description": "This replaces your Username with 'Streamer'",
-		"type": "bool",
-		"default": true
-	},
-	"MenuPos-heading": {
-		"type": "custom",
-		"mode" : "Heading",
-		"text": "Menu Manipulation"
-	 },
-	 "MenuPos-pos": {
-		"type": "custom",
-		"mode" : "Hardcoded"
-	 },
-	 "compact-main-menu": {
-		"name": "Compact Mode",
-		"description": "This makes the menu compact",
-		"type": "bool",
-		"default": false
-	},
-	 "MenuMovement": {
-		"name": "Bottom Menu load Animation",
-		"description": "This setting makes the bottom menu move when loading",
-		"type": "bool",
-		"default": true
-	},
-	"RightSide": {
-		"name": "Right Menu to Shortcuts",
-		"description": "Moves the right menu near the Shortcuts",
-		"type": "bool",
-		"default": false
-	},
-	"buttons-heading": {
-		"type": "custom",
-		"mode" : "Heading",
-		"text": "Bottom menu buttons"
-	 },
-	 "MoreGamesBottomMenu": {
-		"name": "More Games",
-		"description": "Creates a newgames button in the bottom menu",
-		"type": "bool",
-		"default": false
-	},
-	"MyLevelbutton": {
-		"name": "My Levels",
-		"description": "Creates a My levels button in the bottom menu",
-		"type": "bool",
-		"default": false
-	},
-	"SavedLevelsbutton": {
-		"name": "Saved levels",
-		"description": "Creates a Saved levels button in the bottom menu",
-		"type": "bool",
-		"default": false
-	},
-	"Searchbutton": {
-		"name": "Search",
-		"description": "Creates a Search button in the bottom menu",
-		"type": "bool",
-		"default": false
-	},
-	"replaces-heading": {
-		"type": "custom",
-		"mode" : "Heading",
-		"text": "Replacement"
-	 },
-	 "Geode-Server": {
-		"name": "Geode button",
-		"description": "Replaces geode button with the server icon one",
-		"type": "bool",
-		"default": false
-	},
-	"MenuLayer-Geode-SwelvyBG": {
-		"name": "SwelvyBG background",
-		"description": "Converts the background to the SwelvyBG One!",
-		"type": "bool",
-		"default": true
-	},
-	"Shortcuts-heading": {
-		"type": "custom",
-		"mode" : "Heading",
-		"text": "Shortcuts"
-	 },
-	"ShortcutMyLevel": {
-		"name": "My Levels Shortcut",
-		"description": "Adds my Levels to the Shortcuts location",
-		"type": "bool",
-		"default": true
-	},
-	"ShortcutSavedLevels": {
-		"name": "Saved levels Shortcut",
-		"description": "Adds saved Levels to the Shortcuts location",
-		"type": "bool",
-		"default": true
-	},
-	"TextureLDR-Shortcut": {
-		"name": "Texture Loader",
-		"description": "Moves TextureLoader to MoreGames Button",
-		"type": "bool",
-		"default": true
-	},
-	"Leaderboard-Shortcut": {
-		"name": "leaderboard Shortcut",
-		"description": "Adds a Leaderboard button",
-		"type": "bool",
-		"default": true
-	},
-	"ShortcutSearch": {
-		"name": "Search Shortcut",
-		"description": "Removes More games and replaces it with Search button",
-		"type": "bool",
-		"default": true
-	},
-	"ShortcutDaily": {
-		"name": "Daily Shortcut",
-		"description": "Adds Daily button to Shortcuts",
-		"type": "bool",
-		"default": true
-	},
-	"ShortcutWeekly": {
-		"name": "Weekly Shortcut",
-		"description": "Adds Weekly button to Shortcuts",
-		"type": "bool",
-		"default": true
-	},
-	"Joke-Features": {
-		"type": "custom",
-		"mode" : "Heading",
-		"text": "Joke Settings"
-	 },
-	 "SFX": {
-		"name": "SFX",
-		"description": "Enable the Sound effects from the mod",
-		"type": "bool",
-		"default": true
-	},
-	 "Uwugeode": {
-		"name": "Uwu geode",
-		"description": "Makes the geode button uwuifyed",
-		"type": "bool",
-		"default": false
-	},
-	"Merp": {
-		"name": "Merp",
-		"description": "Plays a merp when pressing spacebar",
-		"type": "bool",
-		"default": false
-	},
-	"Experment-heading": {
-		"type": "custom",
-		"mode" : "Heading",
-		"text": "Expermental Settings"
-	 },
-	"TaskKill-Process": {
-		"name": "Shadow-Window Bug fix",
-		"description": "If you have a ShadowWindow bug due to megahack then Enable this, you may lose data when you exit, please save before closing",
-		"type": "bool",
-		"default": false
+	"dependencies": {
+		"geode.node-ids": ">=v1.20.0"
 	}
-}
 }

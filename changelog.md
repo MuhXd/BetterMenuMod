@@ -1,4 +1,7 @@
 # ChangeLog
+### BetterMenu V3
+* complete rewrite for 2.2081
+
 ### BetterMenu V2.05
 * Fixed incompacts with qol
 * Popup when first installing the mod
