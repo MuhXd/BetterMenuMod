@@ -88,34 +88,66 @@ Result<Positions> matjson::Serialize<Positions>::fromJson(matjson::Value const &
 void NodeData::affectNode(CCNode *node, CanNodeData options) {
 	return NodeData::affectNode(CCDirector::get()->getWinSize(), node, options);
 };
-#define LayoutChange(type)if (type* AxisLayoutItem = typeinfo_cast<type*>(node->getLayout())){ \
-			AxisLayoutItem->setAxis(layoutScan() ? geode::Axis::Column : geode::Axis::Row); \
-			node->updateLayout(); \
+#define LayoutChange(type)if (type* LayoutItem = typeinfo_cast<type*>(node->getLayout())){ \
+			auto b = layoutScan(options) ? geode::Axis::Column : geode::Axis::Row; \
+			if (LayoutItem->getAxis() != b){ \
+			auto size = node->getContentSize(); \
+			LayoutItem->setAxis(b); \
+			node->setContentSize({size.height, size.width});\
+			node->updateLayout(); }\
 		};
 void NodeData::affectNode(cocos2d::CCSize Size, CCNode *node, CanNodeData options) {
+	// create padding because yeah
+	
+	/*
 	auto pos = node->getPosition();
-	log::debug("{}:|{} {}",node->getID(),Size.width / pos.x, Size.height / pos.y);
-	node->setPosition(ccp(Size.width * (this->m_x / 1000), Size.height * (this->m_y / 1000)));
-	if (options.m_canRotate) node->setRotation(this->m_rotation);
+	auto contentsize = node->getContentSize();
+	log::debug("\n{}:\n X: {} | Y: {}\nCS:\nX : {} | Y: {}",
+		node->getID(),
+		(pos.x/Size.width)*1000, (pos.y / Size.height)*1000,
+		(contentsize.width / Size.width), (contentsize.height / Size.height) 
+	);
+	*/
+	
 	if (options.m_canScale){ node->setScaleX(this->m_scaleX); node->setScaleY(this->m_scaleY); };
+	if (options.m_canRotate){ node->setRotation(this->m_rotation);}
 	if (options.m_layoutEditable){ 
 		LayoutChange(AxisLayout)
 		LayoutChange(SimpleAxisLayout)
 	};
+	
+	auto range = node->getScaledContentSize();
+	auto d = options.m_anchorPoint;
+	Size.width -= range.width * d.x;
+	Size.height -= range.height * d.y;
+	Size.width -= range.width * (1 - d.x);
+	Size.height -= range.height * (1 - d.y);
+	
+	/*auto pos = node->getPosition();
+	auto contentsize = node->getScaledContentSize();
+	log::debug("\n{}:\n X: {} | Y: {}\nCS:\nX : {} | Y: {}",
+		node->getID(),
+		(  (pos.x - range.width * d.x) / Size.width)*1000, ( (pos.y - range.height * d.y) / Size.height *1000),
+		(contentsize.width / Size.width), (contentsize.height / Size.height) 
+	);
+	*/
+	node->setPosition(ccp(range.width * d.x, range.height * d.y) +
+	 ccp(Size.width * (this->m_x / 1000), Size.height * (this->m_y / 1000)));
 };
-
+#define Import(type, Vname, def)          \
+	type Vname = def;                     \
+	if (auto exportd = val.has(#Vname)) { \
+		exportd.into(Vname);              \
+	};
 Result<std::shared_ptr<SettingV3>> DraggableSetting::parse(std::string const &key, std::string const &modID, matjson::Value const &json) {
 	auto res = std::make_shared<DraggableSetting>();
 	auto root = checkJson(json, "DraggableSetting");
 	res->parseBaseProperties(key, modID, root);
 	if (auto value = root.has("Configs")) {
 		for (auto &[str, val] : value.properties()) {
-#define Import(type, Vname, def)          \
-	type Vname = def;                     \
-	if (auto exportd = val.has(#Vname)) { \
-		exportd.into(Vname);              \
-	};
 
+	Import(double, AnchorPointY, 0.5)
+	Import(double, AnchorPointX, 0.5)
 			Import(
 			    bool, CanRotate, false)
 			    Import(
@@ -129,7 +161,7 @@ Result<std::shared_ptr<SettingV3>> DraggableSetting::parse(std::string const &ke
 			                    bool, LayoutEditable, false)
 
 			                    log::debug("added\nname: {}, CanRotate {}, CanScale {}, ContentSizeY {}, ContentSizeX {}, LayoutEditable {}", str, CanRotate, CanScale, ContentSizeY, ContentSizeX, LayoutEditable);
-			res->m_config[str] = CanNodeData(CanRotate, CanScale, ContentSizeX, ContentSizeY, LayoutEditable);
+			res->m_config[str] = CanNodeData(CanRotate, CanScale, ContentSizeX, ContentSizeY, LayoutEditable, ccp(AnchorPointX, AnchorPointY));
 		}
 	};
 
@@ -141,6 +173,7 @@ class DraggableSettingPopup : public geode::Popup {
 	const float const_mmx = 45 / 2;
 	const float const_mmy = 44 / 2;
 	const float const_mmoffset = 15.0f;
+	CCSize m_sizeFactor;
 	NodeData m_SelectedNode;
 	DragThingy *m_currentDraggy = nullptr;
 	geode::NineSlice *m_currentDraggySprite = nullptr;
@@ -170,6 +203,40 @@ class DraggableSettingPopup : public geode::Popup {
 		auto size = m_bg->getContentSize();
 		return ccp((size.width - drag->getContentWidth() / 2) * (offset.x / 1000), (size.height - drag->getContentHeight() / 2) * (offset.y / 1000));
 	};
+	void LoadItemFromSave(CCNode* draggot, NodeData value){
+		auto clipper = draggot->getParent();
+		if (!draggot || !clipper) return;
+		draggot->setScaleX(value.m_scaleX);
+		draggot->setScaleY(value.m_scaleY);
+		draggot->setRotation(value.m_rotation);
+		auto bgSize = m_bg->getScaledContentSize();
+		auto bgAnchor = m_bg->getAnchorPoint();
+		auto bgPos    = m_bg->convertToWorldSpaceAR({0, 0});
+		float minX = bgPos.x - bgSize.width  * bgAnchor.x;
+		float minY = bgPos.y - bgSize.height * bgAnchor.y;
+		float maxX = minX + bgSize.width;
+		float maxY = minY + bgSize.height;
+		auto bbox = draggot->boundingBox();
+		auto bl = clipper->convertToWorldSpace(bbox.origin);
+		auto tr = clipper->convertToWorldSpace({
+			bbox.origin.x + bbox.size.width,
+			bbox.origin.y + bbox.size.height
+		});
+		float width  = tr.x - bl.x;
+		float height = tr.y - bl.y;
+		auto nodeWorld = clipper->convertToWorldSpace(draggot->getPosition());
+		float bboxCenterX = bl.x + width * 0.5f;
+		float bboxCenterY = bl.y + height * 0.5f;
+		float offsetX = nodeWorld.x - bboxCenterX;
+		float offsetY = nodeWorld.y - bboxCenterY;
+		float rangeX = bgSize.width  - width;
+		float rangeY = bgSize.height - height;
+		float newBL_X = minX + (value.m_x/1000)  * rangeX;
+		float newBL_Y = minY + (value.m_y / 1000) * rangeY;
+		float centerX = newBL_X + width  * 0.5f;
+		float centerY = newBL_Y + height * 0.5f;
+		draggot->setPosition(clipper->convertToNodeSpace({centerX+offsetX, centerY+offsetY}));
+	}
 	void sendSave(auto id,CCNode* item, std::pair<double,double> position) {
 		auto g2 = m_settingNode->getValue();
 			if (auto g = g2.get(id)) {
@@ -182,68 +249,108 @@ class DraggableSettingPopup : public geode::Popup {
 					val.m_rotation = item->getRotation();
 					val.m_layout = m_SelectedNode.m_layout;
 					g2[id] = val;
+				} else {
+					if (auto ms3 = m_setting.get()) {
+						auto g3 =ms3->getDefaultValue();
+						if (auto g = g3.get(id)) {
+							if (g.has_value()) {
+								auto val = g.value();
+								val.m_x = position.first * 1000;
+								val.m_y = position.second * 1000;
+								val.m_scaleY =  item->getScaleY();
+								val.m_scaleX =  item->getScaleX();
+								val.m_rotation = item->getRotation();
+								val.m_layout = m_SelectedNode.m_layout;
+								g2[id] = val;
+							}
+						}
+					}
 				};
 			};
 			m_settingNode->setValue(g2, nullptr);
 	};
 
-	std::pair<double,double> RecalculatePoint(CCNode* item,std::string id, bool cbf = false, bool Move = true) {
-		auto parentSize = m_bg->getContentSize();
-		auto parentPos  = m_bg->getPosition();
-		auto anchor     = m_bg->getAnchorPoint();
+	std::pair<double, double> RecalculatePoint(CCNode* item, std::string id, bool snap = false, bool move = true) {
+		if (!item || !m_bg) return {0.0, 0.0};
+
+		auto parent = item->getParent();
+		if (!parent) return {0.0, 0.0};
+		auto bgSize   = m_bg->getScaledContentSize();
+		auto bgAnchor = m_bg->getAnchorPoint();
+		auto bgPos    = m_bg->convertToWorldSpaceAR({0, 0});
+
+		float minX = bgPos.x - bgSize.width  * bgAnchor.x;
+		float minY = bgPos.y - bgSize.height * bgAnchor.y;
+		float maxX = minX + bgSize.width;
+		float maxY = minY + bgSize.height;
+
 		auto bbox = item->boundingBox();
-		float halfW = bbox.size.width  / 2.f;
-		float halfH = bbox.size.height / 2.f;
-		float minX = parentPos.x - parentSize.width  * anchor.x + halfW;
-		float maxX = parentPos.x - parentSize.width  * anchor.x + parentSize.width  - halfW;
-		float minY = parentPos.y - parentSize.height * anchor.y + halfH;
-		float maxY = parentPos.y - parentSize.height * anchor.y + parentSize.height - halfH;
-		auto pos = item->getPosition();
-		pos.x = std::clamp(pos.x, minX, maxX);
-		pos.y = std::clamp(pos.y, minY, maxY);
-		double percentX = (pos.x - minX) / (maxX - minX);
-		double percentY = (pos.y - minY) / (maxY - minY);
-		if (cbf) {
+		auto bl = parent->convertToWorldSpace(bbox.origin);
+
+		auto tr = parent->convertToWorldSpace({
+			bbox.origin.x + bbox.size.width,
+			bbox.origin.y + bbox.size.height
+		});
+
+		float width  = tr.x - bl.x;
+		float height = tr.y - bl.y;
+
+		auto nodeWorld = parent->convertToWorldSpace(item->getPosition());
+
+		float bboxCenterX = bl.x + width * 0.5f;
+		float bboxCenterY = bl.y + height * 0.5f;
+
+		float offsetX = nodeWorld.x - bboxCenterX;
+		float offsetY = nodeWorld.y - bboxCenterY;
+
+		float rangeX = bgSize.width  - width;
+		float rangeY = bgSize.height - height;
+
+		double percentX = (rangeX != 0.0) ? (bl.x - minX) / rangeX : 1.0;
+		double percentY =  (rangeY != 0.0) ? (bl.y - minY) / rangeY : 1.0;
+
+		percentX = std::clamp(percentX, 0.0, 1.0);
+		percentY = std::clamp(percentY, 0.0, 1.0);
+
+		if (snap && m_snapPoint > 0) {
 			double div = m_snapPoint / 1000;
 			percentX = std::round(percentX / div) * div;
 			percentY = std::round(percentY / div) * div;
 		}
-		std::pair<double,double> ret;
-		if (Move) {
-			double x = minX + percentX * (maxX - minX);
-			double y = minY + percentY * (maxY - minY);
-			minX -= halfW;
-			maxX += halfW;
-			minY -= halfH;
-			maxY += halfH;
-			ret = {(pos.x - minX) / (maxX - minX), (pos.y - minY) / (maxY - minY)};
-			item->setPosition(x,y);
+
+		if (move) {
+			auto anchor = item->getAnchorPoint();
+			float newBL_X = minX + percentX * rangeX;
+			float newBL_Y = minY + percentY * rangeY;
+
+			float centerX = newBL_X + width  * 0.5f;
+			float centerY = newBL_Y + height * 0.5f;
+			
+
+			item->setPosition(parent->convertToNodeSpace({centerX+offsetX, centerY+offsetY}));
+
 			if (m_CanNodeData.m_layoutEditable) {
-				m_SelectedNode.m_x = ret.first * 1000;
-				m_SelectedNode.m_y = ret.second * 1000;
-				bool vir = m_SelectedNode.layoutScan();
+				m_SelectedNode.m_x = percentX * 1000;
+				m_SelectedNode.m_y = percentY * 1000;
+				bool vir = m_SelectedNode.layoutScan(m_CanNodeData, m_SelectedNode.l_lastdir);
 				if (!vir) {
-					m_currentDraggy->setContentSize({m_CanNodeData.m_contentSizeX,m_CanNodeData.m_contentSizeY});
+					m_currentDraggy->setContentSize({m_CanNodeData.m_contentSizeX* m_sizeFactor.width,m_CanNodeData.m_contentSizeY* m_sizeFactor.height});
 					m_currentDraggySprite->setContentSize(m_currentDraggy->getContentSize());
 				} else {
-					m_currentDraggy->setContentSize({m_CanNodeData.m_contentSizeY,m_CanNodeData.m_contentSizeX});
+					m_currentDraggy->setContentSize({m_CanNodeData.m_contentSizeY* m_sizeFactor.height,m_CanNodeData.m_contentSizeX* m_sizeFactor.width});
 					m_currentDraggySprite->setContentSize(m_currentDraggy->getContentSize());
 				}
 			}
-		}else{
-			minX -= halfW;
-			maxX += halfW;
-			minY -= halfH;
-			maxY += halfH;
-			ret = {(pos.x - minX) / (maxX - minX), (pos.y - minY) / (maxY - minY)};
 		}
-		
-		
+
+		std::pair<double,double> ret = {percentX, percentY};
+
 		if (!id.empty()) {
-			sendSave(id,item, ret);
-		};
+			sendSave(id, item, ret);
+		}
+
 		return ret;
-	};
+	}
 	void sendSave(std::string id) {
 		RecalculatePoint(m_currentDraggy, id, false, true);
 	}
@@ -284,9 +391,9 @@ class DraggableSettingPopup : public geode::Popup {
 		        ->setGap(10.f)
 		        ->setCrossAxisScaling(AxisScaling::ScaleDownGaps)
 		        ->setCrossAxisAlignment(geode::CrossAxisAlignment::Center));
-
+		m_sizeFactor = m_size / 1.3;
 		m_bg = geode::NineSlice::createWithSpriteFrameName("NeonSquare.png"_spr);
-		m_bg->setContentSize(m_size / 1.3);
+		m_bg->setContentSize(m_sizeFactor);
 		CCPoint mainLayerPosition = m_bgSprite->getPosition() - ccp(0, 10);
 		m_bg->setPosition(mainLayerPosition);
 		m_mainLayer->addChild(m_bg);
@@ -300,17 +407,20 @@ class DraggableSettingPopup : public geode::Popup {
 			m_mainLayer->addChild(clipper);
 			clipper->setStencil(m_bg);
 			for (auto const &[id, node] : setting->m_config) {
+				auto nodef = m_settingNode->getValue().get(id).value_or(NodeData());
 				auto NeonSquare = geode::NineSlice::createWithSpriteFrameName("NeonSquare.png"_spr);
 				NeonSquare->ignoreAnchorPointForPosition(true);
 				if (node.m_layoutEditable) {
-					bool vir = m_settingNode->getValue().get(id).value_or(NodeData()).layoutScan();
+					bool vir = m_settingNode->getValue().get(id).value_or(NodeData()).layoutScan(node);
 					if (!vir) {
-						NeonSquare->setContentSize({node.m_contentSizeX,node.m_contentSizeY});
+						NeonSquare->setContentSize({node.m_contentSizeX * m_sizeFactor.width,node.m_contentSizeY * m_sizeFactor.height});
 					} else {
-						NeonSquare->setContentSize({node.m_contentSizeY,node.m_contentSizeX});
+						NeonSquare->setContentSize({node.m_contentSizeY * m_sizeFactor.height,node.m_contentSizeX* m_sizeFactor.width});
 					}
+				} else {
+					NeonSquare->setContentSize({node.m_contentSizeX,node.m_contentSizeY});
 				}
-				auto draggot = DragThingy::create([=](DragThingy *item) {
+				auto draggot = DragThingy::create([NeonSquare, this, id](DragThingy *item) {
 					if (m_currentDraggySprite) m_currentDraggySprite->setColor({255,255,255});
 					NeonSquare->setColor({ 140, 0, 255 });
 					m_currentDraggy = item;
@@ -325,24 +435,11 @@ class DraggableSettingPopup : public geode::Popup {
 							RecalculatePoint(item, id, true, true);
 						 };
 				 });
-
 				draggot->setContentSize(NeonSquare->getContentSize());
+				draggot->setAnchorPoint(node.m_anchorPoint);
 				clipper->addChild(draggot);
 				draggot->addChild(NeonSquare);
-
-				auto value = m_settingNode->getValue().get(id).value_or(NodeData());
-				auto size = m_bg->getContentSize();
-				auto anchor = m_bg->getAnchorPoint();
-				float minX = m_bg->getPositionX() - size.width * anchor.x;
-				float maxX = minX + size.width ;
-				float minY = m_bg->getPositionY() - size.height * anchor.y;
-				float maxY = minY + size.height;
-				auto x = minX + ((maxX - minX) * (value.m_x / 1000));
-				auto y = minY + ((maxY - minY) * (value.m_y / 1000));
-				draggot->setPosition(x,y);
-				draggot->setScaleX(value.m_scaleX);
-				draggot->setScaleY(value.m_scaleY);
-				draggot->setRotation(value.m_rotation);
+				LoadItemFromSave(draggot,nodef);
 			}
 		} else {
 			this->setTitle(fmt::format("failed to get for {}", m_setting->getDisplayName()));

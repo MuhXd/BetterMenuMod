@@ -1,5 +1,5 @@
 {
-	"geode": "5.3.0",
+	"geode": "5.5.3",
 	"gd": {
 		"win": "2.2081",
 		"android": "2.2081",
@@ -65,28 +65,135 @@
 			"default": {
 				"bottom-menu" : {
 					"x" : 500,
-					"y" : 140.625,
+					"y" : 49.019608,
 					"Rotation": 0, 
 					"Scale" : 1
 				},
-				"hellp" : {
+				"main-title" : {
 					"x" : 500,
-					"y" : 140.625,
+					"y" : 910.44775,
+					"Rotation": 0, 
+					"Scale" : 1
+				},
+				"main-menu" : {
+					"x" : 500,
+					"y" : 547.5059,
+					"Rotation": 0, 
+					"Scale" : 1
+				},
+				"profile-menu" : {
+					"x" : 38.186157,
+					"y" : 296.2963,
+					"Rotation": 0, 
+					"layout" : 1,
+					"Scale" : 1
+				},
+				"right-side-menu" : {
+					"x" : 969.7406,
+					"y" : 642.8571,
+					"Rotation": 0, 
+					"Scale" : 1
+				},
+				"side-menu" : {
+					"x" : 0,
+					"y" : 775,
+					"Rotation": 0, 
+					"Scale" : 1
+				},
+				"top-right-menu" : {
+					"x" : 986.4498,
+					"y" : 1000,
+					"Rotation": 0, 
+					"Scale" : 1
+				},
+				"close-menu" : {
+					"x" : 0,
+					"y" : 1000,
+					"Rotation": 0, 
+					"Scale" : 1
+				},
+				"social-media-menu" : {
+					"x" : 28.452616,
+					"y" : 48.616306,
+					"Rotation": 0, 
+					"Scale" : 1
+				},
+				"more-games-menu" : {
+					"x" : 987.4734,
+					"y" : 74.07407,
 					"Rotation": 0, 
 					"Scale" : 1
 				}
 			},
 			"Configs" : {
 				"bottom-menu" : {
-					"ContentSizeY" : 20,
-					"ContentSizeX" : 104,
+					"ContentSizeX" : 0.5,
+					"ContentSizeY" : 0.203125,
 					"CanRotate" : true,
 					"LayoutEditable" : true,
 					"CanScale" : true
 				},
 				"main-title" : {
-					"ContentSizeY" : 35,
-					"ContentSizeX" : 104,
+					"ContentSizeY" : 0.1625,
+					"ContentSizeX" : 0.7539543,
+					"CanRotate" : true,
+					"LayoutEditable" : false,
+					"CanScale" : true
+				},
+				"main-menu" : {
+					"ContentSizeY" : 0.3421875,
+					"ContentSizeX" : 0.7539543,
+					"CanRotate" : true,
+					"LayoutEditable" : true,
+					"CanScale" : true
+				},
+				"profile-menu" : {
+					"ContentSizeY" : 0.26362038,
+					"ContentSizeX" : 0.15625,
+					"CanRotate" : true,
+					"LayoutEditable" : true,
+					"CanScale" : true
+				},
+				"right-side-menu" : {
+					"ContentSizeX" : 0.5625,
+					"ContentSizeY" : 0.08523726,
+					"CanRotate" : true,
+					"LayoutEditable" : true,
+					"CanScale" : true
+				},
+				"side-menu" : {
+					"ContentSizeY" : 0.375,
+					"ContentSizeX" : 0.08787346,
+					"CanRotate" : true,
+					"LayoutEditable" : true,
+					"CanScale" : true
+				},
+				"top-right-menu" : {
+					"ContentSizeY" : 0.15625,
+					"ContentSizeX" : 0.35149384,
+					"CanRotate" : true,
+					"LayoutEditable" : true,
+					"CanScale" : true
+				},
+				"close-menu" : {
+					"ContentSizeX" : 0.425,
+					"ContentSizeY" : 0.08787346,
+					"CanRotate" : true,
+					"LayoutEditable" : true,
+					"CanScale" : true
+				},
+				"social-media-menu" : {
+					"AnchorPointY" : 0,
+					"AnchorPointX" : 0,
+					"ContentSizeY" : 0.16437499,
+					"ContentSizeX" : 0.19701232,
+					"CanRotate" : true,
+					"LayoutEditable" : false,
+					"CanScale" : true
+				},
+				"more-games-menu" : {
+					"ContentSizeY" : 0.15625,
+					"ContentSizeX" : 0.17574692,
 					"CanRotate" : true,
 					"LayoutEditable" : false,
 					"CanScale" : true

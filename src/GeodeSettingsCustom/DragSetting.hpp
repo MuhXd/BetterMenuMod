@@ -14,15 +14,17 @@ struct CanNodeData {
 	float m_contentSizeX = 104;
 	bool m_canRotate = false;
 	bool m_layoutEditable = false;
+	CCPoint m_anchorPoint = ccp(0.5,0.5);
 	bool m_canScale = false;
-	CanNodeData(bool CanRotate, bool CanScale, float ContentSizeX, float ContentSizeY, bool LayoutEditable)
-        : m_canRotate(CanRotate), m_canScale(CanScale), m_contentSizeX(ContentSizeX), m_contentSizeY(ContentSizeY), m_layoutEditable(LayoutEditable) {};
+	CanNodeData(bool CanRotate, bool CanScale, float ContentSizeX, float ContentSizeY, bool LayoutEditable, CCPoint anchorPoint)
+        : m_canRotate(CanRotate), m_canScale(CanScale), m_contentSizeX(ContentSizeX), m_contentSizeY(ContentSizeY), m_layoutEditable(LayoutEditable), m_anchorPoint(anchorPoint) {};
 	CanNodeData(CanNodeData const&) = default;
     CanNodeData() = default;
 
 };
 
 struct NodeData {
+	bool l_lastdir = false;
 	double m_x = 0;
 	double m_y = 0;
 	double m_scaleX = 1;
@@ -34,10 +36,38 @@ struct NodeData {
 	*/
 	bool layoutScan() {
 		if (m_layout == ToggleState::Auto) {
-			return (m_x < 250 || m_x > 750) && (m_y > 30 && m_y < 900);
+			return (m_x <= 250 || m_x >= 750) && (m_y >= 30 && m_y <= 900);
 		} else {
 			return m_layout == ToggleState::Column;
 		};
+	};
+	/*
+	Returns: true if it is Column and false if it is Row
+	*/
+	bool layoutScan(CanNodeData config, bool flipped) {
+		if (m_layout == ToggleState::Auto) {
+			float halfW = (config.m_contentSizeX * 420) * m_scaleX  * config.m_anchorPoint.x;
+			float halfH = (config.m_contentSizeY * 270) * m_scaleY * config.m_anchorPoint.y;
+			float x = flipped ? m_y : m_x;
+			float y = flipped ? m_x : m_y;
+			return // edging check
+			((x - halfW) <= 250 || (x + halfW) >= 750)
+			&& ((y - halfH) >= 30 && (y + halfH) <= 900); // verticaling check
+		}
+		return m_layout == ToggleState::Column;
+	};
+	/*
+	Returns: true if it is Column and false if it is Row
+	*/
+	bool layoutScan(CanNodeData config) {
+		if (m_layout == ToggleState::Auto) {
+			float halfW = (config.m_contentSizeX * 420) * m_scaleX  * config.m_anchorPoint.x;
+			float halfH = (config.m_contentSizeY * 270) * m_scaleY * config.m_anchorPoint.y;
+			return // edging check
+			((m_x - halfW) <= 250 || (m_x + halfW) >= 750)
+			&& ((m_y - halfH) >= 30 && (m_y + halfH) <= 900); // verticaling check
+		} 
+		return m_layout == ToggleState::Column;
 	};
 
     NodeData(double px, double py, double sX, double sY, double r, int m_layout)
@@ -69,16 +99,6 @@ struct Positions {
     bool contains(std::string const& key) const {
         return m_nodes.find(key) != m_nodes.end();
     };
-	void test() const {
-		for (auto const& [id, node] : m_nodes) {
-			std::cout 
-				<< id << " | x: " << node.m_x
-				<< " y: " << node.m_y
-				<< " scaleX: " << node.m_scaleX
-				<< " scaleY: " << node.m_scaleY
-				<< "\n";
-		}
-	};
 };
 
 template <>

@@ -13,12 +13,16 @@ using namespace geode::prelude;
     if (auto ck = Loader::get()->getInstalledMod(id); ck && ck->shouldLoad())
 
 class $modify(MyMenuLayer, MenuLayer) {
+	struct Fields {
+		bool m_blockHooks = false;
+	};
 	static void onModify(auto& self) {
         (void)self.setHookPriority("MenuLayer::keyDown", Priority::Replace);
     }
 
 	static inline bool s_passthrough = false;
 	void keyDown(cocos2d::enumKeyCodes key, double timestamp) {
+		if (m_fields->m_blockHooks) return MenuLayer::keyDown(key, timestamp);
 		if (s_passthrough) {
 			MenuLayer::keyDown(key, timestamp);
 			s_passthrough = false;
@@ -101,12 +105,22 @@ class $modify(MyMenuLayer, MenuLayer) {
 		Mod* CurrentMod = Mod::get();
 		if (auto setting = typeinfo_cast<DraggableSetting*>(CurrentMod->getSetting("Main-menu").get())) {
 			log::info("test {}",setting->m_config.size());
+			// fix restart buttons
+			if (auto closeMenu = this->getChildByID("close-menu")) {
+ 				closeMenu->setContentSize({ 200.f, 50.f });
+				closeMenu->updateLayout();
+				closeMenu->setAnchorPoint({0.5,0.5});
+				closeMenu->setLayout( SimpleRowLayout::create()
+                    ->setMainAxisAlignment(MainAxisAlignment::Start)
+                    ->setGap(5.f));
+			};
 			auto currentValue = setting->getValue();
 			for (auto const &[id, node] : setting->m_config) {
 				auto nodeRec = this->getChildByIDRecursive(id);
 				if (!nodeRec) continue;
 				auto val = currentValue.get(id);
 				if (!val.has_value()) continue;
+				log::debug("{}",id);
 				val.value().affectNode(nodeRec, node);
 			}
 		};
@@ -121,6 +135,7 @@ class $modify(MyMenuLayer, MenuLayer) {
 			CurrentMod->setSavedValue("safe-mode", false);
 		});
 		if (CurrentMod->setSavedValue("safe-mode", true)) {
+			m_fields->m_blockHooks = true;
 			log::error("Disabling Hooks, detected crash");
 			geode::Loader::get()->queueInMainThread([this] {
                 auto pop = geode::createQuickPopup(
@@ -140,6 +155,7 @@ class $modify(MyMenuLayer, MenuLayer) {
 			return true;
 		};
 		if (CurrentMod->getSettingValue<bool>("mod-toggle")) {
+			m_fields->m_blockHooks = true;
 			return true;
 		}
 		CurrentMod->setSavedValue("safe-mode", true);
