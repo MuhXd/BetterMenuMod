@@ -31,6 +31,27 @@
 			"description": "Press this button to close the game",
 			"type": "keybind",
 			"default": ["Escape", "Controller_Start"],
+			"priority": -5
+		},
+		"play-keybind": {
+			"name": "Play Keybind",
+			"description": "Press this button to play the game",
+			"type": "keybind",
+			"default": ["Space", "Controller_A"],
+			"priority": -4
+		},
+		"garage-keybind": {
+			"name": "Icon Kit Keybind",
+			"description": "Press this button to kit the icon",
+			"type": "keybind",
+			"default": ["X", "Controller_X"],
+			"priority": -3
+		},
+		"editor-keybind": {
+			"name": "Editor Keybind",
+			"description": "Press this button to kit the icon",
+			"type": "keybind",
+			"default": ["Y", "Controller_Y"],
 			"priority": -2
 		},
 		"texture-loader-keybind": {

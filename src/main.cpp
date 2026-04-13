@@ -99,6 +99,26 @@ class $modify(MyMenuLayer, MenuLayer) {
             this->passThroughKeyDown(KEY_Escape, timestamp);
 			return true;
         });
+		this->defineKeybind("play-keybind", [this](double timestamp) {
+			if (!isTopLevel()) return false;
+            this->passThroughKeyDown(KEY_Space, timestamp);
+			return true;
+        });
+
+		// TODO: FIX GIROS FOR CONTROLLER 
+
+		// controller only has these BUTTON X FOR ICON KIT
+		this->defineKeybind("garage-keybind", [this](double timestamp) {
+			if (!isTopLevel()) return false;
+            this->passThroughKeyDown(CONTROLLER_X, timestamp);
+			return true;
+        });
+		// controller only has these BUTTON Y FOR EditorThing
+		this->defineKeybind("editor-keybind", [this](double timestamp) {
+			if (!isTopLevel()) return false;
+            this->passThroughKeyDown(CONTROLLER_Y, timestamp);
+			return true;
+        });
 	};
 	
 	void LoadPositions(){
@@ -110,7 +130,7 @@ class $modify(MyMenuLayer, MenuLayer) {
  				closeMenu->setContentSize({ 200.f, 50.f });
 				closeMenu->updateLayout();
 				closeMenu->setAnchorPoint({0.5,0.5});
-				closeMenu->setLayout( SimpleRowLayout::create()
+				closeMenu->setLayout(SimpleRowLayout::create()
                     ->setMainAxisAlignment(MainAxisAlignment::Start)
                     ->setGap(5.f));
 			};
